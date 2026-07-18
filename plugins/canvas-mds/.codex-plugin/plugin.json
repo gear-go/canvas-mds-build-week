@@ -1,0 +1,20 @@
+{
+  "name": "canvas-mds",
+  "version": "0.1.0",
+  "description": "Skills portables para configurar, adaptar, auditar y crear estructuras MDS en Canvas.",
+  "author": {
+    "name": "Docentes MDS UDD"
+  },
+  "keywords": ["canvas", "mds", "docencia", "lms"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Canvas MDS",
+    "shortDescription": "Configura y construye cursos MDS en Canvas",
+    "longDescription": "Flujo docente portable para conexión segura, adaptación de programas, dry-run, auditoría estructural y creación controlada de objetos no publicados en Canvas.",
+    "developerName": "Docentes MDS UDD",
+    "category": "Education",
+    "capabilities": ["Canvas course inspection", "Unpublished course scaffolding"],
+    "defaultPrompt": "Ayúdame a preparar, auditar o construir de forma segura un curso MDS en Canvas.",
+    "brandColor": "#1F4E79"
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "version": "0.5.0-mvp",
+  "course_profile": "entornos-digitales-digital-innovation-studio-2026",
+  "course_identity": {
+    "required_terms": ["entornos digitales"]
+  },
+  "structure_note": "El perfil propone tres hitos sumativos dentro del 30%, dossier/prototipo grupal 40%, cuestionario individual 5% y defensa oral 25%.",
+  "timezone": "America/Santiago",
+  "default_publish": false,
+  "source_files": [
+    "programa/014_B5C2_Entornos_Digitales_IA_Actualizado_2026.docx",
+    "programa/Planificacion_Entornos_Digitales_Digital_Innovation_Studio_2026.md"
+  ],
+  "course_dates": {
+    "start": "2026-07-27",
+    "end": "2026-10-07"
+  },
+  "team_group_category": {
+    "name": "Equipos interdisciplinarios · Digital Innovation Studio 2026",
+    "self_signup": false
+  },
+  "learning_outcomes": {
+    "RA1": "Analizar transformación digital y oportunidades de creación de valor en contexto.",
+    "RA2": "Diagnosticar y priorizar un problema sustentándolo con evidencia.",
+    "RA3": "Diseñar y prototipar una solución basada en datos e IA con supervisión humana.",
+    "RA4": "Evaluar deseabilidad, factibilidad, viabilidad, responsabilidad e impacto.",
+    "RA5": "Formular gobernanza, riesgos, adopción y escalamiento responsable.",
+    "RA6": "Comunicar y defender la propuesta ante audiencias diversas."
+  },
+  "assignment_groups": [
+    {
+      "name": "Hitos de avance del Digital Innovation Studio",
+      "weight": 30
+    },
+    {
+      "name": "Dossier y prototipo del proyecto integrador",
+      "weight": 45,
+      "components": [
+        {
+          "assignment_key": "dossier-final",
+          "course_weight_percent": 40
+        },
+        {
+          "assignment_key": "cuestionario-individual",
+          "course_weight_percent": 5
+        }
+      ]
+    },
+    {
+      "name": "Defensa oral del proyecto integrador",
+      "weight": 25
+    }
+  ],
+  "assignments": [
+    {
+      "key": "preparacion-inventario",
+      "name": "Preparación · Inventario individual de oportunidades",
+      "kind": "formative",
+      "points": 0,
+      "due_local": "2026-08-07 23:59",
+      "group": null,
+      "mode": "individual",
+      "ra": ["RA1", "RA2"],
+      "iag_level": "C para el diagnóstico inicial; IA permitida después para contraste",
+      "evidence": "Dos oportunidades con contexto, actores, evidencia y valor potencial."
+    },
+    {
+      "key": "checkpoint-diagnostico",
+      "name": "Checkpoint · Ficha de oportunidad y diagnóstico preliminar",
+      "kind": "formative",
+      "points": 0,
+      "due_local": "2026-08-20 23:59",
+      "group": null,
+      "mode": "equipo",
+      "ra": ["RA1", "RA2"],
+      "iag_level": "B por fase",
+      "evidence": "Contexto, problema preliminar, afectados, evidencia inicial, valor e incertidumbres."
+    },
+    {
+      "key": "hito-evaluado-1",
+      "name": "Hito evaluado 1 · Brief de problema y línea base",
+      "kind": "summative",
+      "points": 100,
+      "due_local": "2026-08-27 23:59",
+      "group": "Hitos de avance del Digital Innovation Studio",
+      "mode": "equipo con verificación individual breve",
+      "ra": ["RA1", "RA2", "RA4"],
+      "iag_level": "B por fase",
+      "evidence": "Problema validado, stakeholders, proceso actual, línea base, causas, restricciones y criterios de éxito."
+    },
+    {
+      "key": "hito-evaluado-2",
+      "name": "Hito evaluado 2 · Ecosistema, propuesta de valor y diseño de solución",
+      "kind": "summative",
+      "points": 100,
+      "due_local": "2026-09-03 23:59",
+      "group": "Hitos de avance del Digital Innovation Studio",
+      "mode": "equipo con verificación individual breve",
+      "ra": ["RA1", "RA3", "RA4"],
+      "iag_level": "A/B por fase",
+      "evidence": "Mapa de ecosistema, actores, datos, incentivos, propuesta de valor y modelo de servicio."
+    },
+    {
+      "key": "checkpoint-prototipo-v0",
+      "name": "Checkpoint · Prototipo versión 0 y protocolo de validación",
+      "kind": "formative",
+      "points": 0,
+      "due_local": "2026-09-10 23:59",
+      "group": null,
+      "mode": "equipo",
+      "ra": ["RA3", "RA4"],
+      "iag_level": "A/B por fase",
+      "evidence": "Funcionamiento, datos, entradas/salidas, rol de IA y persona usuaria, límites, hipótesis y métricas."
+    },
+    {
+      "key": "hito-evaluado-3",
+      "name": "Hito evaluado 3 · Validación, riesgos, gobernanza e impactos",
+      "kind": "summative",
+      "points": 100,
+      "due_local": "2026-09-24 23:59",
+      "group": "Hitos de avance del Digital Innovation Studio",
+      "mode": "equipo con red team y verificación individual breve",
+      "ra": ["RA3", "RA4", "RA5"],
+      "iag_level": "A/B por fase",
+      "evidence": "Prototipo v1, pruebas, matriz de riesgos, supervisión humana, mitigaciones e indicadores."
+    },
+    {
+      "key": "checkpoint-dossier",
+      "name": "Checkpoint · Dossier preliminar y prototipo final",
+      "kind": "formative",
+      "points": 0,
+      "due_local": "2026-10-01 23:59",
+      "group": null,
+      "mode": "equipo",
+      "ra": ["RA3", "RA4", "RA5", "RA6"],
+      "iag_level": "A/B por fase",
+      "evidence": "Dossier, prototipo, roadmap, métricas, gobernanza y ensayo de defensa."
+    },
+    {
+      "key": "defensa-oral",
+      "name": "Defensa oral · Demo Day del proyecto integrador",
+      "kind": "summative",
+      "points": 100,
+      "due_local": "2026-10-03 12:10",
+      "session_schedule": {
+        "start": "2026-10-03 08:30",
+        "first_block_end": "2026-10-03 10:15",
+        "break": "2026-10-03 10:15–10:25",
+        "second_block_start": "2026-10-03 10:25",
+        "end": "2026-10-03 12:10"
+      },
+      "group": "Defensa oral del proyecto integrador",
+      "mode": "equipo; sin interrogación individual sistemática por escala de cohorte",
+      "group_assignment": true,
+      "submission_types": ["on_paper"],
+      "ra": ["RA1", "RA2", "RA3", "RA4", "RA5", "RA6"],
+      "iag_level": "C durante la defensa",
+      "evidence": "Presentación, demostración y respuesta del equipo al panel sobre decisiones, evidencia y límites."
+    },
+    {
+      "key": "cuestionario-individual",
+      "name": "Cuestionario individual · Contribución y reflexión",
+      "kind": "individual_evidence",
+      "points": 10,
+      "course_weight_percent": 5,
+      "unlock_local": "2026-10-03 12:10",
+      "due_local": "2026-10-07 23:59",
+      "group": "Dossier y prototipo del proyecto integrador",
+      "mode": "individual · cuestionario en Canvas (10–15 minutos)",
+      "ra": ["RA4", "RA5", "RA6"],
+      "iag_level": "C: respuesta personal sin generación delegada; corrector ortográfico permitido",
+      "evidence": "Contribución verificable al proyecto, decisión individual relevante, aprendizaje, uso responsable de IA y reflexión sobre colaboración interdisciplinaria.",
+      "grade_use": "Componente individual obligatorio de 10 puntos dentro del grupo de 45%; equivale a 5 puntos porcentuales de la nota final del curso.",
+      "quiz_settings": {
+        "attempts": 1,
+        "time_limit_minutes": 15,
+        "question_order": "fixed",
+        "review_strategy": "Revisión por banderas y respuestas breves comparables; no usar calificación automática para las respuestas reflexivas.",
+        "questions": [
+          {
+            "name": "Q1 · Rol principal",
+            "points": 1,
+            "type": "multiple_choice",
+            "prompt": "¿Cuál fue tu rol principal en el proyecto?",
+            "options": ["Diagnóstico e investigación", "Diseño de solución", "Datos y prototipo", "Validación y evaluación", "Gobernanza e implementación", "Coordinación y comunicación"]
+          },
+          {
+            "name": "Q2 · Contribuciones verificables",
+            "points": 2,
+            "type": "short_answer",
+            "prompt": "Indica dos contribuciones concretas tuyas y la evidencia verificable asociada."
+          },
+          {
+            "name": "Q3 · Decisión individual",
+            "points": 2,
+            "type": "essay",
+            "prompt": "Describe una decisión del proyecto en la que influiste, qué evidencia utilizaste y qué alternativa descartaste.",
+            "max_words": 150
+          },
+          {
+            "name": "Q4 · Uso responsable de IA y datos",
+            "points": 2,
+            "type": "essay",
+            "prompt": "Explica cómo utilizaste o decidiste no utilizar IA, qué verificaste personalmente y qué resguardos de datos aplicaste.",
+            "max_words": 150
+          },
+          {
+            "name": "Q5 · Aprendizaje interdisciplinario",
+            "points": 2,
+            "type": "essay",
+            "prompt": "¿Qué aprendiste del trabajo interdisciplinario y qué cambiarías en una próxima iteración?",
+            "max_words": 120
+          },
+          {
+            "name": "Q6 · Declaración de autoría",
+            "points": 1,
+            "type": "true_false",
+            "prompt": "Declaro que esta respuesta representa mi contribución y reflexión personal."
+          }
+        ]
+      }
+    },
+    {
+      "key": "dossier-final",
+      "name": "Entrega final · Dossier y prototipo",
+      "kind": "summative",
+      "points": 80,
+      "course_weight_percent": 40,
+      "due_local": "2026-10-07 23:59",
+      "group": "Dossier y prototipo del proyecto integrador",
+      "mode": "equipo",
+      "ra": ["RA2", "RA3", "RA4", "RA5", "RA6"],
+      "iag_level": "A/B por fase con declaración y trazabilidad",
+      "evidence": "Dossier definitivo, anexos, acceso controlado al prototipo y declaración de uso de IA."
+    }
+  ],
+  "modules": [
+    {
+      "position": 0,
+      "name": "Módulo 00 · Comience aquí y preparación",
+      "period": "27 de julio–7 de agosto",
+      "session": "Preparación previa",
+      "ra": ["RA1", "RA2"],
+      "pages": [
+        "Comience aquí",
+        "Programa, calendario y ruta del curso",
+        "Aprender y trabajar con IA",
+        "Datos, privacidad, accesibilidad y alternativas de herramientas",
+        "Metodología y evaluación del Digital Innovation Studio"
+      ],
+      "assignments": ["preparacion-inventario"]
+    },
+    {
+      "position": 1,
+      "name": "Módulo 01 · Explorar transformación digital y creación de valor",
+      "period": "8–20 de agosto",
+      "session": "Clase 1 · 8 de agosto",
+      "ra": ["RA1", "RA2"],
+      "pages": ["M01 · Resultados y ruta", "M01 · Conceptos y casos", "M01 · Actividad de priorización", "M01 · Cierre y transferencia"],
+      "assignments": ["checkpoint-diagnostico"]
+    },
+    {
+      "position": 2,
+      "name": "Módulo 02 · Diagnosticar problemas y validar evidencia",
+      "period": "21–27 de agosto",
+      "session": "Clase 2 · 22 de agosto",
+      "ra": ["RA1", "RA2", "RA4"],
+      "pages": ["M02 · Resultados y ruta", "M02 · Descubrimiento y diseño de servicios", "M02 · Clínica de problemas", "M02 · Cierre y transferencia"],
+      "assignments": ["hito-evaluado-1"]
+    },
+    {
+      "position": 3,
+      "name": "Módulo 03 · Diseñar ecosistemas y propuesta de valor",
+      "period": "28 de agosto–3 de septiembre",
+      "session": "Clase 3 · 29 de agosto",
+      "ra": ["RA1", "RA3", "RA4"],
+      "pages": ["M03 · Resultados y ruta", "M03 · Ecosistemas y gobierno digital", "M03 · Mapa de actores y servicio", "M03 · Cierre y transferencia"],
+      "assignments": ["hito-evaluado-2"]
+    },
+    {
+      "position": 4,
+      "name": "Módulo 04 · Prototipar con datos e inteligencia artificial",
+      "period": "4–10 de septiembre",
+      "session": "Clase 4 · 5 de septiembre",
+      "ra": ["RA3", "RA4"],
+      "pages": ["M04 · Resultados y ruta", "M04 · Datos, IA y prototipado", "M04 · Laboratorio de prototipo", "M04 · Cierre y transferencia"],
+      "assignments": ["checkpoint-prototipo-v0"]
+    },
+    {
+      "position": 5,
+      "name": "Módulo 05 · Gobernar riesgos, ética e impactos",
+      "period": "11–24 de septiembre",
+      "session": "Clase 5 · 12 de septiembre",
+      "ra": ["RA3", "RA4", "RA5"],
+      "pages": ["M05 · Resultados y ruta", "M05 · Gobernanza, regulación y sostenibilidad", "M05 · Red team interdisciplinario", "M05 · Cierre y transferencia"],
+      "assignments": ["hito-evaluado-3"]
+    },
+    {
+      "position": 6,
+      "name": "Módulo 06 · Implementar, adoptar, medir y escalar",
+      "period": "25 de septiembre–1 de octubre",
+      "session": "Clase 6 · 26 de septiembre",
+      "ra": ["RA4", "RA5", "RA6"],
+      "pages": ["M06 · Resultados y ruta", "M06 · Implementación y adopción", "M06 · Roadmap, KPI y caso de valor", "M06 · Cierre y transferencia"],
+      "assignments": ["checkpoint-dossier"]
+    },
+    {
+      "position": 7,
+      "name": "Módulo 07 · Defender la innovación digital",
+      "period": "2–3 de octubre",
+      "session": "Clase 7 · 3 de octubre",
+      "ra": ["RA1", "RA2", "RA3", "RA4", "RA5", "RA6"],
+      "pages": ["M07 · Agenda y reglas del Demo Day", "M07 · Rúbrica y preguntas comunes", "M07 · Evaluación cruzada", "M07 · Síntesis integradora"],
+      "assignments": ["defensa-oral"]
+    },
+    {
+      "position": 8,
+      "name": "Cierre · Dossier, cuestionario individual y transferencia",
+      "period": "4–7 de octubre",
+      "session": "Cierre posterior",
+      "ra": ["RA2", "RA3", "RA4", "RA5", "RA6"],
+      "pages": ["Instrucciones de cierre", "Declaración de uso de IA", "Archivo de evidencia y próximos pasos"],
+      "assignments": ["cuestionario-individual", "dossier-final"]
+    }
+  ],
+  "course_policies": [
+    {
+      "key": "program_scope",
+      "label": "Aprobación y alcance del programa",
+      "status": "confirmed",
+      "summary": "La versión actualizada del programa está aprobada para MIIS, MDS y MGS."
+    },
+    {
+      "key": "demo_day",
+      "label": "Demo Day y defensa oral",
+      "status": "confirmed",
+      "summary": "Sábado 3 de octubre, 08:30–10:15; pausa 10:15–10:25; segundo bloque 10:25–12:10. El vencimiento de la defensa queda fijado a las 12:10."
+    },
+    {
+      "key": "late_recovery",
+      "label": "Atrasos y recuperación",
+      "status": "confirmed",
+      "summary": "Se admite flexibilidad con justificación enviada por correo al docente, copia al director y propuesta explícita de plan de entrega."
+    },
+    {
+      "key": "ai_access",
+      "label": "Plataforma de IA y acceso equivalente",
+      "status": "confirmed",
+      "summary": "Copilot Chat institucional es la plataforma base. Se permiten ChatGPT, Claude, DeepSeek o Gemini dentro de sus planes gratuitos; una suscripción pagada puede recomendarse, pero no es requisito de evaluación."
+    },
+    {
+      "key": "data_handling",
+      "label": "Herramientas y clasificación de datos",
+      "status": "confirmed",
+      "summary": "Para datos sensibles se utiliza Copilot Chat y se respeta siempre la política de la empresa u organización de origen. Los proyectos deben privilegiar datos de baja protección, anonimizados o sintéticos antes de utilizar herramientas externas como Claude o ChatGPT."
+    },
+    {
+      "key": "team_formation",
+      "label": "Equipos y evidencia individual",
+      "status": "confirmed",
+      "summary": "Los equipos se forman después de una actividad inicial y deben mezclar estudiantes de distintos magísteres. Para una cohorte de al menos 45 estudiantes, la evidencia individual se recoge mediante un cuestionario breve en Canvas después del Demo Day, no mediante preguntas individuales sistemáticas durante la defensa. El cuestionario representa 5% de la nota final y el dossier/prototipo grupal 40%, ambos dentro del grupo de evaluación de 45%."
+    },
+    {
+      "key": "rubric_gate",
+      "label": "Rúbricas",
+      "status": "confirmed",
+      "summary": "Las rúbricas deben quedar aprobadas y asociadas antes de crear o publicar las tareas evaluadas."
+    }
+  ],
+  "manual_decisions": []
+}

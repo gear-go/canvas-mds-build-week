@@ -1,0 +1,8 @@
+{
+  "base_url": "https://udd.instructure.com",
+  "course_id": null,
+  "output_root": ".canvas/reports",
+  "keyring_service": "canvas-docencia-mds",
+  "keyring_account": "docente@udd.cl"
+}
+

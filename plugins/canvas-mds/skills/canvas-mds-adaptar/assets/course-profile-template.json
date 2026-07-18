@@ -1,0 +1,95 @@
+{
+  "version": "0.1.0-draft",
+  "course_profile": "reemplazar-curso-periodo",
+  "course_identity": {
+    "required_terms": ["nombre distintivo del curso"]
+  },
+  "structure_note": "Borrador generado desde documentos del curso; requiere aprobación docente.",
+  "timezone": "America/Santiago",
+  "default_publish": false,
+  "source_files": [],
+  "course_dates": {
+    "start": "2026-01-01",
+    "end": "2026-12-31"
+  },
+  "team_group_category": {
+    "name": "Equipos interdisciplinarios · reemplazar curso",
+    "self_signup": false
+  },
+  "learning_outcomes": {
+    "RA1": "Reemplazar con el resultado de aprendizaje aprobado."
+  },
+  "assignment_groups": [
+    {"name": "Trabajo aplicado", "weight": 60},
+    {
+      "name": "Evidencia individual",
+      "weight": 40,
+      "components": [
+        {"assignment_key": "reflexion-individual", "course_weight_percent": 40}
+      ]
+    }
+  ],
+  "assignments": [
+    {
+      "key": "entrega-aplicada",
+      "name": "Entrega aplicada · reemplazar",
+      "kind": "summative",
+      "points": 100,
+      "due_local": "2026-01-31 23:59",
+      "group": "Trabajo aplicado",
+      "mode": "equipo",
+      "group_assignment": true,
+      "ra": ["RA1"],
+      "iag_level": "Reemplazar",
+      "evidence": "Reemplazar evidencia esperada."
+    },
+    {
+      "key": "reflexion-individual",
+      "name": "Cuestionario individual · contribución y reflexión",
+      "kind": "individual_evidence",
+      "points": 10,
+      "course_weight_percent": 40,
+      "unlock_local": "2026-01-31 12:00",
+      "due_local": "2026-02-02 23:59",
+      "group": "Evidencia individual",
+      "mode": "individual · Classic Quiz",
+      "ra": ["RA1"],
+      "iag_level": "Respuesta personal; reemplazar política autorizada.",
+      "evidence": "Contribución verificable y reflexión personal.",
+      "quiz_settings": {
+        "attempts": 1,
+        "time_limit_minutes": 15,
+        "questions": [
+          {"name": "Q1 · Contribución", "points": 5, "type": "essay", "prompt": "Describe tu contribución y evidencia.", "max_words": 150},
+          {"name": "Q2 · Reflexión", "points": 5, "type": "essay", "prompt": "Explica qué aprendiste y qué cambiarías.", "max_words": 150}
+        ]
+      }
+    }
+  ],
+  "modules": [
+    {
+      "position": 0,
+      "name": "Módulo 00 · Comience aquí",
+      "period": "Reemplazar",
+      "session": "Preparación",
+      "ra": ["RA1"],
+      "pages": ["Comience aquí", "Programa, calendario y ruta del curso"],
+      "assignments": []
+    },
+    {
+      "position": 1,
+      "name": "Módulo 01 · Reemplazar",
+      "period": "Reemplazar",
+      "session": "Reemplazar",
+      "ra": ["RA1"],
+      "pages": ["M01 · Resultados y ruta", "M01 · Actividad", "M01 · Cierre"],
+      "assignments": ["entrega-aplicada", "reflexion-individual"]
+    }
+  ],
+  "course_policies": [],
+  "manual_decisions": [
+    "Reemplazar datos de ejemplo y aprobar el perfil completo.",
+    "Aprobar y asociar rúbricas antes de publicar tareas sumativas."
+  ]
+}
+
