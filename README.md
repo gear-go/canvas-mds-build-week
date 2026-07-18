@@ -1,6 +1,6 @@
 # Canvas MDS · Process-Centered Course Design with AI
 
-> A safe Codex plugin that turns course documents, institutional AI guidance, and faculty decisions into reviewable Canvas LMS blueprints.
+> A safe Codex plugin for generative pedagogical reasoning, process-centered assessment, and reviewable Canvas LMS blueprints.
 
 [Versión en español](README.es.md)
 
@@ -23,7 +23,9 @@ Canvas MDS separates:
 
 - Reads course structure without retrieving student submissions, grades, or enrollment data.
 - Produces structural snapshots, provisional audits, and zero-mutation dry-runs.
-- Converts course documents and confirmed faculty decisions into a portable JSON course profile.
+- Diagnoses what the current assessment can and cannot establish about learning in an AI-rich course.
+- Proposes multiple redesign options, tests validity failures, and records the instructor's decisions.
+- Converts the approved redesign into a portable JSON course profile.
 - Creates or reuses assignment groups, a team category, pages, assignments, one Classic Quiz, and modules.
 - Requires the instructor to confirm the exact Canvas course ID before any write.
 - Creates everything as **unpublished** and verifies that state after execution.
@@ -36,7 +38,7 @@ It intentionally does **not** publish or delete content, change enrollments, dow
 | Layer | Responsibility |
 | --- | --- |
 | Course evidence | Approved syllabus, schedule, institutional guidance, and explicit faculty decisions. |
-| Codex + GPT-5.6 | Interprets documents, identifies contradictions and missing decisions, helps the instructor create a traceable course profile, and orchestrates the three plugin skills. |
+| Codex + GPT-5.6 | Diagnoses the assessment-validity gap, asks decision-changing questions, proposes alternatives with trade-offs, simulates failure scenarios, and compiles confirmed faculty decisions. |
 | JSON course profile | Stores learning outcomes, assessment weights, process evidence, dates, AI/data policies, pages, modules, and pending decisions without Canvas credentials or IDs. |
 | Deterministic Python engine | Validates invariants, reads Canvas structure, calculates a dry-run, applies the narrowly authorized plan, and verifies the result. |
 | Canvas LMS API | Receives read requests by default and protected POST/PUT requests only after explicit confirmation. |
@@ -48,7 +50,7 @@ GPT-5.6 is used through Codex as the reasoning and orchestration layer. The Pyth
 | Skill | Purpose | Write behavior |
 | --- | --- | --- |
 | **$canvas-mds-configurar** | Configure the Canvas URL, course ID, local reports, and secure credential source; then run connection diagnostics. | Local configuration only. Never asks for a token in chat. |
-| **$canvas-mds-adaptar** | Turn course documents and instructor decisions into a reviewable JSON profile. | Writes a local profile; never changes Canvas. |
+| **$canvas-mds-redisenar** | Diagnose assessment validity and redesign evidence from final-product emphasis toward visible process, individual contribution, feedback response, and responsible AI use. | Writes local, traceable redesign artifacts and a profile; never changes Canvas. |
 | **$canvas-mds-gestionar** | Inspect, audit, dry-run, and—only after precise approval—create an unpublished Canvas structure. | Read-only by default; protected and idempotent unpublished creation is the only Canvas write path. |
 
 ## How Codex and GPT-5.6 were used
@@ -63,7 +65,7 @@ During Build Week, Codex with GPT-5.6 accelerated the transition from educationa
 
 Key product decisions remained human decisions: focus on process evidence, keep instructors in control, prohibit publication and destructive operations, exclude student data, and require explicit course identity confirmation.
 
-At runtime, GPT-5.6 helps faculty reason over course evidence and construct the profile. Deterministic validation then prevents the model layer from bypassing the approved scope.
+At runtime, GPT-5.6 reconciles heterogeneous course evidence, diagnoses invisible learning processes, proposes at least two viable designs, and stress-tests them against AI-without-understanding and unequal-contribution scenarios. The instructor confirms every material decision. Deterministic validation then enforces UDD-informed controls for learning-outcome alignment, process and individual evidence, feedback use, cognitive demand, accessible alternatives, weights, traceability, and Canvas safety.
 
 ## Safety model
 
@@ -135,7 +137,7 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 7 tests
+Ran 15 tests
 OK
 ~~~
 
@@ -145,7 +147,7 @@ Then run the complete credential-free judge experience:
 python judge_demo.py
 ~~~
 
-It validates the sample profile with the production validator and generates an English PASS summary from a synthetic dry-run with zero network access and zero Canvas mutations. See the full [Five-Minute Judge Experience](JUDGE_GUIDE.md).
+It validates the approved GPT-5.6-assisted redesign, shows the shift from 95% final-product / 0% process evidence to 40% / 60%, and generates an English PASS summary with 20 pedagogical, traceability, and safety checks. See the full [Judge Experience](JUDGE_GUIDE.md), including the interactive Codex prompt.
 
 The tests exercise:
 
@@ -155,9 +157,10 @@ The tests exercise:
 - pending-decision write rejection;
 - Canvas dates generated in the course time zone;
 - supported Classic Quiz role choices;
-- structured provisional audit output.
+- structured provisional audit output;
+- UDD-informed learning-outcome alignment, self/peer assessment, cognitive-demand, feedback-actor, response-loop, and alternative-format controls.
 
-Judges can also inspect the anonymized technical pattern in [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). It is a reference profile, not a profile to apply to an unrelated course.
+Judges can inspect the full reasoning contract in [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), the evidence shift in [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md), and the compiled profile in [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). These are sanitized reference artifacts, not a profile to apply to an unrelated course.
 
 ## Optional Canvas-connected verification
 
@@ -174,7 +177,7 @@ Judges can also inspect the anonymized technical pattern in [entornos-digitales-
    python plugins/canvas-mds/scripts/canvas_mds.py doctor
    ~~~
 
-4. Use **$canvas-mds-adaptar** to create and approve a profile for that specific sandbox course.
+4. Use **$canvas-mds-redisenar** to diagnose, redesign, and approve a profile for that specific sandbox course.
 5. Generate a dry-run with no mutations:
 
    ~~~text
@@ -202,7 +205,7 @@ No publication command exists in this MVP.
 
 The needs behind Canvas MDS came from earlier work in the UDD AI Workshop, university and faculty AI committees, institutional AI policy discussions, and leadership of the Master's in Data Science. That prior work established the problem and constraints; it is not presented as Build Week software.
 
-Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, seven tests, example profile, distribution package, and submission evidence were implemented for Build Week.
+Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, fifteen tests, process-redesign reference case, example profile, distribution package, and submission evidence were implemented for Build Week.
 
 See [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) for the evidence record.
 

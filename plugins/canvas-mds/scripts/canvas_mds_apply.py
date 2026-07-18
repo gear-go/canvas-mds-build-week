@@ -25,6 +25,8 @@ from canvas_mds import (
     write_json,
 )
 
+from process_evidence import validate_process_blueprint
+
 
 class CanvasWriteClient(CanvasReadOnlyClient):
     """Cliente de escritura limitado a POST y PUT, sin reintentos automáticos."""
@@ -210,6 +212,10 @@ def validate_blueprint(blueprint: dict[str, Any]) -> None:
     ]
     if group_assignments and not blueprint.get("team_group_category"):
         raise CanvasMVPError("Hay tareas grupales, pero falta team_group_category.")
+    try:
+        validate_process_blueprint(blueprint)
+    except ValueError as exc:
+        raise CanvasMVPError(str(exc)) from exc
 
 
 def policy_summary(blueprint: dict[str, Any], key: str) -> str:
@@ -262,6 +268,9 @@ def assignment_description(blueprint: dict[str, Any], assignment: dict[str, Any]
     ra = ", ".join(str(item) for item in assignment.get("ra") or [])
     weight = assignment.get("course_weight_percent")
     weight_line = f"<li><strong>Incidencia:</strong> {weight}% del curso.</li>" if weight else ""
+    process_stage = str(assignment.get("process_stage") or "no declarada")
+    evidence_scope = str(assignment.get("evidence_scope") or "no declarado")
+    dimensions = ", ".join(str(item) for item in assignment.get("process_dimensions") or [])
     return (
         '<div style="border-left:4px solid #1f4e79;padding:12px;background:#f5f8fb">'
         "<strong>Borrador no publicado.</strong> Revisar instrucciones y rúbrica antes de publicar."
@@ -270,8 +279,12 @@ def assignment_description(blueprint: dict[str, Any], assignment: dict[str, Any]
         f"<li><strong>RA:</strong> {escape(ra)}</li>"
         f"<li><strong>Uso de IA:</strong> {escape(str(assignment.get('iag_level') or ''))}</li>"
         f"{weight_line}"
+        f"<li><strong>Etapa del proceso:</strong> {escape(process_stage)}</li>"
+        f"<li><strong>Alcance de evidencia:</strong> {escape(evidence_scope)}</li>"
         "</ul>"
         f"<h3>Evidencia esperada</h3><p>{escape(str(assignment.get('evidence') or ''))}</p>"
+        "<h3>Proceso de aprendizaje visible</h3>"
+        f"<p>{escape(dimensions or 'Requiere definición docente.')}</p>"
         "<h3>Atrasos y recuperación</h3>"
         f"<p>{escape(policy_summary(blueprint, 'late_recovery'))}</p>"
     )

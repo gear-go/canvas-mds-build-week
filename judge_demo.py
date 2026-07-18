@@ -25,6 +25,7 @@ if str(ENGINE_DIR) not in sys.path:
 
 from canvas_mds import CanvasMVPError, build_dry_run  # noqa: E402
 from canvas_mds_apply import validate_blueprint  # noqa: E402
+from process_evidence import validate_process_blueprint  # noqa: E402
 
 
 def load_profile(path: Path) -> dict[str, Any]:
@@ -87,6 +88,7 @@ def empty_snapshot_requires_all_proposed_objects(plan: dict[str, Any]) -> bool:
 def run_demo(profile_path: Path) -> dict[str, Any]:
     blueprint = load_profile(profile_path)
     validate_blueprint(blueprint)
+    process_metrics = validate_process_blueprint(blueprint)
 
     snapshot = synthetic_empty_snapshot(blueprint)
     plan = build_dry_run(snapshot, blueprint)
@@ -95,9 +97,50 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
         for item in blueprint.get("assignments") or []
         if isinstance(item.get("quiz_settings"), dict)
     ]
+    redesign = blueprint["pedagogical_redesign"]
+    current = redesign["current_assessment"]
+    options = redesign["redesign_options"]
+    selected_options = [item for item in options if item.get("selected") is True]
+    adversarial_categories = {
+        str(item.get("category") or "")
+        for item in redesign.get("adversarial_scenarios") or []
+    }
+    knowledge_refs = {
+        str(item)
+        for item in (blueprint.get("process_assessment_policy") or {}).get(
+            "knowledge_base_refs"
+        )
+        or []
+    }
+    source_roles = {
+        str(item.get("role") or "") for item in redesign.get("source_evidence") or []
+    }
 
     checks = {
         "profile_valid": True,
+        "generative_redesign_artifact_valid": bool(process_metrics),
+        "two_or_more_redesign_options": len(options) >= 2,
+        "exactly_one_faculty_selected_option": len(selected_options) == 1,
+        "udd_knowledge_base_is_traced": (
+            "udd_active_learning_knowledge_base" in source_roles
+            and any(item.startswith("UDD-R") for item in knowledge_refs)
+        ),
+        "product_weight_reduced_from_95_to_40": (
+            current.get("product_weight_percent") == 95
+            and process_metrics["product_weight_percent"] == 40
+        ),
+        "process_weight_increased_from_0_to_60": (
+            current.get("process_weight_percent") == 0
+            and process_metrics["process_weight_percent"] == 60
+        ),
+        "individual_evidence_present": process_metrics["has_individual_evidence"],
+        "feedback_iteration_present": process_metrics["has_feedback_iteration"],
+        "ai_use_disclosure_present": process_metrics["has_ai_use_disclosure"],
+        "adversarial_validity_scenarios_present": {
+            "ai_without_understanding",
+            "unequal_team_contribution",
+        }
+        <= adversarial_categories,
         "default_publish_is_false": blueprint.get("default_publish") is False,
         "no_pending_manual_decisions": not blueprint.get("manual_decisions"),
         "assignment_groups_sum_to_100": sum(
@@ -120,19 +163,50 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
 
     return {
         "status": "PASS",
-        "experience": "Canvas MDS offline judge demo",
+        "experience": "Canvas MDS process-centered assessment judge demo",
         "profile": blueprint.get("course_profile"),
         "profile_path": str(profile_path),
         "sample_content_language": "Spanish (target deployment context)",
         "canvas_connection_used": False,
         "credentials_required": False,
         "canvas_mutations": plan["metadata"]["canvas_mutations"],
+        "assessment_shift": {
+            "before": {
+                "final_product_percent": current.get("product_weight_percent"),
+                "process_evidence_percent": current.get("process_weight_percent"),
+                "individual_evidence_percent": current.get(
+                    "individual_evidence_weight_percent"
+                ),
+            },
+            "approved_redesign": {
+                "final_product_percent": process_metrics["product_weight_percent"],
+                "process_evidence_percent": process_metrics["process_weight_percent"],
+                "individual_evidence_percent": process_metrics[
+                    "individual_evidence_weight_percent"
+                ],
+            },
+        },
+        "reasoning_contract": {
+            "gpt_5_6": (
+                "Diagnoses the validity gap from heterogeneous course evidence, "
+                "proposes alternatives and tests them against failure scenarios."
+            ),
+            "faculty": (
+                "Answers decision-changing questions and confirms, modifies or "
+                "rejects every material pedagogical choice."
+            ),
+            "deterministic_engine": (
+                "Validates traceability, learning-outcome coverage, weights, "
+                "process evidence, accessibility metadata and Canvas safety gates."
+            ),
+        },
         "proposed": plan["proposed"],
         "actions": plan["actions"],
         "checks": checks,
         "note": (
-            "The demo executed the production profile validator and dry-run planner "
-            "against a synthetic empty Canvas snapshot. No HTTP request was attempted."
+            "The harness validated the approved GPT-5.6-assisted redesign and ran "
+            "the production dry-run planner against a synthetic empty Canvas "
+            "snapshot. No HTTP request was attempted."
         ),
     }
 
@@ -140,14 +214,37 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
 def render_summary(result: dict[str, Any]) -> str:
     proposed = result["proposed"]
     checks = result["checks"]
+    before = result["assessment_shift"]["before"]
+    after = result["assessment_shift"]["approved_redesign"]
+    contract = result["reasoning_contract"]
     lines = [
-        "Canvas MDS Offline Judge Demo",
-        "=============================",
+        "Canvas MDS Process-Centered Judge Demo",
+        "======================================",
         f"Status: {result['status']}",
         f"Profile: {result['profile']}",
         "Canvas connection used: no",
         "Credentials required: no",
         f"Canvas mutations: {result['canvas_mutations']}",
+        "",
+        "Assessment evidence shift:",
+        (
+            "- Final product: "
+            f"{before['final_product_percent']}% -> {after['final_product_percent']}%"
+        ),
+        (
+            "- Process evidence: "
+            f"{before['process_evidence_percent']}% -> {after['process_evidence_percent']}%"
+        ),
+        (
+            "- Individual evidence: "
+            f"{before['individual_evidence_percent']}% -> "
+            f"{after['individual_evidence_percent']}%"
+        ),
+        "",
+        "Reasoning and control:",
+        f"- GPT-5.6: {contract['gpt_5_6']}",
+        f"- Faculty: {contract['faculty']}",
+        f"- Deterministic engine: {contract['deterministic_engine']}",
         "",
         "Proposed course structure:",
         f"- Modules: {proposed['modules']}",
@@ -155,7 +252,7 @@ def render_summary(result: dict[str, Any]) -> str:
         f"- Assignments: {proposed['assignments']}",
         f"- Assignment groups: {proposed['assignment_groups']}",
         "",
-        "Safety and validity checks:",
+        f"Safety, pedagogical validity and traceability checks ({len(checks)}):",
     ]
     lines.extend(
         f"- {'PASS' if passed else 'FAIL'}: {name.replace('_', ' ')}"
@@ -168,8 +265,9 @@ def render_summary(result: dict[str, Any]) -> str:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Validate the sample Canvas MDS profile and run the production dry-run "
-            "planner without credentials, network access, or Canvas mutations."
+            "Validate the approved process-centered assessment redesign and run "
+            "the production Canvas dry-run planner without credentials, network "
+            "access or Canvas mutations."
         )
     )
     parser.add_argument(
@@ -190,7 +288,7 @@ def main() -> int:
     args = parse_args()
     try:
         result = run_demo(args.profile.resolve())
-    except CanvasMVPError as exc:
+    except (CanvasMVPError, ValueError) as exc:
         print(f"Judge demo failed: {exc}", file=sys.stderr)
         return 1
 

@@ -1,0 +1,71 @@
+{
+  "schema_version": "0.2.0",
+  "redesign_id": "replace-course-assessment-redesign",
+  "language": "es",
+  "source_evidence": [
+    {
+      "id": "SRC-00",
+      "path": "plugins/canvas-mds/skills/canvas-mds-redisenar/references/metodologias-activas-udd.md",
+      "role": "udd_active_learning_knowledge_base",
+      "authority": "documented"
+    },
+    {
+      "id": "SRC-01",
+      "path": "replace/programa.md",
+      "role": "approved_learning_outcomes",
+      "authority": "documented"
+    }
+  ],
+  "current_assessment": {
+    "summary": "Replace with the current assessment model.",
+    "product_weight_percent": 0,
+    "process_weight_percent": 0,
+    "individual_evidence_weight_percent": 0
+  },
+  "diagnosis": {
+    "assessment_validity_problem": "Replace with a concise, evidence-grounded diagnosis.",
+    "invisible_learning_processes": [],
+    "ai_validity_risks": [],
+    "evidence_refs": [
+      "SRC-00",
+      "SRC-01"
+    ],
+    "knowledge_base_refs": [
+      "UDD-R1",
+      "UDD-R2",
+      "UDD-H1"
+    ]
+  },
+  "faculty_questions": [
+    {
+      "id": "Q-01",
+      "question": "Replace with a decision-changing faculty question.",
+      "status": "pending",
+      "answer": null,
+      "evidence_refs": [
+        "SRC-01"
+      ]
+    }
+  ],
+  "faculty_decisions": [],
+  "redesign_options": [],
+  "selected_design": {
+    "option_id": null,
+    "process_checkpoints": [],
+    "individual_evidence": [],
+    "feedback_loops": [],
+    "ai_use_evidence": [],
+    "knowledge_base_refs": [
+      "UDD-R1",
+      "UDD-R2",
+      "UDD-R4",
+      "UDD-R7",
+      "UDD-R9",
+      "UDD-R10"
+    ]
+  },
+  "adversarial_scenarios": [],
+  "unresolved_decisions": [
+    "Answer Q-01 and approve one redesign option."
+  ]
+}

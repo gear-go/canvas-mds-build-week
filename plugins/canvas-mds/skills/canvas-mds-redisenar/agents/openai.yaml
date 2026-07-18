@@ -1,0 +1,4 @@
+interface:
+  display_name: "Canvas MDS: rediseñar"
+  short_description: "Rediseña evaluación para evidenciar el proceso"
+  default_prompt: "Usa $canvas-mds-redisenar para diagnosticar mi evaluación y rediseñarla con evidencia del proceso."

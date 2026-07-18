@@ -1,0 +1,313 @@
+{
+  "version": "0.2.0-process-draft",
+  "course_profile": "reemplazar-curso-periodo",
+  "course_identity": {
+    "required_terms": [
+      "nombre distintivo del curso"
+    ]
+  },
+  "structure_note": "Borrador generado desde documentos del curso; requiere aprobación docente.",
+  "timezone": "America/Santiago",
+  "default_publish": false,
+  "source_files": [
+    "plugins/canvas-mds/skills/canvas-mds-redisenar/references/metodologias-activas-udd.md",
+    "replace/programa.md"
+  ],
+  "course_dates": {
+    "start": "2026-01-01",
+    "end": "2026-12-31"
+  },
+  "team_group_category": {
+    "name": "Equipos interdisciplinarios · reemplazar curso",
+    "self_signup": false
+  },
+  "learning_outcomes": {
+    "RA1": "Reemplazar con el resultado de aprendizaje aprobado."
+  },
+  "assignment_groups": [
+    {
+      "name": "Trabajo aplicado",
+      "weight": 60,
+      "components": [
+        {
+          "assignment_key": "entrega-aplicada",
+          "course_weight_percent": 60
+        }
+      ]
+    },
+    {
+      "name": "Evidencia individual",
+      "weight": 40,
+      "components": [
+        {
+          "assignment_key": "reflexion-individual",
+          "course_weight_percent": 40
+        }
+      ]
+    }
+  ],
+  "assignments": [
+    {
+      "key": "entrega-aplicada",
+      "name": "Entrega aplicada · reemplazar",
+      "kind": "summative",
+      "points": 100,
+      "due_local": "2026-01-31 23:59",
+      "group": "Trabajo aplicado",
+      "mode": "equipo",
+      "group_assignment": true,
+      "ra": [
+        "RA1"
+      ],
+      "iag_level": "Reemplazar",
+      "evidence": "Reemplazar evidencia esperada.",
+      "course_weight_percent": 60,
+      "process_stage": "feedback_iteration",
+      "evidence_scope": "team",
+      "process_dimensions": [
+        "decision_rationale",
+        "feedback_response",
+        "peer_assessment"
+      ],
+      "cognitive_processes": [
+        "analyze",
+        "evaluate",
+        "create"
+      ],
+      "knowledge_dimensions": [
+        "conceptual",
+        "procedural",
+        "metacognitive"
+      ],
+      "alternative_evidence_formats": [
+        "written_artifact",
+        "narrated_equivalent"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R4",
+        "UDD-R9",
+        "UDD-R10"
+      ],
+      "ai_use": {
+        "level": "replace",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01"
+      ],
+      "faculty_decision_ids": [],
+      "feedback_loop": {
+        "receives_feedback": true,
+        "requires_response": true,
+        "actor": "replace",
+        "response_in_assignment_key": "reflexion-individual"
+      }
+    },
+    {
+      "key": "reflexion-individual",
+      "name": "Cuestionario individual · contribución y reflexión",
+      "kind": "individual_evidence",
+      "points": 10,
+      "course_weight_percent": 40,
+      "unlock_local": "2026-01-31 12:00",
+      "due_local": "2026-02-02 23:59",
+      "group": "Evidencia individual",
+      "mode": "individual · Classic Quiz",
+      "ra": [
+        "RA1"
+      ],
+      "iag_level": "Respuesta personal; reemplazar política autorizada.",
+      "evidence": "Contribución verificable y reflexión personal.",
+      "quiz_settings": {
+        "attempts": 1,
+        "time_limit_minutes": 15,
+        "questions": [
+          {
+            "name": "Q1 · Contribución",
+            "points": 5,
+            "type": "essay",
+            "prompt": "Describe tu contribución y evidencia.",
+            "max_words": 150
+          },
+          {
+            "name": "Q2 · Reflexión",
+            "points": 5,
+            "type": "essay",
+            "prompt": "Explica qué aprendiste y qué cambiarías.",
+            "max_words": 150
+          }
+        ]
+      },
+      "process_stage": "reflection",
+      "evidence_scope": "individual",
+      "process_dimensions": [
+        "individual_contribution",
+        "self_assessment",
+        "ai_verification"
+      ],
+      "cognitive_processes": [
+        "analyze",
+        "evaluate"
+      ],
+      "knowledge_dimensions": [
+        "procedural",
+        "metacognitive"
+      ],
+      "alternative_evidence_formats": [
+        "written_response",
+        "oral_response_with_transcript"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R4",
+        "UDD-R6",
+        "UDD-R7",
+        "UDD-R10"
+      ],
+      "ai_use": {
+        "level": "replace",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01"
+      ],
+      "faculty_decision_ids": [],
+      "feedback_loop": {
+        "receives_feedback": false,
+        "requires_response": false
+      }
+    }
+  ],
+  "modules": [
+    {
+      "position": 0,
+      "name": "Módulo 00 · Comience aquí",
+      "period": "Reemplazar",
+      "session": "Preparación",
+      "ra": [
+        "RA1"
+      ],
+      "pages": [
+        "Comience aquí",
+        "Programa, calendario y ruta del curso"
+      ],
+      "assignments": []
+    },
+    {
+      "position": 1,
+      "name": "Módulo 01 · Reemplazar",
+      "period": "Reemplazar",
+      "session": "Reemplazar",
+      "ra": [
+        "RA1"
+      ],
+      "pages": [
+        "M01 · Resultados y ruta",
+        "M01 · Actividad",
+        "M01 · Cierre"
+      ],
+      "assignments": [
+        "entrega-aplicada",
+        "reflexion-individual"
+      ]
+    }
+  ],
+  "course_policies": [],
+  "manual_decisions": [
+    "Reemplazar datos de ejemplo y aprobar el perfil completo.",
+    "Aprobar y asociar rúbricas antes de publicar tareas sumativas."
+  ],
+  "pedagogical_redesign": {
+    "schema_version": "0.2.0",
+    "redesign_id": "replace-course-assessment-redesign",
+    "language": "es",
+    "source_evidence": [
+      {
+        "id": "SRC-00",
+        "path": "plugins/canvas-mds/skills/canvas-mds-redisenar/references/metodologias-activas-udd.md",
+        "role": "udd_active_learning_knowledge_base",
+        "authority": "documented"
+      },
+      {
+        "id": "SRC-01",
+        "path": "replace/programa.md",
+        "role": "approved_learning_outcomes",
+        "authority": "documented"
+      }
+    ],
+    "current_assessment": {
+      "summary": "Replace with the current assessment model.",
+      "product_weight_percent": 0,
+      "process_weight_percent": 0,
+      "individual_evidence_weight_percent": 0
+    },
+    "diagnosis": {
+      "assessment_validity_problem": "Replace with a concise, evidence-grounded diagnosis.",
+      "invisible_learning_processes": [],
+      "ai_validity_risks": [],
+      "evidence_refs": [
+        "SRC-00",
+        "SRC-01"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-H1"
+      ]
+    },
+    "faculty_questions": [
+      {
+        "id": "Q-01",
+        "question": "Replace with a decision-changing faculty question.",
+        "status": "pending",
+        "answer": null,
+        "evidence_refs": [
+          "SRC-01"
+        ]
+      }
+    ],
+    "faculty_decisions": [],
+    "redesign_options": [],
+    "selected_design": {
+      "option_id": null,
+      "process_checkpoints": [],
+      "individual_evidence": [],
+      "feedback_loops": [],
+      "ai_use_evidence": [],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R4",
+        "UDD-R7",
+        "UDD-R9",
+        "UDD-R10"
+      ]
+    },
+    "adversarial_scenarios": [],
+    "unresolved_decisions": [
+      "Answer Q-01 and approve one redesign option."
+    ]
+  },
+  "process_assessment_policy": {
+    "enabled": true,
+    "minimum_process_weight_percent": 50,
+    "require_individual_evidence_for_group_work": true,
+    "require_feedback_iteration": true,
+    "require_ai_use_disclosure": true,
+    "require_self_or_peer_assessment": true,
+    "require_alternative_evidence_formats": true,
+    "knowledge_base_refs": [
+      "UDD-R1",
+      "UDD-R2",
+      "UDD-R4",
+      "UDD-R7",
+      "UDD-R9",
+      "UDD-R10"
+    ]
+  }
+}
