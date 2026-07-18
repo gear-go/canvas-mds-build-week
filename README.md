@@ -139,6 +139,14 @@ Ran 7 tests
 OK
 ~~~
 
+Then run the complete credential-free judge experience:
+
+~~~text
+python judge_demo.py
+~~~
+
+It validates the sample profile with the production validator and generates an English PASS summary from a synthetic dry-run with zero network access and zero Canvas mutations. See the full [Five-Minute Judge Experience](JUDGE_GUIDE.md).
+
 The tests exercise:
 
 - HTTPS and same-origin enforcement;
