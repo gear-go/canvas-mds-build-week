@@ -1,20 +1,32 @@
 {
   "name": "canvas-mds",
-  "version": "0.1.0",
-  "description": "Skills portables para configurar, adaptar, auditar y crear estructuras MDS en Canvas.",
+  "version": "0.1.0+codex.20260718201910",
+  "description": "Razonamiento pedag\u00f3gico generativo, evaluaci\u00f3n centrada en el proceso y gesti\u00f3n segura de cursos Canvas MDS.",
   "author": {
     "name": "Docentes MDS UDD"
   },
-  "keywords": ["canvas", "mds", "docencia", "lms"],
+  "keywords": [
+    "canvas",
+    "mds",
+    "docencia",
+    "evaluaci\u00f3n",
+    "ia",
+    "proceso"
+  ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Canvas MDS",
-    "shortDescription": "Configura y construye cursos MDS en Canvas",
-    "longDescription": "Flujo docente portable para conexión segura, adaptación de programas, dry-run, auditoría estructural y creación controlada de objetos no publicados en Canvas.",
+    "shortDescription": "Redise\u00f1a evaluaci\u00f3n y construye Canvas con seguridad",
+    "longDescription": "Flujo docente portable que usa GPT-5.6 para diagnosticar validez, proponer alternativas y registrar decisiones; luego valida evidencia del proceso y crea, de forma controlada, objetos no publicados en Canvas.",
     "developerName": "Docentes MDS UDD",
     "category": "Education",
-    "capabilities": ["Canvas course inspection", "Unpublished course scaffolding"],
-    "defaultPrompt": "Ayúdame a preparar, auditar o construir de forma segura un curso MDS en Canvas.",
+    "capabilities": [
+      "Generative assessment redesign",
+      "Process-evidence validation",
+      "Canvas course inspection",
+      "Unpublished course scaffolding"
+    ],
+    "defaultPrompt": "Usa $canvas-mds-redisenar para diagnosticar mi evaluaci\u00f3n y redise\u00f1arla con evidencia del proceso antes de preparar Canvas.",
     "brandColor": "#1F4E79"
   }
 }

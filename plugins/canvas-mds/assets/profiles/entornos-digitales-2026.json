@@ -1,15 +1,22 @@
 {
-  "version": "0.5.0-mvp",
+  "version": "0.6.0-process-mvp",
   "course_profile": "entornos-digitales-digital-innovation-studio-2026",
   "course_identity": {
-    "required_terms": ["entornos digitales"]
+    "required_terms": [
+      "entornos digitales"
+    ]
   },
-  "structure_note": "El perfil propone tres hitos sumativos dentro del 30%, dossier/prototipo grupal 40%, cuestionario individual 5% y defensa oral 25%.",
+  "structure_note": "GPT-5.6 diagnosed the assessment-validity gap and proposed alternatives; the instructor approved a process-centered design with deterministic safeguards.",
   "timezone": "America/Santiago",
   "default_publish": false,
   "source_files": [
-    "programa/014_B5C2_Entornos_Digitales_IA_Actualizado_2026.docx",
-    "programa/Planificacion_Entornos_Digitales_Digital_Innovation_Studio_2026.md"
+    "plugins/canvas-mds/skills/canvas-mds-redisenar/references/metodologias-activas-udd.md",
+    "plugins/canvas-mds/assets/judge-case/input/course-overview.md",
+    "plugins/canvas-mds/assets/judge-case/input/learning-outcomes.md",
+    "plugins/canvas-mds/assets/judge-case/input/current-assessment.md",
+    "plugins/canvas-mds/assets/judge-case/input/current-rubric.md",
+    "plugins/canvas-mds/assets/judge-case/input/institutional-ai-guidance.md",
+    "plugins/canvas-mds/assets/judge-case/input/faculty-constraints.json"
   ],
   "course_dates": {
     "start": "2026-07-27",
@@ -30,7 +37,21 @@
   "assignment_groups": [
     {
       "name": "Hitos de avance del Digital Innovation Studio",
-      "weight": 30
+      "weight": 30,
+      "components": [
+        {
+          "assignment_key": "hito-evaluado-1",
+          "course_weight_percent": 10
+        },
+        {
+          "assignment_key": "hito-evaluado-2",
+          "course_weight_percent": 10
+        },
+        {
+          "assignment_key": "hito-evaluado-3",
+          "course_weight_percent": 10
+        }
+      ]
     },
     {
       "name": "Dossier y prototipo del proyecto integrador",
@@ -48,7 +69,13 @@
     },
     {
       "name": "Defensa oral del proyecto integrador",
-      "weight": 25
+      "weight": 25,
+      "components": [
+        {
+          "assignment_key": "defensa-oral",
+          "course_weight_percent": 25
+        }
+      ]
     }
   ],
   "assignments": [
@@ -60,9 +87,58 @@
       "due_local": "2026-08-07 23:59",
       "group": null,
       "mode": "individual",
-      "ra": ["RA1", "RA2"],
+      "ra": [
+        "RA1",
+        "RA2"
+      ],
       "iag_level": "C para el diagnóstico inicial; IA permitida después para contraste",
-      "evidence": "Dos oportunidades con contexto, actores, evidencia y valor potencial."
+      "evidence": "Dos oportunidades con contexto, actores, evidencia y valor potencial.",
+      "course_weight_percent": 0,
+      "process_stage": "framing",
+      "evidence_scope": "individual",
+      "process_dimensions": [
+        "problem_framing",
+        "individual_reasoning"
+      ],
+      "cognitive_processes": [
+        "analyze",
+        "evaluate"
+      ],
+      "knowledge_dimensions": [
+        "conceptual",
+        "metacognitive"
+      ],
+      "alternative_evidence_formats": [
+        "structured_text",
+        "audio_with_transcript"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R7",
+        "UDD-R10",
+        "UDD-H1"
+      ],
+      "ai_use": {
+        "level": "guided_contrast",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "faculty_decision_ids": [
+        "FD-01",
+        "FD-04"
+      ],
+      "feedback_loop": {
+        "receives_feedback": false,
+        "requires_response": false
+      }
     },
     {
       "key": "checkpoint-diagnostico",
@@ -72,9 +148,61 @@
       "due_local": "2026-08-20 23:59",
       "group": null,
       "mode": "equipo",
-      "ra": ["RA1", "RA2"],
+      "ra": [
+        "RA1",
+        "RA2"
+      ],
       "iag_level": "B por fase",
-      "evidence": "Contexto, problema preliminar, afectados, evidencia inicial, valor e incertidumbres."
+      "evidence": "Contexto, problema preliminar, afectados, evidencia inicial, valor e incertidumbres.",
+      "course_weight_percent": 0,
+      "process_stage": "diagnosis",
+      "evidence_scope": "team",
+      "process_dimensions": [
+        "problem_framing",
+        "evidence_selection",
+        "feedback_response"
+      ],
+      "cognitive_processes": [
+        "analyze",
+        "evaluate"
+      ],
+      "knowledge_dimensions": [
+        "conceptual",
+        "procedural"
+      ],
+      "alternative_evidence_formats": [
+        "structured_brief",
+        "annotated_concept_map"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R4",
+        "UDD-R9",
+        "UDD-H3"
+      ],
+      "ai_use": {
+        "level": "phase_specific",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "faculty_decision_ids": [
+        "FD-01",
+        "FD-05"
+      ],
+      "feedback_loop": {
+        "receives_feedback": true,
+        "requires_response": true,
+        "actor": "faculty",
+        "response_in_assignment_key": "hito-evaluado-1"
+      }
     },
     {
       "key": "hito-evaluado-1",
@@ -84,9 +212,62 @@
       "due_local": "2026-08-27 23:59",
       "group": "Hitos de avance del Digital Innovation Studio",
       "mode": "equipo con verificación individual breve",
-      "ra": ["RA1", "RA2", "RA4"],
+      "ra": [
+        "RA1",
+        "RA2",
+        "RA4"
+      ],
       "iag_level": "B por fase",
-      "evidence": "Problema validado, stakeholders, proceso actual, línea base, causas, restricciones y criterios de éxito."
+      "evidence": "Problema validado, stakeholders, proceso actual, línea base, causas, restricciones y criterios de éxito.",
+      "course_weight_percent": 10,
+      "process_stage": "diagnosis",
+      "evidence_scope": "mixed",
+      "process_dimensions": [
+        "decision_rationale",
+        "baseline_reasoning",
+        "feedback_response"
+      ],
+      "cognitive_processes": [
+        "analyze",
+        "evaluate"
+      ],
+      "knowledge_dimensions": [
+        "conceptual",
+        "procedural"
+      ],
+      "alternative_evidence_formats": [
+        "written_brief",
+        "oral_briefing_with_evidence_map"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R3",
+        "UDD-R9",
+        "UDD-H3"
+      ],
+      "ai_use": {
+        "level": "phase_specific",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "faculty_decision_ids": [
+        "FD-01",
+        "FD-05"
+      ],
+      "feedback_loop": {
+        "receives_feedback": true,
+        "requires_response": true,
+        "actor": "faculty_and_peers",
+        "response_in_assignment_key": "hito-evaluado-2"
+      }
     },
     {
       "key": "hito-evaluado-2",
@@ -96,9 +277,63 @@
       "due_local": "2026-09-03 23:59",
       "group": "Hitos de avance del Digital Innovation Studio",
       "mode": "equipo con verificación individual breve",
-      "ra": ["RA1", "RA3", "RA4"],
+      "ra": [
+        "RA1",
+        "RA3",
+        "RA4"
+      ],
       "iag_level": "A/B por fase",
-      "evidence": "Mapa de ecosistema, actores, datos, incentivos, propuesta de valor y modelo de servicio."
+      "evidence": "Mapa de ecosistema, actores, datos, incentivos, propuesta de valor y modelo de servicio.",
+      "course_weight_percent": 10,
+      "process_stage": "design",
+      "evidence_scope": "mixed",
+      "process_dimensions": [
+        "alternative_comparison",
+        "design_decisions",
+        "feedback_response"
+      ],
+      "cognitive_processes": [
+        "analyze",
+        "evaluate",
+        "create"
+      ],
+      "knowledge_dimensions": [
+        "conceptual",
+        "procedural"
+      ],
+      "alternative_evidence_formats": [
+        "service_blueprint",
+        "narrated_visual_model"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R3",
+        "UDD-R9",
+        "UDD-H1"
+      ],
+      "ai_use": {
+        "level": "phase_specific",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "faculty_decision_ids": [
+        "FD-01",
+        "FD-05"
+      ],
+      "feedback_loop": {
+        "receives_feedback": true,
+        "requires_response": true,
+        "actor": "faculty_and_peers",
+        "response_in_assignment_key": "checkpoint-prototipo-v0"
+      }
     },
     {
       "key": "checkpoint-prototipo-v0",
@@ -108,9 +343,61 @@
       "due_local": "2026-09-10 23:59",
       "group": null,
       "mode": "equipo",
-      "ra": ["RA3", "RA4"],
+      "ra": [
+        "RA3",
+        "RA4"
+      ],
       "iag_level": "A/B por fase",
-      "evidence": "Funcionamiento, datos, entradas/salidas, rol de IA y persona usuaria, límites, hipótesis y métricas."
+      "evidence": "Funcionamiento, datos, entradas/salidas, rol de IA y persona usuaria, límites, hipótesis y métricas.",
+      "course_weight_percent": 0,
+      "process_stage": "iteration",
+      "evidence_scope": "team",
+      "process_dimensions": [
+        "iteration",
+        "validation_planning",
+        "feedback_response"
+      ],
+      "cognitive_processes": [
+        "apply",
+        "analyze",
+        "create"
+      ],
+      "knowledge_dimensions": [
+        "procedural",
+        "metacognitive"
+      ],
+      "alternative_evidence_formats": [
+        "interactive_prototype",
+        "recorded_walkthrough_with_transcript"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R2",
+        "UDD-R4",
+        "UDD-R9",
+        "UDD-R10",
+        "UDD-H5"
+      ],
+      "ai_use": {
+        "level": "phase_specific",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "faculty_decision_ids": [
+        "FD-05"
+      ],
+      "feedback_loop": {
+        "receives_feedback": true,
+        "requires_response": true,
+        "actor": "peers_and_faculty",
+        "response_in_assignment_key": "hito-evaluado-3"
+      }
     },
     {
       "key": "hito-evaluado-3",
@@ -120,9 +407,64 @@
       "due_local": "2026-09-24 23:59",
       "group": "Hitos de avance del Digital Innovation Studio",
       "mode": "equipo con red team y verificación individual breve",
-      "ra": ["RA3", "RA4", "RA5"],
+      "ra": [
+        "RA3",
+        "RA4",
+        "RA5"
+      ],
       "iag_level": "A/B por fase",
-      "evidence": "Prototipo v1, pruebas, matriz de riesgos, supervisión humana, mitigaciones e indicadores."
+      "evidence": "Prototipo v1, pruebas, matriz de riesgos, supervisión humana, mitigaciones e indicadores.",
+      "course_weight_percent": 10,
+      "process_stage": "validation",
+      "evidence_scope": "mixed",
+      "process_dimensions": [
+        "validation_reasoning",
+        "risk_governance",
+        "feedback_response"
+      ],
+      "cognitive_processes": [
+        "analyze",
+        "evaluate",
+        "create"
+      ],
+      "knowledge_dimensions": [
+        "procedural",
+        "metacognitive"
+      ],
+      "alternative_evidence_formats": [
+        "written_validation_report",
+        "recorded_defense_with_evidence_matrix"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R4",
+        "UDD-R9",
+        "UDD-H5"
+      ],
+      "ai_use": {
+        "level": "phase_specific",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "faculty_decision_ids": [
+        "FD-01",
+        "FD-04",
+        "FD-05"
+      ],
+      "feedback_loop": {
+        "receives_feedback": true,
+        "requires_response": true,
+        "actor": "faculty",
+        "response_in_assignment_key": "checkpoint-dossier"
+      }
     },
     {
       "key": "checkpoint-dossier",
@@ -132,9 +474,64 @@
       "due_local": "2026-10-01 23:59",
       "group": null,
       "mode": "equipo",
-      "ra": ["RA3", "RA4", "RA5", "RA6"],
+      "ra": [
+        "RA3",
+        "RA4",
+        "RA5",
+        "RA6"
+      ],
       "iag_level": "A/B por fase",
-      "evidence": "Dossier, prototipo, roadmap, métricas, gobernanza y ensayo de defensa."
+      "evidence": "Dossier, prototipo, roadmap, métricas, gobernanza y ensayo de defensa.",
+      "course_weight_percent": 0,
+      "process_stage": "feedback_iteration",
+      "evidence_scope": "team",
+      "process_dimensions": [
+        "synthesis",
+        "feedback_response",
+        "revision_planning"
+      ],
+      "cognitive_processes": [
+        "evaluate",
+        "create"
+      ],
+      "knowledge_dimensions": [
+        "procedural",
+        "metacognitive"
+      ],
+      "alternative_evidence_formats": [
+        "annotated_dossier",
+        "narrated_prototype_walkthrough"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R2",
+        "UDD-R4",
+        "UDD-R9",
+        "UDD-R10",
+        "UDD-H3"
+      ],
+      "ai_use": {
+        "level": "phase_specific",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "faculty_decision_ids": [
+        "FD-02",
+        "FD-04",
+        "FD-05"
+      ],
+      "feedback_loop": {
+        "receives_feedback": true,
+        "requires_response": true,
+        "actor": "faculty_and_peers",
+        "response_in_assignment_key": "dossier-final"
+      }
     },
     {
       "key": "defensa-oral",
@@ -152,10 +549,64 @@
       "group": "Defensa oral del proyecto integrador",
       "mode": "equipo; sin interrogación individual sistemática por escala de cohorte",
       "group_assignment": true,
-      "submission_types": ["on_paper"],
-      "ra": ["RA1", "RA2", "RA3", "RA4", "RA5", "RA6"],
+      "submission_types": [
+        "on_paper"
+      ],
+      "ra": [
+        "RA1",
+        "RA2",
+        "RA3",
+        "RA4",
+        "RA5",
+        "RA6"
+      ],
       "iag_level": "C durante la defensa",
-      "evidence": "Presentación, demostración y respuesta del equipo al panel sobre decisiones, evidencia y límites."
+      "evidence": "Presentación, demostración y respuesta del equipo al panel sobre decisiones, evidencia y límites.",
+      "course_weight_percent": 25,
+      "process_stage": "defense",
+      "evidence_scope": "team",
+      "process_dimensions": [
+        "decision_defense",
+        "team_reasoning"
+      ],
+      "cognitive_processes": [
+        "evaluate",
+        "create"
+      ],
+      "knowledge_dimensions": [
+        "conceptual",
+        "procedural"
+      ],
+      "alternative_evidence_formats": [
+        "live_oral_defense",
+        "accessible_recorded_defense"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R10",
+        "UDD-H1"
+      ],
+      "ai_use": {
+        "level": "not_during_defense",
+        "disclosure_required": false,
+        "verification_required": false
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "faculty_decision_ids": [
+        "FD-02"
+      ],
+      "feedback_loop": {
+        "receives_feedback": true,
+        "requires_response": false,
+        "actor": "expert_panel"
+      }
     },
     {
       "key": "cuestionario-individual",
@@ -167,7 +618,11 @@
       "due_local": "2026-10-07 23:59",
       "group": "Dossier y prototipo del proyecto integrador",
       "mode": "individual · cuestionario en Canvas (10–15 minutos)",
-      "ra": ["RA4", "RA5", "RA6"],
+      "ra": [
+        "RA4",
+        "RA5",
+        "RA6"
+      ],
       "iag_level": "C: respuesta personal sin generación delegada; corrector ortográfico permitido",
       "evidence": "Contribución verificable al proyecto, decisión individual relevante, aprendizaje, uso responsable de IA y reflexión sobre colaboración interdisciplinaria.",
       "grade_use": "Componente individual obligatorio de 10 puntos dentro del grupo de 45%; equivale a 5 puntos porcentuales de la nota final del curso.",
@@ -182,7 +637,14 @@
             "points": 1,
             "type": "multiple_choice",
             "prompt": "¿Cuál fue tu rol principal en el proyecto?",
-            "options": ["Diagnóstico e investigación", "Diseño de solución", "Datos y prototipo", "Validación y evaluación", "Gobernanza e implementación", "Coordinación y comunicación"]
+            "options": [
+              "Diagnóstico e investigación",
+              "Diseño de solución",
+              "Datos y prototipo",
+              "Validación y evaluación",
+              "Gobernanza e implementación",
+              "Coordinación y comunicación"
+            ]
           },
           {
             "name": "Q2 · Contribuciones verificables",
@@ -218,6 +680,52 @@
             "prompt": "Declaro que esta respuesta representa mi contribución y reflexión personal."
           }
         ]
+      },
+      "process_stage": "reflection",
+      "evidence_scope": "individual",
+      "process_dimensions": [
+        "individual_contribution",
+        "self_assessment",
+        "ai_verification"
+      ],
+      "cognitive_processes": [
+        "analyze",
+        "evaluate"
+      ],
+      "knowledge_dimensions": [
+        "procedural",
+        "metacognitive"
+      ],
+      "alternative_evidence_formats": [
+        "written_response",
+        "oral_response_with_transcript"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R4",
+        "UDD-R6",
+        "UDD-R7",
+        "UDD-R10",
+        "UDD-H5"
+      ],
+      "ai_use": {
+        "level": "personal_disclosure",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "faculty_decision_ids": [
+        "FD-03",
+        "FD-04"
+      ],
+      "feedback_loop": {
+        "receives_feedback": false,
+        "requires_response": false
       }
     },
     {
@@ -229,9 +737,64 @@
       "due_local": "2026-10-07 23:59",
       "group": "Dossier y prototipo del proyecto integrador",
       "mode": "equipo",
-      "ra": ["RA2", "RA3", "RA4", "RA5", "RA6"],
+      "ra": [
+        "RA2",
+        "RA3",
+        "RA4",
+        "RA5",
+        "RA6"
+      ],
       "iag_level": "A/B por fase con declaración y trazabilidad",
-      "evidence": "Dossier definitivo, anexos, acceso controlado al prototipo y declaración de uso de IA."
+      "evidence": "Dossier definitivo, anexos, acceso controlado al prototipo y declaración de uso de IA.",
+      "process_stage": "final_product",
+      "evidence_scope": "team",
+      "process_dimensions": [
+        "final_synthesis",
+        "revision_trace",
+        "ai_disclosure"
+      ],
+      "cognitive_processes": [
+        "evaluate",
+        "create"
+      ],
+      "knowledge_dimensions": [
+        "conceptual",
+        "procedural",
+        "metacognitive"
+      ],
+      "alternative_evidence_formats": [
+        "accessible_digital_dossier",
+        "narrated_dossier_with_equivalent_evidence"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R3",
+        "UDD-R9",
+        "UDD-R10",
+        "UDD-H6"
+      ],
+      "ai_use": {
+        "level": "declared_and_verified",
+        "disclosure_required": true,
+        "verification_required": true
+      },
+      "source_evidence_ids": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "faculty_decision_ids": [
+        "FD-02",
+        "FD-04",
+        "FD-05"
+      ],
+      "feedback_loop": {
+        "receives_feedback": false,
+        "requires_response": false
+      }
     }
   ],
   "modules": [
@@ -240,7 +803,10 @@
       "name": "Módulo 00 · Comience aquí y preparación",
       "period": "27 de julio–7 de agosto",
       "session": "Preparación previa",
-      "ra": ["RA1", "RA2"],
+      "ra": [
+        "RA1",
+        "RA2"
+      ],
       "pages": [
         "Comience aquí",
         "Programa, calendario y ruta del curso",
@@ -248,79 +814,172 @@
         "Datos, privacidad, accesibilidad y alternativas de herramientas",
         "Metodología y evaluación del Digital Innovation Studio"
       ],
-      "assignments": ["preparacion-inventario"]
+      "assignments": [
+        "preparacion-inventario"
+      ]
     },
     {
       "position": 1,
       "name": "Módulo 01 · Explorar transformación digital y creación de valor",
       "period": "8–20 de agosto",
       "session": "Clase 1 · 8 de agosto",
-      "ra": ["RA1", "RA2"],
-      "pages": ["M01 · Resultados y ruta", "M01 · Conceptos y casos", "M01 · Actividad de priorización", "M01 · Cierre y transferencia"],
-      "assignments": ["checkpoint-diagnostico"]
+      "ra": [
+        "RA1",
+        "RA2"
+      ],
+      "pages": [
+        "M01 · Resultados y ruta",
+        "M01 · Conceptos y casos",
+        "M01 · Actividad de priorización",
+        "M01 · Cierre y transferencia"
+      ],
+      "assignments": [
+        "checkpoint-diagnostico"
+      ]
     },
     {
       "position": 2,
       "name": "Módulo 02 · Diagnosticar problemas y validar evidencia",
       "period": "21–27 de agosto",
       "session": "Clase 2 · 22 de agosto",
-      "ra": ["RA1", "RA2", "RA4"],
-      "pages": ["M02 · Resultados y ruta", "M02 · Descubrimiento y diseño de servicios", "M02 · Clínica de problemas", "M02 · Cierre y transferencia"],
-      "assignments": ["hito-evaluado-1"]
+      "ra": [
+        "RA1",
+        "RA2",
+        "RA4"
+      ],
+      "pages": [
+        "M02 · Resultados y ruta",
+        "M02 · Descubrimiento y diseño de servicios",
+        "M02 · Clínica de problemas",
+        "M02 · Cierre y transferencia"
+      ],
+      "assignments": [
+        "hito-evaluado-1"
+      ]
     },
     {
       "position": 3,
       "name": "Módulo 03 · Diseñar ecosistemas y propuesta de valor",
       "period": "28 de agosto–3 de septiembre",
       "session": "Clase 3 · 29 de agosto",
-      "ra": ["RA1", "RA3", "RA4"],
-      "pages": ["M03 · Resultados y ruta", "M03 · Ecosistemas y gobierno digital", "M03 · Mapa de actores y servicio", "M03 · Cierre y transferencia"],
-      "assignments": ["hito-evaluado-2"]
+      "ra": [
+        "RA1",
+        "RA3",
+        "RA4"
+      ],
+      "pages": [
+        "M03 · Resultados y ruta",
+        "M03 · Ecosistemas y gobierno digital",
+        "M03 · Mapa de actores y servicio",
+        "M03 · Cierre y transferencia"
+      ],
+      "assignments": [
+        "hito-evaluado-2"
+      ]
     },
     {
       "position": 4,
       "name": "Módulo 04 · Prototipar con datos e inteligencia artificial",
       "period": "4–10 de septiembre",
       "session": "Clase 4 · 5 de septiembre",
-      "ra": ["RA3", "RA4"],
-      "pages": ["M04 · Resultados y ruta", "M04 · Datos, IA y prototipado", "M04 · Laboratorio de prototipo", "M04 · Cierre y transferencia"],
-      "assignments": ["checkpoint-prototipo-v0"]
+      "ra": [
+        "RA3",
+        "RA4"
+      ],
+      "pages": [
+        "M04 · Resultados y ruta",
+        "M04 · Datos, IA y prototipado",
+        "M04 · Laboratorio de prototipo",
+        "M04 · Cierre y transferencia"
+      ],
+      "assignments": [
+        "checkpoint-prototipo-v0"
+      ]
     },
     {
       "position": 5,
       "name": "Módulo 05 · Gobernar riesgos, ética e impactos",
       "period": "11–24 de septiembre",
       "session": "Clase 5 · 12 de septiembre",
-      "ra": ["RA3", "RA4", "RA5"],
-      "pages": ["M05 · Resultados y ruta", "M05 · Gobernanza, regulación y sostenibilidad", "M05 · Red team interdisciplinario", "M05 · Cierre y transferencia"],
-      "assignments": ["hito-evaluado-3"]
+      "ra": [
+        "RA3",
+        "RA4",
+        "RA5"
+      ],
+      "pages": [
+        "M05 · Resultados y ruta",
+        "M05 · Gobernanza, regulación y sostenibilidad",
+        "M05 · Red team interdisciplinario",
+        "M05 · Cierre y transferencia"
+      ],
+      "assignments": [
+        "hito-evaluado-3"
+      ]
     },
     {
       "position": 6,
       "name": "Módulo 06 · Implementar, adoptar, medir y escalar",
       "period": "25 de septiembre–1 de octubre",
       "session": "Clase 6 · 26 de septiembre",
-      "ra": ["RA4", "RA5", "RA6"],
-      "pages": ["M06 · Resultados y ruta", "M06 · Implementación y adopción", "M06 · Roadmap, KPI y caso de valor", "M06 · Cierre y transferencia"],
-      "assignments": ["checkpoint-dossier"]
+      "ra": [
+        "RA4",
+        "RA5",
+        "RA6"
+      ],
+      "pages": [
+        "M06 · Resultados y ruta",
+        "M06 · Implementación y adopción",
+        "M06 · Roadmap, KPI y caso de valor",
+        "M06 · Cierre y transferencia"
+      ],
+      "assignments": [
+        "checkpoint-dossier"
+      ]
     },
     {
       "position": 7,
       "name": "Módulo 07 · Defender la innovación digital",
       "period": "2–3 de octubre",
       "session": "Clase 7 · 3 de octubre",
-      "ra": ["RA1", "RA2", "RA3", "RA4", "RA5", "RA6"],
-      "pages": ["M07 · Agenda y reglas del Demo Day", "M07 · Rúbrica y preguntas comunes", "M07 · Evaluación cruzada", "M07 · Síntesis integradora"],
-      "assignments": ["defensa-oral"]
+      "ra": [
+        "RA1",
+        "RA2",
+        "RA3",
+        "RA4",
+        "RA5",
+        "RA6"
+      ],
+      "pages": [
+        "M07 · Agenda y reglas del Demo Day",
+        "M07 · Rúbrica y preguntas comunes",
+        "M07 · Evaluación cruzada",
+        "M07 · Síntesis integradora"
+      ],
+      "assignments": [
+        "defensa-oral"
+      ]
     },
     {
       "position": 8,
       "name": "Cierre · Dossier, cuestionario individual y transferencia",
       "period": "4–7 de octubre",
       "session": "Cierre posterior",
-      "ra": ["RA2", "RA3", "RA4", "RA5", "RA6"],
-      "pages": ["Instrucciones de cierre", "Declaración de uso de IA", "Archivo de evidencia y próximos pasos"],
-      "assignments": ["cuestionario-individual", "dossier-final"]
+      "ra": [
+        "RA2",
+        "RA3",
+        "RA4",
+        "RA5",
+        "RA6"
+      ],
+      "pages": [
+        "Instrucciones de cierre",
+        "Declaración de uso de IA",
+        "Archivo de evidencia y próximos pasos"
+      ],
+      "assignments": [
+        "cuestionario-individual",
+        "dossier-final"
+      ]
     }
   ],
   "course_policies": [
@@ -367,5 +1026,347 @@
       "summary": "Las rúbricas deben quedar aprobadas y asociadas antes de crear o publicar las tareas evaluadas."
     }
   ],
-  "manual_decisions": []
+  "manual_decisions": [],
+  "pedagogical_redesign": {
+    "schema_version": "0.2.0",
+    "redesign_id": "digital-innovation-studio-process-redesign-2026",
+    "language": "en",
+    "source_evidence": [
+      {
+        "id": "SRC-00",
+        "path": "plugins/canvas-mds/skills/canvas-mds-redisenar/references/metodologias-activas-udd.md",
+        "role": "udd_active_learning_knowledge_base",
+        "authority": "documented"
+      },
+      {
+        "id": "SRC-01",
+        "path": "plugins/canvas-mds/assets/judge-case/input/course-overview.md",
+        "role": "course_context",
+        "authority": "documented"
+      },
+      {
+        "id": "SRC-02",
+        "path": "plugins/canvas-mds/assets/judge-case/input/learning-outcomes.md",
+        "role": "approved_learning_outcomes",
+        "authority": "documented"
+      },
+      {
+        "id": "SRC-03",
+        "path": "plugins/canvas-mds/assets/judge-case/input/current-assessment.md",
+        "role": "current_assessment",
+        "authority": "documented"
+      },
+      {
+        "id": "SRC-04",
+        "path": "plugins/canvas-mds/assets/judge-case/input/current-rubric.md",
+        "role": "current_rubric",
+        "authority": "documented"
+      },
+      {
+        "id": "SRC-05",
+        "path": "plugins/canvas-mds/assets/judge-case/input/institutional-ai-guidance.md",
+        "role": "institutional_ai_guidance",
+        "authority": "documented"
+      },
+      {
+        "id": "SRC-06",
+        "path": "plugins/canvas-mds/assets/judge-case/input/faculty-constraints.json",
+        "role": "faculty_constraints",
+        "authority": "faculty_confirmed"
+      }
+    ],
+    "current_assessment": {
+      "summary": "The final dossier/prototype and Demo Day account for 95% of the grade. Process coaching is informal and leaves no required evidence of decisions, iteration, feedback response, AI verification, or individual contribution before the final artifact.",
+      "product_weight_percent": 95,
+      "process_weight_percent": 0,
+      "individual_evidence_weight_percent": 5
+    },
+    "diagnosis": {
+      "assessment_validity_problem": "The rubric claims to assess critical reasoning, evidence, iteration, and responsible AI use, but almost all graded evidence appears in final team products. A polished AI-assisted submission can therefore score well without establishing how students framed the problem, rejected alternatives, improved from feedback, verified AI output, or contributed individually.",
+      "invisible_learning_processes": [
+        "Problem framing before solution selection",
+        "Evidence used to reject alternatives",
+        "Iteration from baseline to improved prototype",
+        "Response to peer or faculty feedback",
+        "Individual ownership of consequential decisions",
+        "Verification and rejection of AI-generated suggestions"
+      ],
+      "ai_validity_risks": [
+        "A team may delegate core framing or synthesis to generative AI and present only the polished result.",
+        "A declaration of AI use does not by itself establish verification or student understanding.",
+        "Final group evidence cannot establish individual mastery or contribution."
+      ],
+      "evidence_refs": [
+        "SRC-00",
+        "SRC-01",
+        "SRC-02",
+        "SRC-03",
+        "SRC-04",
+        "SRC-05",
+        "SRC-06"
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R4",
+        "UDD-R7",
+        "UDD-R9",
+        "UDD-H1",
+        "UDD-H3",
+        "UDD-H5"
+      ]
+    },
+    "faculty_questions": [
+      {
+        "id": "Q-01",
+        "question": "Which consequential decisions must every student be able to defend individually?",
+        "status": "answered",
+        "answer": "Each student must defend one consequential decision, one rejected alternative, the evidence used, and their own contribution.",
+        "evidence_refs": [
+          "SRC-02",
+          "SRC-03",
+          "SRC-04",
+          "SRC-06"
+        ]
+      },
+      {
+        "id": "Q-02",
+        "question": "Should the assessment reward a correct first solution or improvement based on evidence and feedback?",
+        "status": "answered",
+        "answer": "Reward improvement. Teams should preserve a baseline, respond to feedback, and explain what changed and why.",
+        "evidence_refs": [
+          "SRC-01",
+          "SRC-02",
+          "SRC-06"
+        ]
+      },
+      {
+        "id": "Q-03",
+        "question": "Which uses of generative AI are permitted and what evidence of responsible use is required?",
+        "status": "answered",
+        "answer": "AI is permitted for exploration, critique, coding, and prototyping. Students must disclose consequential uses, verify outputs, protect data, and identify at least one rejected suggestion.",
+        "evidence_refs": [
+          "SRC-05",
+          "SRC-06"
+        ]
+      }
+    ],
+    "faculty_decisions": [
+      {
+        "id": "FD-01",
+        "status": "confirmed",
+        "decision": "Move 30% of the course grade into three evidence-based milestones worth 10% each.",
+        "rationale": "The milestones make framing, design decisions, validation, and governance visible before the final product.",
+        "source_question_ids": [
+          "Q-02"
+        ]
+      },
+      {
+        "id": "FD-02",
+        "status": "confirmed",
+        "decision": "Retain the authentic final dossier/prototype at 40% and Demo Day defense at 25%.",
+        "rationale": "The final product remains important, but no longer carries the entire validity burden.",
+        "source_question_ids": [
+          "Q-02"
+        ]
+      },
+      {
+        "id": "FD-03",
+        "status": "confirmed",
+        "decision": "Add a 5% individual post-Demo-Day questionnaire.",
+        "rationale": "A short individual instrument is feasible for the cohort and establishes contribution, decision ownership, learning, and responsible AI use.",
+        "source_question_ids": [
+          "Q-01"
+        ]
+      },
+      {
+        "id": "FD-04",
+        "status": "confirmed",
+        "decision": "Require disclosure and verification of consequential AI use across the project.",
+        "rationale": "Responsible AI use must be evidenced through decisions and verification, not only a generic declaration.",
+        "source_question_ids": [
+          "Q-03"
+        ]
+      },
+      {
+        "id": "FD-05",
+        "status": "confirmed",
+        "decision": "Add formative checkpoints that require teams to respond to feedback.",
+        "rationale": "Feedback should change later work and create observable evidence of iteration without adding more summative grading.",
+        "source_question_ids": [
+          "Q-02"
+        ]
+      }
+    ],
+    "redesign_options": [
+      {
+        "id": "OPT-01",
+        "name": "Lightweight process evidence",
+        "selected": false,
+        "faculty_workload": "Low: one milestone, one decision log, and one individual reflection.",
+        "tradeoffs": [
+          "Faster to review but leaves fewer opportunities to observe iteration.",
+          "Relies more heavily on retrospective student accounts."
+        ],
+        "knowledge_base_refs": [
+          "UDD-R1",
+          "UDD-R2",
+          "UDD-R7",
+          "UDD-H6"
+        ]
+      },
+      {
+        "id": "OPT-02",
+        "name": "Balanced studio evidence",
+        "selected": true,
+        "faculty_workload": "Moderate: three concise graded milestones, formative checkpoints, and a short individual questionnaire.",
+        "tradeoffs": [
+          "Produces stronger longitudinal evidence but requires scheduled checkpoint review.",
+          "Reduces final-product weight while preserving the authentic dossier and Demo Day."
+        ],
+        "knowledge_base_refs": [
+          "UDD-R1",
+          "UDD-R2",
+          "UDD-R4",
+          "UDD-R7",
+          "UDD-R9",
+          "UDD-H3"
+        ]
+      }
+    ],
+    "selected_design": {
+      "option_id": "OPT-02",
+      "process_checkpoints": [
+        {
+          "assignment_key": "checkpoint-diagnostico",
+          "purpose": "Expose early framing, evidence, uncertainty, and feedback response."
+        },
+        {
+          "assignment_key": "hito-evaluado-1",
+          "purpose": "Assess the validated problem, baseline, causes, and success criteria."
+        },
+        {
+          "assignment_key": "hito-evaluado-2",
+          "purpose": "Assess alternatives, ecosystem decisions, and solution design."
+        },
+        {
+          "assignment_key": "checkpoint-prototipo-v0",
+          "purpose": "Preserve a baseline prototype and validation protocol."
+        },
+        {
+          "assignment_key": "hito-evaluado-3",
+          "purpose": "Assess validation, risk, governance, and impact decisions."
+        },
+        {
+          "assignment_key": "checkpoint-dossier",
+          "purpose": "Require a documented response to feedback before the final product."
+        }
+      ],
+      "individual_evidence": [
+        {
+          "assignment_key": "cuestionario-individual",
+          "purpose": "Verify contribution, consequential decisions, learning, and responsible AI use."
+        }
+      ],
+      "feedback_loops": [
+        {
+          "from_assignment_key": "checkpoint-prototipo-v0",
+          "to_assignment_key": "hito-evaluado-3",
+          "required_evidence": "Feedback received, response, and resulting change."
+        },
+        {
+          "from_assignment_key": "checkpoint-dossier",
+          "to_assignment_key": "dossier-final",
+          "required_evidence": "Final revision log linked to faculty or peer feedback."
+        }
+      ],
+      "ai_use_evidence": [
+        {
+          "assignment_key": "dossier-final",
+          "required_evidence": "Consequential AI uses, verification performed, data safeguards, and rejected suggestions."
+        },
+        {
+          "assignment_key": "cuestionario-individual",
+          "required_evidence": "Personal explanation of AI use or non-use and what the student verified."
+        }
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R3",
+        "UDD-R4",
+        "UDD-R6",
+        "UDD-R7",
+        "UDD-R9",
+        "UDD-R10",
+        "UDD-H1",
+        "UDD-H3",
+        "UDD-H5",
+        "UDD-H6"
+      ]
+    },
+    "adversarial_scenarios": [
+      {
+        "id": "ADV-01",
+        "category": "ai_without_understanding",
+        "scenario": "A team uses generative AI to produce a polished dossier and prototype but cannot explain the key choices.",
+        "risk": "The current final-product rubric could reward quality without establishing the intended reasoning.",
+        "mitigation": "Use graded milestones, decision evidence, verification records, and the individual questionnaire before accepting the final artifact as evidence.",
+        "affected_assignment_keys": [
+          "hito-evaluado-1",
+          "hito-evaluado-2",
+          "hito-evaluado-3",
+          "cuestionario-individual",
+          "dossier-final"
+        ]
+      },
+      {
+        "id": "ADV-02",
+        "category": "unequal_team_contribution",
+        "scenario": "One student performs most consequential work while the whole team presents the result.",
+        "risk": "Team artifacts and Demo Day cannot establish individual mastery or contribution.",
+        "mitigation": "Require each student to identify a consequential decision, rejected alternative, supporting evidence, and verifiable contribution in the individual questionnaire.",
+        "affected_assignment_keys": [
+          "defensa-oral",
+          "cuestionario-individual"
+        ]
+      },
+      {
+        "id": "ADV-03",
+        "category": "good_process_imperfect_product",
+        "scenario": "A team demonstrates strong inquiry and improvement but the final prototype remains imperfect.",
+        "risk": "A product-dominant grade can underrepresent meaningful learning and evidence-based iteration.",
+        "mitigation": "Allocate 30% to milestones and require explicit feedback response so process quality has independent weight.",
+        "affected_assignment_keys": [
+          "hito-evaluado-1",
+          "hito-evaluado-2",
+          "hito-evaluado-3"
+        ]
+      }
+    ],
+    "unresolved_decisions": []
+  },
+  "process_assessment_policy": {
+    "enabled": true,
+    "minimum_process_weight_percent": 50,
+    "require_individual_evidence_for_group_work": true,
+    "require_feedback_iteration": true,
+    "require_ai_use_disclosure": true,
+    "require_self_or_peer_assessment": true,
+    "require_alternative_evidence_formats": true,
+    "knowledge_base_refs": [
+      "UDD-R1",
+      "UDD-R2",
+      "UDD-R3",
+      "UDD-R4",
+      "UDD-R6",
+      "UDD-R7",
+      "UDD-R9",
+      "UDD-R10",
+      "UDD-H1",
+      "UDD-H3",
+      "UDD-H5",
+      "UDD-H6"
+    ]
+  }
 }

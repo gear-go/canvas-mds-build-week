@@ -1,6 +1,6 @@
 # Canvas MDS · Diseño de cursos centrado en el proceso con IA
 
-> Un complemento seguro para Codex que convierte documentos de curso, lineamientos institucionales de IA y decisiones docentes en blueprints revisables para Canvas LMS.
+> Un complemento seguro para Codex que combina razonamiento pedagógico generativo, evaluación centrada en el proceso y blueprints revisables para Canvas LMS.
 
 [English version](README.md)
 
@@ -23,7 +23,9 @@ Canvas MDS separa:
 
 - Lee la estructura del curso sin recuperar entregas, notas ni matrículas.
 - Produce snapshots estructurales, auditorías provisionales y dry-runs sin mutaciones.
-- Convierte documentos del curso y decisiones confirmadas en un perfil JSON portable.
+- Diagnostica qué puede y qué no puede demostrar la evaluación actual sobre el aprendizaje en un curso con IA.
+- Propone alternativas de rediseño, simula fallas de validez y registra las decisiones del docente.
+- Convierte el rediseño aprobado en un perfil JSON portable.
 - Crea o reutiliza grupos de evaluación, una categoría de equipos, páginas, tareas, un Classic Quiz y módulos.
 - Exige confirmar el ID exacto del curso Canvas antes de cualquier escritura.
 - Crea todo como **no publicado** y verifica ese estado después de ejecutar.
@@ -36,7 +38,7 @@ Deliberadamente **no** publica ni elimina contenido, modifica matrículas, desca
 | Capa | Responsabilidad |
 | --- | --- |
 | Evidencia del curso | Programa aprobado, planificación, lineamientos institucionales y decisiones explícitas del docente. |
-| Codex + GPT-5.6 | Interpreta documentos, detecta contradicciones y decisiones faltantes, ayuda a crear un perfil trazable y orquesta las tres skills. |
+| Codex + GPT-5.6 | Diagnostica la brecha de validez, formula preguntas que cambian decisiones, propone alternativas con trade-offs, simula fallas y compila las decisiones confirmadas. |
 | Perfil JSON | Guarda resultados de aprendizaje, ponderaciones, evidencia de proceso, fechas, políticas de IA/datos, páginas, módulos y decisiones pendientes sin credenciales ni IDs de Canvas. |
 | Motor Python determinista | Valida invariantes, lee la estructura de Canvas, calcula el dry-run, aplica el plan autorizado y verifica el resultado. |
 | API de Canvas LMS | Recibe lecturas por defecto y solicitudes POST/PUT protegidas solo después de una confirmación explícita. |
@@ -48,7 +50,7 @@ GPT-5.6 se utiliza dentro de Codex como capa de razonamiento y orquestación. El
 | Skill | Propósito | Comportamiento de escritura |
 | --- | --- | --- |
 | **$canvas-mds-configurar** | Configura URL, ID del curso, reportes locales y fuente segura de credencial; luego diagnostica la conexión. | Solo configuración local. Nunca solicita el token en el chat. |
-| **$canvas-mds-adaptar** | Convierte documentos y decisiones docentes en un perfil JSON revisable. | Escribe un perfil local; nunca modifica Canvas. |
+| **$canvas-mds-redisenar** | Diagnostica la validez de la evaluación y rediseña evidencia desde el producto final hacia proceso visible, contribución individual, uso del feedback y uso responsable de IA. | Escribe artefactos locales trazables y un perfil; nunca modifica Canvas. |
 | **$canvas-mds-gestionar** | Inspecciona, audita, hace dry-run y, solo tras una aprobación precisa, crea una estructura no publicada. | Lectura por defecto; la única escritura es una creación protegida, idempotente y no publicada. |
 
 ## Cómo se utilizaron Codex y GPT-5.6
@@ -63,7 +65,7 @@ Durante Build Week, Codex con GPT-5.6 aceleró el paso desde las necesidades edu
 
 Las decisiones centrales siguieron siendo humanas: enfocarse en evidencia del proceso, mantener al docente en control, prohibir publicación y operaciones destructivas, excluir datos estudiantiles y exigir confirmación explícita de la identidad del curso.
 
-Durante el uso, GPT-5.6 ayuda al docente a razonar sobre la evidencia del curso y construir el perfil. La validación determinista impide que la capa de modelo sobrepase el alcance aprobado.
+Durante el uso, GPT-5.6 reconcilia evidencia heterogénea, diagnostica procesos de aprendizaje invisibles, propone al menos dos diseños viables y los somete a escenarios de IA sin comprensión y contribución desigual. El docente confirma cada decisión material. La validación determinista aplica controles inspirados en la base UDD para alineamiento con RA, evidencia de proceso e individual, uso del feedback, demanda cognitiva, alternativas accesibles, ponderaciones, trazabilidad y seguridad Canvas.
 
 ## Modelo de seguridad
 
@@ -135,7 +137,7 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Resultado esperado:
 
 ~~~text
-Ran 7 tests
+Ran 15 tests
 OK
 ~~~
 
@@ -145,7 +147,7 @@ Luego ejecuta la experiencia completa para jueces, cuya interfaz y documentació
 python judge_demo.py
 ~~~
 
-El comando valida el perfil de ejemplo con el validador de producción y genera un resumen PASS en inglés a partir de un dry-run sintético, sin red y con cero mutaciones Canvas. Consulta la guía [Five-Minute Judge Experience](JUDGE_GUIDE.md).
+El comando valida el rediseño aprobado asistido por GPT-5.6, muestra el cambio de 95% producto final / 0% proceso a 40% / 60%, y genera un resumen PASS en inglés con 20 controles pedagógicos, de trazabilidad y seguridad. Consulta la [Judge Experience](JUDGE_GUIDE.md), que también incluye el prompt interactivo para Codex.
 
 Las pruebas cubren:
 
@@ -155,9 +157,10 @@ Las pruebas cubren:
 - rechazo de escritura con decisiones pendientes;
 - fechas Canvas generadas en la zona horaria del curso;
 - opciones admitidas para roles en el Classic Quiz;
-- salida estructurada de la auditoría provisional.
+- salida estructurada de la auditoría provisional;
+- controles UDD de alineamiento con RA, auto/coevaluación, demanda cognitiva, actor del feedback, ciclo de respuesta y formatos alternativos.
 
-También puede inspeccionarse el patrón técnico anonimizado en [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). Es un perfil de referencia y no debe aplicarse a un curso diferente.
+Los jueces pueden inspeccionar el contrato de razonamiento en [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), el cambio de evidencia en [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md) y el perfil compilado en [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). Son artefactos sanitizados de referencia y no deben aplicarse a otro curso.
 
 ## Verificación opcional conectada a Canvas
 
@@ -174,7 +177,7 @@ También puede inspeccionarse el patrón técnico anonimizado en [entornos-digit
    python plugins/canvas-mds/scripts/canvas_mds.py doctor
    ~~~
 
-4. Usa **$canvas-mds-adaptar** para crear y aprobar un perfil específico para ese curso sandbox.
+4. Usa **$canvas-mds-redisenar** para diagnosticar, rediseñar y aprobar un perfil específico para ese curso sandbox.
 5. Genera un dry-run sin mutaciones:
 
    ~~~text
@@ -202,7 +205,7 @@ Este MVP no tiene comando de publicación.
 
 Las necesidades de Canvas MDS surgieron de trabajo previo en el IA Workshop de la UDD, comisiones de IA de universidad y facultad, discusiones de política institucional y la dirección de la Maestría en Data Science. Ese trabajo previo estableció el problema y las restricciones; no se presenta como software de Build Week.
 
-La ideación de esta implementación comenzó el 16 de julio de 2026. La primera sesión técnica central recuperada fue creada el 17 de julio. El complemento portable, sus tres skills, el motor determinista, las siete pruebas, el perfil de ejemplo, el paquete y la evidencia de entrega se implementaron para Build Week.
+La ideación de esta implementación comenzó el 16 de julio de 2026. La primera sesión técnica central recuperada fue creada el 17 de julio. El complemento portable, sus tres skills, el motor determinista, las quince pruebas, el caso de rediseño centrado en el proceso y el perfil de ejemplo, el paquete y la evidencia de entrega se implementaron para Build Week.
 
 Consulta [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) para revisar el registro de evidencia.
 

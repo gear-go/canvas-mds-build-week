@@ -1,5 +1,0 @@
-﻿interface:
-  display_name: "Canvas MDS: adaptar"
-  short_description: "Adapta documentos docentes a un perfil Canvas MDS"
-  default_prompt: "Usa -mds-adaptar para convertir el programa y la planificación en un perfil Canvas revisable."
-

@@ -16,6 +16,8 @@ from urllib.parse import quote, urljoin, urlsplit
 
 import requests
 
+from process_evidence import process_metrics
+
 
 DEFAULT_BASE_URL = "https://udd.instructure.com"
 DEFAULT_CONFIG = Path(".canvas/local.json")
@@ -956,6 +958,13 @@ def build_dry_run(snapshot: dict[str, Any], blueprint: dict[str, Any]) -> dict[s
         "learning_outcomes": blueprint.get("learning_outcomes", {}),
         "course_policies": blueprint.get("course_policies", []),
         "manual_decisions": blueprint.get("manual_decisions", []),
+        "process_assessment_policy": blueprint.get("process_assessment_policy", {}),
+        "pedagogical_redesign": blueprint.get("pedagogical_redesign", {}),
+        "process_metrics": (
+            process_metrics(blueprint)
+            if (blueprint.get("process_assessment_policy") or {}).get("enabled") is True
+            else {}
+        ),
     }
 
 
@@ -992,6 +1001,27 @@ def render_dry_run(snapshot: dict[str, Any], blueprint: dict[str, Any], plan: di
             f"| Grupos de tareas | {current['assignment_groups']} | {proposed['assignment_groups']} | {actions['groups_to_create']} |",
             "",
             str(blueprint.get("structure_note") or "La propuesta se deriva del perfil del curso y debe ser revisada por el equipo docente antes de aplicarse."),
+        ]
+    )
+    metrics = plan.get("process_metrics") or {}
+    if metrics:
+        diagnosis = (plan.get("pedagogical_redesign") or {}).get("diagnosis") or {}
+        lines.extend(
+            [
+                "",
+                "## Rediseño centrado en el proceso",
+                "",
+                str(diagnosis.get("assessment_validity_problem") or ""),
+                "",
+                "| Evidencia | Peso aprobado |",
+                "|---|---:|",
+                f"| Producto final | {metrics.get('product_weight_percent')}% |",
+                f"| Proceso de aprendizaje | {metrics.get('process_weight_percent')}% |",
+                f"| Evidencia individual | {metrics.get('individual_evidence_weight_percent')}% |",
+            ]
+        )
+    lines.extend(
+        [
             "",
             "## Grupos de evaluación",
             "",
@@ -1010,8 +1040,8 @@ def render_dry_run(snapshot: dict[str, Any], blueprint: dict[str, Any], plan: di
             "",
             "## Evaluaciones y checkpoints",
             "",
-            "| Actividad | Tipo | Vence | Grupo/peso | Puntos/incidencia | Modalidad | RA | IAG | Acción |",
-            "|---|---|---|---|---|---|---|---|---|",
+            "| Actividad | Tipo | Etapa | Alcance | Vence | Grupo/peso | Puntos/incidencia | Modalidad | RA | IAG | Acción |",
+            "|---|---|---|---|---|---|---|---|---|---|---|",
         ]
     )
     group_weights = {
@@ -1029,7 +1059,8 @@ def render_dry_run(snapshot: dict[str, Any], blueprint: dict[str, Any], plan: di
         if item.get("course_weight_percent") is not None:
             points_label += f" · {item.get('course_weight_percent')}% del curso"
         lines.append(
-            f"| {item.get('name')} | {item.get('kind')} | {item.get('due_local')} | {group_label} | {points_label} | "
+            f"| {item.get('name')} | {item.get('kind')} | {item.get('process_stage')} | "
+            f"{item.get('evidence_scope')} | {item.get('due_local')} | {group_label} | {points_label} | "
             f"{item.get('mode')} | {', '.join(item.get('ra', []))} | {item.get('iag_level')} | {item.get('action')} |"
         )
 

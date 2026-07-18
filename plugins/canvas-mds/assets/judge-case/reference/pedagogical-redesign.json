@@ -1,0 +1,319 @@
+{
+  "schema_version": "0.2.0",
+  "redesign_id": "digital-innovation-studio-process-redesign-2026",
+  "language": "en",
+  "source_evidence": [
+    {
+      "id": "SRC-00",
+      "path": "plugins/canvas-mds/skills/canvas-mds-redisenar/references/metodologias-activas-udd.md",
+      "role": "udd_active_learning_knowledge_base",
+      "authority": "documented"
+    },
+    {
+      "id": "SRC-01",
+      "path": "plugins/canvas-mds/assets/judge-case/input/course-overview.md",
+      "role": "course_context",
+      "authority": "documented"
+    },
+    {
+      "id": "SRC-02",
+      "path": "plugins/canvas-mds/assets/judge-case/input/learning-outcomes.md",
+      "role": "approved_learning_outcomes",
+      "authority": "documented"
+    },
+    {
+      "id": "SRC-03",
+      "path": "plugins/canvas-mds/assets/judge-case/input/current-assessment.md",
+      "role": "current_assessment",
+      "authority": "documented"
+    },
+    {
+      "id": "SRC-04",
+      "path": "plugins/canvas-mds/assets/judge-case/input/current-rubric.md",
+      "role": "current_rubric",
+      "authority": "documented"
+    },
+    {
+      "id": "SRC-05",
+      "path": "plugins/canvas-mds/assets/judge-case/input/institutional-ai-guidance.md",
+      "role": "institutional_ai_guidance",
+      "authority": "documented"
+    },
+    {
+      "id": "SRC-06",
+      "path": "plugins/canvas-mds/assets/judge-case/input/faculty-constraints.json",
+      "role": "faculty_constraints",
+      "authority": "faculty_confirmed"
+    }
+  ],
+  "current_assessment": {
+    "summary": "The final dossier/prototype and Demo Day account for 95% of the grade. Process coaching is informal and leaves no required evidence of decisions, iteration, feedback response, AI verification, or individual contribution before the final artifact.",
+    "product_weight_percent": 95,
+    "process_weight_percent": 0,
+    "individual_evidence_weight_percent": 5
+  },
+  "diagnosis": {
+    "assessment_validity_problem": "The rubric claims to assess critical reasoning, evidence, iteration, and responsible AI use, but almost all graded evidence appears in final team products. A polished AI-assisted submission can therefore score well without establishing how students framed the problem, rejected alternatives, improved from feedback, verified AI output, or contributed individually.",
+    "invisible_learning_processes": [
+      "Problem framing before solution selection",
+      "Evidence used to reject alternatives",
+      "Iteration from baseline to improved prototype",
+      "Response to peer or faculty feedback",
+      "Individual ownership of consequential decisions",
+      "Verification and rejection of AI-generated suggestions"
+    ],
+    "ai_validity_risks": [
+      "A team may delegate core framing or synthesis to generative AI and present only the polished result.",
+      "A declaration of AI use does not by itself establish verification or student understanding.",
+      "Final group evidence cannot establish individual mastery or contribution."
+    ],
+    "evidence_refs": [
+      "SRC-00",
+      "SRC-01",
+      "SRC-02",
+      "SRC-03",
+      "SRC-04",
+      "SRC-05",
+      "SRC-06"
+    ],
+    "knowledge_base_refs": [
+      "UDD-R1",
+      "UDD-R2",
+      "UDD-R4",
+      "UDD-R7",
+      "UDD-R9",
+      "UDD-H1",
+      "UDD-H3",
+      "UDD-H5"
+    ]
+  },
+  "faculty_questions": [
+    {
+      "id": "Q-01",
+      "question": "Which consequential decisions must every student be able to defend individually?",
+      "status": "answered",
+      "answer": "Each student must defend one consequential decision, one rejected alternative, the evidence used, and their own contribution.",
+      "evidence_refs": [
+        "SRC-02",
+        "SRC-03",
+        "SRC-04",
+        "SRC-06"
+      ]
+    },
+    {
+      "id": "Q-02",
+      "question": "Should the assessment reward a correct first solution or improvement based on evidence and feedback?",
+      "status": "answered",
+      "answer": "Reward improvement. Teams should preserve a baseline, respond to feedback, and explain what changed and why.",
+      "evidence_refs": [
+        "SRC-01",
+        "SRC-02",
+        "SRC-06"
+      ]
+    },
+    {
+      "id": "Q-03",
+      "question": "Which uses of generative AI are permitted and what evidence of responsible use is required?",
+      "status": "answered",
+      "answer": "AI is permitted for exploration, critique, coding, and prototyping. Students must disclose consequential uses, verify outputs, protect data, and identify at least one rejected suggestion.",
+      "evidence_refs": [
+        "SRC-05",
+        "SRC-06"
+      ]
+    }
+  ],
+  "faculty_decisions": [
+    {
+      "id": "FD-01",
+      "status": "confirmed",
+      "decision": "Move 30% of the course grade into three evidence-based milestones worth 10% each.",
+      "rationale": "The milestones make framing, design decisions, validation, and governance visible before the final product.",
+      "source_question_ids": [
+        "Q-02"
+      ]
+    },
+    {
+      "id": "FD-02",
+      "status": "confirmed",
+      "decision": "Retain the authentic final dossier/prototype at 40% and Demo Day defense at 25%.",
+      "rationale": "The final product remains important, but no longer carries the entire validity burden.",
+      "source_question_ids": [
+        "Q-02"
+      ]
+    },
+    {
+      "id": "FD-03",
+      "status": "confirmed",
+      "decision": "Add a 5% individual post-Demo-Day questionnaire.",
+      "rationale": "A short individual instrument is feasible for the cohort and establishes contribution, decision ownership, learning, and responsible AI use.",
+      "source_question_ids": [
+        "Q-01"
+      ]
+    },
+    {
+      "id": "FD-04",
+      "status": "confirmed",
+      "decision": "Require disclosure and verification of consequential AI use across the project.",
+      "rationale": "Responsible AI use must be evidenced through decisions and verification, not only a generic declaration.",
+      "source_question_ids": [
+        "Q-03"
+      ]
+    },
+    {
+      "id": "FD-05",
+      "status": "confirmed",
+      "decision": "Add formative checkpoints that require teams to respond to feedback.",
+      "rationale": "Feedback should change later work and create observable evidence of iteration without adding more summative grading.",
+      "source_question_ids": [
+        "Q-02"
+      ]
+    }
+  ],
+  "redesign_options": [
+    {
+      "id": "OPT-01",
+      "name": "Lightweight process evidence",
+      "selected": false,
+      "faculty_workload": "Low: one milestone, one decision log, and one individual reflection.",
+      "tradeoffs": [
+        "Faster to review but leaves fewer opportunities to observe iteration.",
+        "Relies more heavily on retrospective student accounts."
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R7",
+        "UDD-H6"
+      ]
+    },
+    {
+      "id": "OPT-02",
+      "name": "Balanced studio evidence",
+      "selected": true,
+      "faculty_workload": "Moderate: three concise graded milestones, formative checkpoints, and a short individual questionnaire.",
+      "tradeoffs": [
+        "Produces stronger longitudinal evidence but requires scheduled checkpoint review.",
+        "Reduces final-product weight while preserving the authentic dossier and Demo Day."
+      ],
+      "knowledge_base_refs": [
+        "UDD-R1",
+        "UDD-R2",
+        "UDD-R4",
+        "UDD-R7",
+        "UDD-R9",
+        "UDD-H3"
+      ]
+    }
+  ],
+  "selected_design": {
+    "option_id": "OPT-02",
+    "process_checkpoints": [
+      {
+        "assignment_key": "checkpoint-diagnostico",
+        "purpose": "Expose early framing, evidence, uncertainty, and feedback response."
+      },
+      {
+        "assignment_key": "hito-evaluado-1",
+        "purpose": "Assess the validated problem, baseline, causes, and success criteria."
+      },
+      {
+        "assignment_key": "hito-evaluado-2",
+        "purpose": "Assess alternatives, ecosystem decisions, and solution design."
+      },
+      {
+        "assignment_key": "checkpoint-prototipo-v0",
+        "purpose": "Preserve a baseline prototype and validation protocol."
+      },
+      {
+        "assignment_key": "hito-evaluado-3",
+        "purpose": "Assess validation, risk, governance, and impact decisions."
+      },
+      {
+        "assignment_key": "checkpoint-dossier",
+        "purpose": "Require a documented response to feedback before the final product."
+      }
+    ],
+    "individual_evidence": [
+      {
+        "assignment_key": "cuestionario-individual",
+        "purpose": "Verify contribution, consequential decisions, learning, and responsible AI use."
+      }
+    ],
+    "feedback_loops": [
+      {
+        "from_assignment_key": "checkpoint-prototipo-v0",
+        "to_assignment_key": "hito-evaluado-3",
+        "required_evidence": "Feedback received, response, and resulting change."
+      },
+      {
+        "from_assignment_key": "checkpoint-dossier",
+        "to_assignment_key": "dossier-final",
+        "required_evidence": "Final revision log linked to faculty or peer feedback."
+      }
+    ],
+    "ai_use_evidence": [
+      {
+        "assignment_key": "dossier-final",
+        "required_evidence": "Consequential AI uses, verification performed, data safeguards, and rejected suggestions."
+      },
+      {
+        "assignment_key": "cuestionario-individual",
+        "required_evidence": "Personal explanation of AI use or non-use and what the student verified."
+      }
+    ],
+    "knowledge_base_refs": [
+      "UDD-R1",
+      "UDD-R2",
+      "UDD-R3",
+      "UDD-R4",
+      "UDD-R6",
+      "UDD-R7",
+      "UDD-R9",
+      "UDD-R10",
+      "UDD-H1",
+      "UDD-H3",
+      "UDD-H5",
+      "UDD-H6"
+    ]
+  },
+  "adversarial_scenarios": [
+    {
+      "id": "ADV-01",
+      "category": "ai_without_understanding",
+      "scenario": "A team uses generative AI to produce a polished dossier and prototype but cannot explain the key choices.",
+      "risk": "The current final-product rubric could reward quality without establishing the intended reasoning.",
+      "mitigation": "Use graded milestones, decision evidence, verification records, and the individual questionnaire before accepting the final artifact as evidence.",
+      "affected_assignment_keys": [
+        "hito-evaluado-1",
+        "hito-evaluado-2",
+        "hito-evaluado-3",
+        "cuestionario-individual",
+        "dossier-final"
+      ]
+    },
+    {
+      "id": "ADV-02",
+      "category": "unequal_team_contribution",
+      "scenario": "One student performs most consequential work while the whole team presents the result.",
+      "risk": "Team artifacts and Demo Day cannot establish individual mastery or contribution.",
+      "mitigation": "Require each student to identify a consequential decision, rejected alternative, supporting evidence, and verifiable contribution in the individual questionnaire.",
+      "affected_assignment_keys": [
+        "defensa-oral",
+        "cuestionario-individual"
+      ]
+    },
+    {
+      "id": "ADV-03",
+      "category": "good_process_imperfect_product",
+      "scenario": "A team demonstrates strong inquiry and improvement but the final prototype remains imperfect.",
+      "risk": "A product-dominant grade can underrepresent meaningful learning and evidence-based iteration.",
+      "mitigation": "Allocate 30% to milestones and require explicit feedback response so process quality has independent weight.",
+      "affected_assignment_keys": [
+        "hito-evaluado-1",
+        "hito-evaluado-2",
+        "hito-evaluado-3"
+      ]
+    }
+  ],
+  "unresolved_decisions": []
+}

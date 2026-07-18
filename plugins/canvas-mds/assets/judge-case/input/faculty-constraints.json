@@ -1,0 +1,13 @@
+{
+  "cohort_size": 45,
+  "course_weeks": 8,
+  "team_based_project": true,
+  "preserve_demo_day": true,
+  "maximum_individual_review_minutes": 15,
+  "faculty_priorities": [
+    "Reward improvement based on evidence and feedback.",
+    "Require each student to defend one consequential decision.",
+    "Allow AI for exploration and prototyping with disclosure and verification.",
+    "Avoid collecting student data in the redesign tool."
+  ]
+}

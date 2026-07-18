@@ -1,39 +1,93 @@
-# Canvas MDS · Five-Minute Judge Experience
+# Canvas MDS · Judge Experience
 
-This guide provides a reproducible way to evaluate Canvas MDS without a Canvas account, API token, network connection, or rebuild.
+Canvas MDS helps a faculty member redesign assessment for the AI era: from grading only polished outputs to collecting evidence of framing, decisions, iteration, feedback response, individual contribution and responsible AI use.
 
-The offline harness calls the same production profile validator and dry-run planner used by the plugin. It supplies a synthetic empty Canvas snapshot only at the boundary where the live workflow would normally read course structure.
+The recommended experience has two parts:
 
-## What you can verify
+1. an interactive GPT-5.6 pedagogical redesign in Codex;
+2. a credential-free deterministic verification of the approved design and Canvas plan.
 
-In approximately five minutes, you can confirm that Canvas MDS:
+No Canvas account, token, student data or network access is required for the offline verification.
 
-- loads a realistic course profile;
-- rejects structurally unsafe profiles through the production validator;
-- checks that assessment groups sum to 100%;
-- requires a distinctive course identity and exactly one Classic Quiz;
-- requires zero pending faculty decisions;
-- keeps default publication disabled;
-- creates a dry-run with **canvas_mutations: 0**;
-- marks every planned page, assignment, and module as unpublished;
-- performs the experience without credentials or HTTP requests.
+## What is genuinely generative
 
-The sample course content is in Spanish because the target deployment context is UDD in Chile. The judge interface, commands, output, and this guide are in English.
+Canvas MDS is not a text splitter or format converter.
 
-## Requirements
+GPT-5.6 must:
+
+- reconcile heterogeneous course evidence: learning outcomes, current assessment, rubric, AI guidance and faculty constraints;
+- diagnose the assessment-validity gap before proposing a solution;
+- identify learning processes that remain invisible in polished team products;
+- ask up to three questions whose answers can materially change the design;
+- propose at least two viable alternatives with workload, risks and trade-offs;
+- test the selected option against AI-without-understanding and unequal-team-contribution scenarios;
+- explain concise, evidence-linked rationales.
+
+The model does not make the final pedagogical decision. The faculty member confirms, modifies or rejects material choices. A deterministic engine then validates traceability, weights, learning-outcome coverage, feedback loops, individual evidence, accessible alternatives and Canvas safety gates.
+
+## Part A · Interactive reasoning experience
+
+### Requirements
+
+- Codex with GPT-5.6.
+- This repository available locally.
+- The Canvas MDS plugin installed from **plugins/canvas-mds**, or the repository opened in Codex so the skill can be inspected.
+
+### Prompt
+
+From the repository root, ask Codex:
+
+~~~text
+Use $canvas-mds-redisenar to analyze the sanitized course evidence in
+plugins/canvas-mds/assets/judge-case/input.
+
+Diagnose whether the current assessment can establish student learning in an
+AI-rich course. Use the packaged UDD active-learning knowledge base where
+relevant. Do not inspect the reference solution yet. First show me the
+evidence-linked diagnosis and ask only the decision-changing faculty questions
+you need before proposing a redesign.
+~~~
+
+### What to observe
+
+A conforming run should:
+
+1. read the course evidence and the UDD knowledge base;
+2. separate documented facts, model proposals and faculty decisions;
+3. explain why a polished AI-assisted product can conceal weak understanding;
+4. ask no more than three consequential questions;
+5. wait for faculty answers before selecting a design;
+6. offer at least two alternatives, including workload and trade-offs;
+7. preserve the authentic final product while adding process evidence;
+8. simulate adversarial validity failures;
+9. produce an approved, traceable redesign only after faculty confirmation;
+10. avoid Canvas writes and student data.
+
+For a time-bounded review, compare the interaction with the completed reference artifacts:
+
+| Artifact | What it demonstrates |
+| --- | --- |
+| [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json) | Evidence-linked diagnosis, questions, decisions, alternatives and adversarial tests. |
+| [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md) | Concise explanation of the assessment paradigm shift. |
+| [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json) | Approved design compiled into a portable Canvas MDS profile. |
+| [metodologias-activas-udd.md](plugins/canvas-mds/skills/canvas-mds-redisenar/references/metodologias-activas-udd.md) | Institutional pedagogical knowledge used as traceable guidance. |
+
+The reference case moves from **95% final-product evidence / 0% process evidence** to **40% final-product evidence / 60% process evidence**, with a separate **5% individual instrument**.
+
+## Part B · Automated verification
+
+### Requirements
 
 - Python 3.10 or newer.
 - The Python package **requests**.
-
-From the repository root:
 
 ~~~text
 python -m pip install requests
 ~~~
 
-No OpenAI API key, Canvas token, Canvas account, or Codex installation is required for this offline path.
+No OpenAI API key, Canvas token or Canvas account is required.
 
-## Step 1: run the automated tests
+### Step 1 · Run the tests
 
 ~~~text
 python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
@@ -42,37 +96,36 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 7 tests
+Ran 15 tests
 OK
 ~~~
 
-These tests cover the deterministic engine, including origin validation, dry-run behavior, pending-decision gates, Canvas time-zone conversion, and Classic Quiz mapping.
+The tests cover the read-only and protected-write engines plus the process-centered controls derived from the UDD knowledge base: learning-outcome references, self/peer assessment, cognitive demand, feedback actors and response loops.
 
-## Step 2: run the offline judge demo
+### Step 2 · Run the judge demo
 
 ~~~text
 python judge_demo.py
 ~~~
 
-Expected summary:
+Expected opening:
 
 ~~~text
-Canvas MDS Offline Judge Demo
-=============================
+Canvas MDS Process-Centered Judge Demo
+======================================
 Status: PASS
 Profile: entornos-digitales-digital-innovation-studio-2026
 Canvas connection used: no
 Credentials required: no
 Canvas mutations: 0
 
-Proposed course structure:
-- Modules: 9
-- Unique pages: 36
-- Assignments: 10
-- Assignment groups: 3
+Assessment evidence shift:
+- Final product: 95% -> 40.0%
+- Process evidence: 0% -> 60.0%
+- Individual evidence: 5% -> 5.0%
 ~~~
 
-The remainder of the output lists ten individual PASS checks.
+The remainder reports the role of GPT-5.6, the faculty member and the deterministic engine, followed by 20 PASS checks.
 
 For a machine-readable result:
 
@@ -80,89 +133,57 @@ For a machine-readable result:
 python judge_demo.py --json
 ~~~
 
-## Step 3: inspect the evidence flow
-
-The offline path uses these repository artifacts:
-
-| Artifact | Role |
-| --- | --- |
-| [judge_demo.py](judge_demo.py) | Credential-free judge harness and English summary. |
-| [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json) | Realistic, non-secret sample course profile. |
-| [canvas_mds_apply.py](plugins/canvas-mds/scripts/canvas_mds_apply.py) | Production profile validator and protected Canvas write engine. |
-| [canvas_mds.py](plugins/canvas-mds/scripts/canvas_mds.py) | Production read-only engine and dry-run planner. |
-| [test_canvas_mds.py](plugins/canvas-mds/scripts/test_canvas_mds.py) | Read-only, audit, origin, and dry-run tests. |
-| [test_canvas_mds_apply.py](plugins/canvas-mds/scripts/test_canvas_mds_apply.py) | Protected-write validation tests. |
-
-The flow is:
+## Evidence flow
 
 ~~~text
-Sample course profile
-        |
-        v
-Production blueprint validator
-        |
-        v
-Synthetic empty Canvas snapshot
-        |
-        v
-Production dry-run planner
-        |
-        v
-English PASS summary (zero mutations)
+Sanitized course evidence + UDD knowledge base
+                    |
+                    v
+GPT-5.6 diagnosis, questions, alternatives and adversarial simulation
+                    |
+                    v
+Faculty confirmation of material pedagogical decisions
+                    |
+                    v
+Traceable redesign artifact + portable course profile
+                    |
+                    v
+Deterministic pedagogical and safety validation
+                    |
+                    v
+Canvas dry-run plan with zero mutations
 ~~~
 
-## Why the snapshot is synthetic
+Production code used by the offline verification:
 
-A live Canvas snapshot would require access to a real institutional course and could expose internal course structure. The synthetic snapshot contains no people, submissions, grades, enrollments, tokens, or institutional identifiers.
+| File | Role |
+| --- | --- |
+| [judge_demo.py](judge_demo.py) | Credential-free English judge harness. |
+| [process_evidence.py](plugins/canvas-mds/scripts/process_evidence.py) | Process-centered assessment validation and metrics. |
+| [canvas_mds_apply.py](plugins/canvas-mds/scripts/canvas_mds_apply.py) | Profile validator and protected Canvas write engine. |
+| [canvas_mds.py](plugins/canvas-mds/scripts/canvas_mds.py) | Read-only engine and dry-run planner. |
+| [test_process_evidence.py](plugins/canvas-mds/scripts/test_process_evidence.py) | UDD-informed pedagogical guardrail tests. |
 
-Only the snapshot boundary is synthetic. Profile validation, action planning, object counts, unpublished-state checks, and zero-mutation verification use production functions directly.
+## Why the Canvas snapshot is synthetic
 
-## Safety checks performed
+A live Canvas snapshot could expose internal course structure. The synthetic snapshot contains no people, submissions, grades, enrollments, tokens or institutional identifiers.
 
-The judge harness exits with status code 1 if any of these conditions fails:
+Only the read boundary is synthetic. The redesign validator, production profile validator, action planner, object counts, unpublished-state checks and zero-mutation verification are real production functions.
 
-1. The profile is valid.
-2. **default_publish** is false.
-3. **manual_decisions** is empty.
-4. Assignment groups sum to 100%.
-5. Exactly one Classic Quiz is present.
-6. The dry-run reports zero Canvas mutations.
-7. Every planned object remains unpublished.
-8. An empty snapshot requires all proposed objects to be created.
-9. No network or Canvas access is used.
-10. No credentials are required.
+## What this experience does not claim
 
-## What this offline experience does not claim
+It does not prove that:
 
-The offline demo does not prove:
+- a judge account has access to an institutional Canvas instance;
+- every endpoint is enabled in a specific Canvas installation;
+- final teaching content or rubrics have received local faculty approval;
+- any course is ready to publish;
+- GPT-5.6 should grade students or infer authorship.
 
-- that a particular judge account has permission to a Canvas instance;
-- that a specific institutional Canvas configuration enables every endpoint;
-- that macOS or Linux keyring integration has been validated;
-- that final teaching content, accessibility, links, or rubrics have received faculty approval;
-- that any course is ready to publish.
-
-Those are intentionally separate operational and faculty-review gates.
+Those remain explicit operational, institutional and faculty-review gates.
 
 ## Optional live sandbox path
 
-A judge with a disposable Canvas sandbox and teacher-level permissions can follow the optional connected verification in [README.md](README.md#optional-canvas-connected-verification).
+A judge with a disposable Canvas sandbox and teacher-level permissions can follow [the optional connected verification](README.md#optional-canvas-connected-verification).
 
-The live path remains read-only through **doctor**, **snapshot**, **audit**, and **dry-run**. The protected creation command is optional, requires the exact course ID twice in the workflow, and can create only unpublished objects.
-
-## Exit codes
-
-| Code | Meaning |
-| ---: | --- |
-| 0 | Every offline judge check passed. |
-| 1 | The profile could not be read, validation failed, or a safety invariant failed. |
-
-## Suggested judging focus
-
-After running the experience, review:
-
-- how course evidence becomes a portable profile;
-- how Codex with GPT-5.6 supports interpretation and faculty decision-making;
-- how deterministic validation constrains the model-assisted workflow;
-- how process evidence, checkpoints, and individual reflection appear in the sample profile;
-- how the project avoids student data and destructive Canvas operations.
+The live path remains read-only through **doctor**, **snapshot**, **audit** and **dry-run**. Protected creation is optional, requires explicit course confirmation and creates unpublished objects only.
