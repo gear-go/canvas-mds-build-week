@@ -139,6 +139,14 @@ Ran 7 tests
 OK
 ~~~
 
+Luego ejecuta la experiencia completa para jueces, cuya interfaz y documentación están en inglés:
+
+~~~text
+python judge_demo.py
+~~~
+
+El comando valida el perfil de ejemplo con el validador de producción y genera un resumen PASS en inglés a partir de un dry-run sintético, sin red y con cero mutaciones Canvas. Consulta la guía [Five-Minute Judge Experience](JUDGE_GUIDE.md).
+
 Las pruebas cubren:
 
 - HTTPS y validación de mismo origen;
