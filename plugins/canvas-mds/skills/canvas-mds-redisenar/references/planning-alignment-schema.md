@@ -17,6 +17,6 @@ El artefacto registra decisiones confirmadas y una cadena auditable; no contiene
 
 `alignment_status` debe ser `confirmed` antes de diseñar actividades. Debe existir exactamente un instrumento principal. Todo instrumento usado por el procedimiento debe estar seleccionado y todo instrumento seleccionado debe usarse. Las relaciones indicador-evidencia son bidireccionales. La carga estimada debe coincidir con elementos × minutos y declarar si consume capacidad docente.
 
-Cada fila de la matriz contiene exactamente un `objective_id`. Sus indicadores deben referenciar ese objetivo; sus evidencias, esos indicadores; sus instrumentos seleccionados, esas evidencias; y sus momentos, esos instrumentos y evidencias. La unión de filas debe cubrir todos los elementos sin crear una matriz cartesiana artificial.
+Cada fila de la matriz contiene exactamente un `objective_id`. Sus indicadores deben referenciar ese objetivo; sus evidencias, esos indicadores; sus instrumentos seleccionados, esas evidencias; y sus momentos, esos instrumentos y evidencias. La unión de filas debe cubrir todos los elementos sin crear una matriz cartesiana artificial. Si un objetivo tiene más de un indicador, las filas de `action`, `content_or_performance` y `condition` no pueden repetir exactamente la misma firma de indicadores, evidencias, instrumentos y momentos.
 
 Validar con `scripts/planning_alignment.py`.

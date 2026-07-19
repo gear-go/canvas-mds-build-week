@@ -66,4 +66,4 @@ No diseñar agenda, módulos ni actividades hasta comprobar:
 7. la carga total está calculada;
 8. las actividades posteriores ejercitan exactamente esta cadena.
 
-Registrar la matriz objetivo → indicador → evidencia → instrumento → momento evaluativo. Cada fila cubre exactamente un objetivo y uno de sus componentes; solo puede incluir indicadores vinculados a ese objetivo, evidencia de esos indicadores, instrumentos capaces de valorarla y momentos que realmente la observan. Mantener los cambios indispensables separados de mejoras opcionales.
+Registrar la matriz objetivo → indicador → evidencia → instrumento → momento evaluativo. Cada fila cubre exactamente un objetivo y uno de sus componentes; solo puede incluir indicadores vinculados a ese objetivo, evidencia de esos indicadores, instrumentos capaces de valorarla y momentos que realmente la observan. Cuando un objetivo tenga varios indicadores, no repetir una misma cadena all-to-all para acción, contenido o desempeño y condición: cada componente debe conservar una traza diferenciada. Mantener los cambios indispensables separados de mejoras opcionales.

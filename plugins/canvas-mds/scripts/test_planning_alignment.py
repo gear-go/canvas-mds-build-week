@@ -11,6 +11,11 @@ from process_evidence import validate_redesign_artifact
 
 def fixture() -> dict:
     indicator_ids = [f"IND-0{i}" for i in range(1, 5)]
+    component_indicators = {
+        "action": ["IND-01", "IND-04"],
+        "content_or_performance": ["IND-02"],
+        "condition": ["IND-03"],
+    }
     indicators = [
         {
             "id": iid,
@@ -109,7 +114,7 @@ def fixture() -> dict:
             {
                 "objective_component": component,
                 "objective_ids": ["OBJ-01"],
-                "indicator_ids": indicator_ids,
+                "indicator_ids": component_indicators[component],
                 "evidence_ids": ["EV-01"],
                 "instrument_ids": ["INS-01"],
                 "procedure_moment_ids": ["MOM-01"],
@@ -192,6 +197,14 @@ class PlanningAlignmentTests(unittest.TestCase):
         for row in value["alignment_matrix"]:
             row["objective_ids"].append("OBJ-02")
         with self.assertRaisesRegex(ValueError, "exactamente un objetivo"):
+            self.validate(value)
+
+    def test_rejects_historical_all_to_all_component_matrix(self) -> None:
+        value = fixture()
+        indicator_ids = [item["id"] for item in value["indicators"]]
+        for row in value["alignment_matrix"]:
+            row["indicator_ids"] = indicator_ids
+        with self.assertRaisesRegex(ValueError, "matriz cartesiana"):
             self.validate(value)
 
     def test_separates_peer_workload_from_faculty_capacity(self) -> None:

@@ -222,6 +222,20 @@ def validate_planning_alignment(
     covered_evidence: set[str] = set()
     covered_instruments: set[str] = set()
     covered_moments: set[str] = set()
+    component_signatures: dict[
+        str,
+        list[
+            tuple[
+                str,
+                tuple[
+                    frozenset[str],
+                    frozenset[str],
+                    frozenset[str],
+                    frozenset[str],
+                ],
+            ]
+        ],
+    ] = {}
     for row in rows:
         component = str(row.get("objective_component") or "")
         if component not in OBJECTIVE_COMPONENTS:
@@ -318,11 +332,35 @@ def validate_planning_alignment(
                     f"La fila de {objective_id}/{component} no sitúa {eid} en un momento."
                 )
 
+        signature = (
+            frozenset(row_indicators),
+            frozenset(row_evidence),
+            frozenset(row_instruments),
+            frozenset(row_moments),
+        )
+        component_signatures.setdefault(objective_id, []).append((component, signature))
+
         covered_objectives |= row_objectives
         covered_indicators |= row_indicators
         covered_evidence |= row_evidence
         covered_instruments |= row_instruments
         covered_moments |= row_moments
+
+    for objective_id, component_rows in component_signatures.items():
+        linked_indicator_count = sum(
+            objective_id in {str(value) for value in indicator.get("objective_ids") or []}
+            for indicator in indicators
+        )
+        signatures = {signature for _, signature in component_rows}
+        if (
+            linked_indicator_count > 1
+            and len(component_rows) == len(OBJECTIVE_COMPONENTS)
+            and len(signatures) == 1
+        ):
+            raise ValueError(
+                "La matriz cartesiana repite la misma cadena completa para action, "
+                f"content_or_performance y condition del objetivo {objective_id}."
+            )
 
     expected_pairs = {
         (objective_id, component)
