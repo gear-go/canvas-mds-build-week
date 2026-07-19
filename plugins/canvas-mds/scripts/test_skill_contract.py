@@ -46,9 +46,26 @@ class RedesignSkillContractTests(unittest.TestCase):
         self.assertIn("categorías excluyentes", self.skill)
         self.assertIn("total de evidencia no final", self.skill)
 
+    def test_p032_requires_udd_source_trace_in_hard_stop(self) -> None:
+        self.assertIn("registrar esta base en el inventario como `SRC-00`", self.skill)
+        self.assertIn("no emitir identificadores `UDD-R*` o `UDD-H*`", self.skill)
+
+    def test_p032_bounds_process_evidence_claims(self) -> None:
+        self.assertIn("No equiparar la ausencia de hitos calificados", self.skill)
+        self.assertIn("contribución de la evidencia posterior es indeterminada", self.skill)
+
+    def test_p032_traces_questions_as_manual_decisions(self) -> None:
+        self.assertIn("Asignar IDs estables `Q-01`, `Q-02` y `Q-03`", self.skill)
+        self.assertIn("listar sus IDs pendientes en `manual_decisions`", self.skill)
+
     def test_judge_guide_exercises_the_first_hard_stop(self) -> None:
         self.assertIn("HARD STOP 1", self.judge_guide)
         self.assertIn("must not propose alternatives", self.judge_guide)
+        self.assertIn("register the packaged UDD knowledge base", self.judge_guide)
+        self.assertIn("Do not equate the absence of graded process", self.judge_guide)
+        self.assertIn("milestones with 0% process evidence", self.judge_guide)
+        self.assertIn("Q-01", self.judge_guide)
+        self.assertIn("manual_decisions", self.judge_guide)
 
 
 if __name__ == "__main__":

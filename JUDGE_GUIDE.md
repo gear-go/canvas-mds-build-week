@@ -50,6 +50,13 @@ relevant. Do not inspect the reference solution yet. First show me the
 evidence-linked diagnosis and ask only the decision-changing faculty questions
 you need before proposing a redesign.
 
+If you cite any UDD-R* or UDD-H* rule, register the packaged UDD knowledge base
+as SRC-00 in the evidence inventory. Do not equate the absence of graded process
+milestones with 0% process evidence when a later reflection or defense exists
+but its criteria are undocumented. Give every material question a stable Q-01,
+Q-02, or Q-03 ID and list unresolved IDs under manual_decisions without creating
+files.
+
 If the evidence does not contain an approved objective, propose two or three
 observable objective alternatives. Stop after the objective alternatives and
 wait for my explicit confirmation before deriving indicators or activities.
@@ -73,6 +80,8 @@ A conforming run should:
 12. simulate adversarial validity failures;
 13. produce artifacts only after faculty confirmation;
 14. avoid Canvas writes and student data.
+
+For HARD STOP 1 specifically, verify that the UDD knowledge base appears as `SRC-00` whenever `UDD-R*` or `UDD-H*` identifiers are cited; that the diagnosis distinguishes zero graded checkpoints during the process from an indeterminate post-hoc reflection; and that every pending `Q-*` appears in `manual_decisions` without creating an artifact.
 
 For a time-bounded review, compare the interaction with the completed reference artifacts:
 
@@ -108,11 +117,11 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 40 tests
+Ran 43 tests
 OK
 ~~~
 
-The tests cover the read-only and protected-write engines, the P0.1 hard-stop contract, cohort-level workload and portable paths, plus objective/activity separation, the P0.2 alignment stop and the P0.3 semantic guards for selected instruments, non-cartesian mappings, activity-level inheritance, workload actors and resolvable source roots. The non-cartesian regression reconstructs the all-to-all component matrix found by the original forward test and asserts its rejection.
+The tests cover the read-only and protected-write engines, the P0.1 hard-stop contract, cohort-level workload and portable paths, plus objective/activity separation, the P0.2 alignment stop and the P0.3 semantic guards for selected instruments, non-cartesian mappings, activity-level inheritance, workload actors and resolvable source roots. P0.3.2 adds HARD STOP regressions for traceable UDD sources, bounded process-evidence claims and stable question/manual-decision IDs. The non-cartesian regression reconstructs the all-to-all component matrix found by the original forward test and asserts its rejection.
 
 ### Step 2 · Run the judge demo
 
