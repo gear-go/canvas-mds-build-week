@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import argparse
+import json
 from pathlib import Path
 from typing import Any
 
@@ -44,7 +46,31 @@ def _require_refs(values: Any, allowed: set[str], label: str) -> None:
         raise ValueError(f"{label} contiene referencias desconocidas: {sorted(unknown)}")
 
 
-def validate_redesign_artifact(artifact: dict[str, Any]) -> None:
+def _validate_portable_sources(
+    sources: list[dict[str, Any]], repository_root: Path
+) -> None:
+    root = repository_root.resolve()
+    if not root.is_dir():
+        raise ValueError(f"La raíz portable no existe o no es un directorio: {root}")
+    for source in sources:
+        source_id = str(source.get("id") or "")
+        relative = Path(str(source.get("path") or ""))
+        resolved = (root / relative).resolve()
+        try:
+            resolved.relative_to(root)
+        except ValueError:
+            raise ValueError(
+                f"La fuente {source_id} escapa de la raíz portable declarada."
+            ) from None
+        if not resolved.is_file():
+            raise ValueError(
+                f"La fuente {source_id} no existe desde la raíz portable: {relative.as_posix()}"
+            )
+
+
+def validate_redesign_artifact(
+    artifact: dict[str, Any], *, repository_root: Path | None = None
+) -> None:
     if not _nonempty(artifact.get("schema_version")):
         raise ValueError("El rediseño pedagógico requiere schema_version.")
     if not _nonempty(artifact.get("redesign_id")):
@@ -66,6 +92,8 @@ def validate_redesign_artifact(artifact: dict[str, Any]) -> None:
             "model_proposal",
         }:
             raise ValueError("Cada fuente requiere una autoridad válida.")
+    if repository_root is not None:
+        _validate_portable_sources(sources, repository_root)
 
     diagnosis = artifact.get("diagnosis")
     if not isinstance(diagnosis, dict):
@@ -200,6 +228,24 @@ def process_metrics(blueprint: dict[str, Any]) -> dict[str, Any]:
             sum(weight(item) for item in assignments if item.get("process_stage") != "final_product"),
             6,
         ),
+        "process_checkpoint_weight_percent": round(
+            sum(
+                weight(item)
+                for item in assignments
+                if item.get("process_stage") != "final_product"
+                and item.get("evidence_scope") != "individual"
+            ),
+            6,
+        ),
+        "individual_verification_weight_percent": round(
+            sum(
+                weight(item)
+                for item in assignments
+                if item.get("process_stage") != "final_product"
+                and item.get("evidence_scope") == "individual"
+            ),
+            6,
+        ),
         "individual_evidence_weight_percent": round(
             sum(weight(item) for item in assignments if item.get("evidence_scope") == "individual"),
             6,
@@ -223,7 +269,112 @@ def process_metrics(blueprint: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def validate_process_blueprint(blueprint: dict[str, Any]) -> dict[str, Any]:
+def validate_assignment_alignment(
+    assignments: list[dict[str, Any]], alignment: dict[str, Any]
+) -> None:
+    objectives = {
+        str(item["id"]): item for item in alignment.get("objectives") or []
+    }
+    indicators = {
+        str(item["id"]): item for item in alignment.get("indicators") or []
+    }
+    evidence = {
+        str(item["id"]): item for item in alignment.get("evidence") or []
+    }
+    instruments = {
+        str(item["id"]): item for item in alignment.get("instruments") or []
+    }
+    moments = {
+        str(item["id"]): item
+        for item in (alignment.get("evaluation_procedure") or {}).get("moments") or []
+    }
+    selected_instruments = {
+        iid for iid, item in instruments.items() if item.get("selected") is True
+    }
+
+    for assignment in assignments:
+        key = str(assignment.get("key") or "")
+        objective_ids = {
+            str(value) for value in assignment.get("objective_ids") or []
+        }
+        indicator_ids = {
+            str(value) for value in assignment.get("indicator_ids") or []
+        }
+        evidence_ids = {
+            str(value) for value in assignment.get("evidence_ids") or []
+        }
+        if not objective_ids or not indicator_ids or not evidence_ids:
+            raise ValueError(
+                f"La actividad {key} requiere objective_ids, indicator_ids y evidence_ids."
+            )
+        unknown_objectives = objective_ids - set(objectives)
+        unknown_indicators = indicator_ids - set(indicators)
+        unknown_evidence = evidence_ids - set(evidence)
+        if unknown_objectives or unknown_indicators or unknown_evidence:
+            raise ValueError(
+                f"La actividad {key} contiene referencias de alineamiento desconocidas."
+            )
+
+        for iid in indicator_ids:
+            linked_objectives = {
+                str(value) for value in indicators[iid].get("objective_ids") or []
+            }
+            if not linked_objectives or not linked_objectives <= objective_ids:
+                raise ValueError(
+                    f"La actividad {key} amplía silenciosamente los objetivos de {iid}."
+                )
+            linked_evidence = {
+                str(value) for value in indicators[iid].get("evidence_ids") or []
+            }
+            if not linked_evidence.intersection(evidence_ids):
+                raise ValueError(
+                    f"La actividad {key} no aporta evidencia para el indicador {iid}."
+                )
+        for eid in evidence_ids:
+            linked_indicators = {
+                str(value) for value in evidence[eid].get("indicator_ids") or []
+            }
+            if not linked_indicators.intersection(indicator_ids):
+                raise ValueError(
+                    f"La actividad {key} usa la evidencia espuria {eid}."
+                )
+
+        instrument_id = str(assignment.get("instrument_id") or "")
+        if instrument_id not in selected_instruments:
+            raise ValueError(
+                f"La actividad {key} requiere un instrumento seleccionado."
+            )
+        instrument_evidence = {
+            str(value) for value in instruments[instrument_id].get("evidence_ids") or []
+        }
+        if not evidence_ids <= instrument_evidence:
+            raise ValueError(
+                f"El instrumento {instrument_id} no puede valorar toda la evidencia de {key}."
+            )
+
+        moment_id = str(assignment.get("procedure_moment_id") or "")
+        if moment_id not in moments:
+            raise ValueError(
+                f"La actividad {key} requiere un procedure_moment_id válido."
+            )
+        moment = moments[moment_id]
+        if instrument_id not in {
+            str(value) for value in moment.get("instrument_ids") or []
+        }:
+            raise ValueError(
+                f"El momento {moment_id} no usa el instrumento de {key}."
+            )
+        if not evidence_ids <= {
+            str(value) for value in moment.get("evidence_ids") or []
+        }:
+            raise ValueError(
+                f"El momento {moment_id} no observa toda la evidencia de {key}."
+            )
+
+
+def validate_process_blueprint(
+    blueprint: dict[str, Any], *, repository_root: Path | None = None
+) -> dict[str, Any]:
     policy = blueprint.get("process_assessment_policy") or {}
     if policy.get("enabled") is not True:
         return {}
@@ -231,7 +382,7 @@ def validate_process_blueprint(blueprint: dict[str, Any]) -> dict[str, Any]:
     artifact = blueprint.get("pedagogical_redesign")
     if not isinstance(artifact, dict):
         raise ValueError("La política de proceso requiere pedagogical_redesign.")
-    validate_redesign_artifact(artifact)
+    validate_redesign_artifact(artifact, repository_root=repository_root)
 
     sources = artifact.get("source_evidence") or []
     source_ids = {str(item["id"]) for item in sources}
@@ -319,6 +470,9 @@ def validate_process_blueprint(blueprint: dict[str, Any]) -> dict[str, Any]:
             accepted_decision_ids,
             f"{key}.faculty_decision_ids",
         )
+
+    if str(artifact.get("schema_version") or "").startswith("0.3"):
+        validate_assignment_alignment(assignments, artifact["planning_alignment"])
 
     if round(total_weight, 6) != 100:
         raise ValueError("Las actividades del diseño de proceso no suman 100% del curso.")
@@ -436,8 +590,9 @@ def render_before_after(blueprint: dict[str, Any]) -> str:
             "| Evidence model | Before | Approved redesign |",
             "|---|---:|---:|",
             f"| Final product | {current.get('product_weight_percent', 0)}% | {metrics['product_weight_percent']}% |",
-            f"| Process evidence | {current.get('process_weight_percent', 0)}% | {metrics['process_weight_percent']}% |",
-            f"| Individual evidence | {current.get('individual_evidence_weight_percent', 0)}% | {metrics['individual_evidence_weight_percent']}% |",
+            f"| Process checkpoints (excluding individual verification) | {current.get('process_weight_percent', 0)}% | {metrics['process_checkpoint_weight_percent']}% |",
+            f"| Individual verification | {current.get('individual_evidence_weight_percent', 0)}% | {metrics['individual_verification_weight_percent']}% |",
+            f"| Total non-final evidence | {current.get('process_weight_percent', 0) + current.get('individual_evidence_weight_percent', 0)}% | {metrics['process_weight_percent']}% |",
             "",
             f"Selected option: **{selected.get('name')}**",
             "",
@@ -486,3 +641,45 @@ def render_before_after(blueprint: dict[str, Any]) -> str:
         ]
     )
     return "\n".join(lines)
+
+
+def validate_artifact_bundle(
+    profile_path: Path, repository_root: Path
+) -> dict[str, Any]:
+    root = repository_root.resolve()
+    resolved_profile = profile_path.resolve()
+    try:
+        resolved_profile.relative_to(root)
+    except ValueError:
+        raise ValueError(
+            "El perfil fue generado fuera de la raíz portable declarada."
+        ) from None
+    try:
+        blueprint = json.loads(resolved_profile.read_text(encoding="utf-8"))
+    except OSError as exc:
+        raise ValueError(f"No se pudo leer el perfil: {resolved_profile}") from exc
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"El perfil no contiene JSON válido: {resolved_profile}") from exc
+    if not isinstance(blueprint, dict):
+        raise ValueError("El perfil debe ser un objeto JSON.")
+    return validate_process_blueprint(blueprint, repository_root=root)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Validate a generated AssessTrace artifact bundle from a portable root."
+    )
+    parser.add_argument("--profile", required=True, type=Path)
+    parser.add_argument("--repository-root", required=True, type=Path)
+    args = parser.parse_args()
+    try:
+        metrics = validate_artifact_bundle(args.profile, args.repository_root)
+    except ValueError as exc:
+        print(f"Artifact validation failed: {exc}")
+        return 1
+    print(json.dumps({"status": "PASS", "metrics": metrics}, ensure_ascii=False, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

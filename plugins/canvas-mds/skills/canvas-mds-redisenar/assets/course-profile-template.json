@@ -14,8 +14,8 @@
     "replace/programa.md"
   ],
   "course_dates": {
-    "start": "2026-01-01",
-    "end": "2026-12-31"
+    "start": null,
+    "end": null
   },
   "team_group_category": {
     "name": "Equipos interdisciplinarios · reemplazar curso",
@@ -52,7 +52,7 @@
       "name": "Entrega aplicada · reemplazar",
       "kind": "summative",
       "points": 100,
-      "due_local": "2026-01-31 23:59",
+      "due_local": null,
       "group": "Trabajo aplicado",
       "mode": "equipo",
       "group_assignment": true,
@@ -100,6 +100,17 @@
         "SRC-01"
       ],
       "faculty_decision_ids": [],
+      "objective_ids": [
+        "OBJ-01"
+      ],
+      "indicator_ids": [
+        "IND-01"
+      ],
+      "evidence_ids": [
+        "EVD-01"
+      ],
+      "instrument_id": "INS-01",
+      "procedure_moment_id": "MOM-01",
       "feedback_loop": {
         "receives_feedback": true,
         "requires_response": true,
@@ -113,8 +124,8 @@
       "kind": "individual_evidence",
       "points": 10,
       "course_weight_percent": 40,
-      "unlock_local": "2026-01-31 12:00",
-      "due_local": "2026-02-02 23:59",
+      "unlock_local": null,
+      "due_local": null,
       "group": "Evidencia individual",
       "mode": "individual · Classic Quiz",
       "ra": [
@@ -177,6 +188,17 @@
         "SRC-01"
       ],
       "faculty_decision_ids": [],
+      "objective_ids": [
+        "OBJ-01"
+      ],
+      "indicator_ids": [
+        "IND-02"
+      ],
+      "evidence_ids": [
+        "EVD-02"
+      ],
+      "instrument_id": "INS-02",
+      "procedure_moment_id": "MOM-02",
       "feedback_loop": {
         "receives_feedback": false,
         "requires_response": false

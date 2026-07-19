@@ -29,7 +29,7 @@ Distinguir siempre:
 - `faculty_confirmed`: proviene de una respuesta o decisión docente;
 - `model_proposal`: propuesta de GPT-5.6 pendiente de aprobación.
 
-No inventar fechas, pesos, políticas, resultados de aprendizaje ni capacidades de Canvas.
+No inventar fechas, pesos, políticas, resultados de aprendizaje ni capacidades de Canvas. Antes de validar el artefacto final, declarar una raíz portable y comprobar que el perfil y todas las rutas de `source_evidence` existan dentro de ella.
 
 Para cursos UDD, usar referencias `UDD-R1`–`UDD-R10` y `UDD-H1`–`UDD-H6` según [metodologias-activas-udd.md](metodologias-activas-udd.md). Las reglas operativas pueden convertirse en controles determinísticos; las heurísticas requieren interpretación de GPT-5.6 y confirmación docente.
 

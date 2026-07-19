@@ -132,6 +132,7 @@ class PlanningAlignmentTests(unittest.TestCase):
         metrics = self.validate(fixture())
         self.assertEqual(metrics["indicator_count"], 4)
         self.assertEqual(metrics["estimated_review_minutes"], 50)
+        self.assertEqual(metrics["estimated_non_faculty_review_minutes"], 0)
 
     def test_reference_alignment_passes(self) -> None:
         root = Path(__file__).resolve().parents[1]
@@ -176,6 +177,47 @@ class PlanningAlignmentTests(unittest.TestCase):
         value["evaluation_procedure"]["moments"][0]["feedback_use"] = ""
         with self.assertRaisesRegex(ValueError, "feedback"):
             self.validate(value)
+
+    def test_rejects_procedure_using_unselected_instrument(self) -> None:
+        value = fixture()
+        value["evaluation_procedure"]["moments"][0]["instrument_ids"].append("INS-02")
+        with self.assertRaisesRegex(ValueError, "instrumentos no seleccionados"):
+            self.validate(value)
+
+    def test_rejects_cartesian_multiobjective_matrix(self) -> None:
+        value = fixture()
+        second_objective = copy.deepcopy(value["objectives"][0])
+        second_objective["id"] = "OBJ-02"
+        value["objectives"].append(second_objective)
+        for row in value["alignment_matrix"]:
+            row["objective_ids"].append("OBJ-02")
+        with self.assertRaisesRegex(ValueError, "exactamente un objetivo"):
+            self.validate(value)
+
+    def test_separates_peer_workload_from_faculty_capacity(self) -> None:
+        value = fixture()
+        checklist = value["instruments"][1]
+        checklist.update(
+            {
+                "role": "complementary",
+                "selected": True,
+                "indicator_ids": ["IND-01"],
+                "evidence_ids": ["EV-01"],
+                "review_workload": {
+                    "items_to_review": 10,
+                    "minutes_per_item": 2,
+                    "estimated_total_minutes": 20,
+                    "reviewer": "peers",
+                    "counts_toward_faculty_capacity": False,
+                },
+            }
+        )
+        value["evaluation_procedure"]["moments"][0]["instrument_ids"].append("INS-02")
+        for row in value["alignment_matrix"]:
+            row["instrument_ids"].append("INS-02")
+        metrics = self.validate(value)
+        self.assertEqual(metrics["estimated_review_minutes"], 50)
+        self.assertEqual(metrics["estimated_non_faculty_review_minutes"], 20)
 
     def test_redesign_03_requires_alignment(self) -> None:
         root = Path(__file__).resolve().parents[1]

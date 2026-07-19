@@ -21,6 +21,10 @@ AssessTrace separates:
 - decisions that still require the instructor;
 - deterministic Canvas operations that can be reviewed before execution.
 
+## Why a plugin, not a platform
+
+Tools already exist for parts of this problem. Hosted assessment platforms can make the writing process visible, but may require a separate institutional contract and add another processor for student work. Platform-native course agents can generate structure inside a single LMS, yet tie the institution more closely to that platform and its licensing. Curriculum-alignment tools can surface outcome gaps, but often live inside their own suites. AssessTrace takes a narrower, more portable position: it introduces no separate assessment platform. Where Canvas and Codex with GPT-5.6 are already institutionally approved, it can run through existing services, policies, and institution-controlled credentials instead of adding another system for student work. It never publishes or deletes, excludes student data by design, and separates instructor judgment from a deterministic engine that refuses any unauthorized or unsafe write. The claim is not more capability than the alternatives; it is less surface area to govern, and a design an institution can pilot without procuring another assessment platform.
+
 ## What the MVP does
 
 - Reads course structure without retrieving student submissions, grades, or enrollment data.
@@ -70,7 +74,7 @@ During Build Week, Codex with GPT-5.6 accelerated the transition from educationa
 
 Key product decisions remained human decisions: focus on process evidence, keep instructors in control, prohibit publication and destructive operations, exclude student data, and require explicit course identity confirmation.
 
-P0.2 adds a generative alignment gate. GPT-5.6 must understand the documented need, distinguish a learning objective from the activities used to reach it, present alternatives when the objective is not approved, and stop for faculty confirmation. Only then may it derive indicators, evidence, instruments, procedure, workload, and finally activities. The deterministic validator checks that complete chain.
+P0.2 introduced the generative alignment gate. P0.3 hardens its semantics: GPT-5.6 must still understand the documented need, distinguish an objective from activities and stop for faculty confirmation, while the deterministic engine now rejects unselected instruments, cartesian matrix links, activities that widen the approved chain, unresolved source paths and overlapping evidence labels.
 
 At runtime, GPT-5.6 reconciles heterogeneous course evidence, diagnoses invisible learning processes, proposes at least two viable designs, and stress-tests them against AI-without-understanding and unequal-contribution scenarios. The instructor confirms every material decision. Deterministic validation then enforces UDD-informed controls for learning-outcome alignment, process and individual evidence, feedback use, cognitive demand, accessible alternatives, weights, traceability, and Canvas safety.
 
@@ -144,7 +148,7 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 29 tests
+Ran 39 tests
 OK
 ~~~
 
@@ -154,7 +158,7 @@ Then run the complete credential-free judge experience:
 python judge_demo.py
 ~~~
 
-It validates the approved GPT-5.6-assisted redesign and P0.2 alignment artifact, shows the shift from 95% final-product / 0% process evidence to 40% / 60%, and generates an English PASS summary with 21 pedagogical, traceability, and safety checks. See the full [Judge Experience](JUDGE_GUIDE.md), including the interactive Codex prompt.
+It validates the approved GPT-5.6-assisted redesign and P0.3 semantic alignment contract, shows the shift from 95% final-product to 40% final-product, 55% process checkpoints and 5% individual verification, and generates an English PASS summary with 23 pedagogical, traceability, portability, and safety checks. See the full [Judge Experience](JUDGE_GUIDE.md), including the interactive Codex prompt.
 
 The tests exercise:
 
@@ -201,6 +205,10 @@ Judges can inspect the full reasoning contract in [pedagogical-redesign.json](pl
 
 No publication command exists in this MVP.
 
+## Who runs the MVP today
+
+AssessTrace is designed for faculty, but this MVP is deliberately an engine with safety rails, not a finished faculty interface. Operating it today assumes a technical user: Codex, Python, and command-line confirmation of every write. That is a sequencing decision, not an oversight. The first risk to solve is not interface polish; it is getting the reasoning, instructor-decision gates, and write-safety invariants right, where mistakes are expensive and hard to reverse. Those are what this release proves. The faculty-facing surface today is the Codex conversation driven by the three skills. A non-technical interface, and an operating model in which an instructional designer or program lead runs the tool alongside faculty, are next steps—not claims this MVP makes.
+
 ## Current limitations
 
 - Canvas access is required for snapshots, audits, live dry-runs, and creation.
@@ -214,7 +222,7 @@ No publication command exists in this MVP.
 
 The needs behind AssessTrace and Evidence by Design came from earlier work in the UDD AI Workshop, university and faculty AI committees, institutional AI policy discussions, and leadership of the Master's in Data Science. That prior work established the problem and constraints; it is not presented as Build Week software.
 
-Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, twenty-nine tests, process-redesign reference case, example profile, distribution package, and submission evidence were implemented for Build Week.
+Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, thirty-nine tests, process-redesign reference case, example profile, distribution package, and submission evidence were implemented for Build Week.
 
 See [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) for the evidence record.
 

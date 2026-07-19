@@ -18,6 +18,8 @@ Aplicar Evidence by Design para convertir evidencia y decisiones docentes en un 
 7. Preguntar antes de asumir una decisión pedagógica material. Si queda una pregunta material sin responder, aplicar `HARD STOP 1`. Mantener lo no resuelto en `manual_decisions`.
 8. No cambiar ponderaciones, modalidad, carga docente, formato individual ni una restricción documentada sin confirmación explícita.
 9. No calificar estudiantes, leer datos estudiantiles ni publicar o modificar Canvas.
+10. Seleccionar todo instrumento usado por el procedimiento. Mantener `selected: false` solo para alternativas comparadas y descartadas.
+11. Trazar cada fila de la matriz a exactamente un objetivo y un componente; prohibir relaciones cartesianas o referencias espurias.
 
 ## Flujo
 
@@ -69,10 +71,10 @@ Después de la confirmación:
 
 - derivar entre cuatro y seis indicadores observables de proceso y resultado;
 - vincular cada indicador con evidencia concreta y cubrir acción, contenido y condición;
-- comparar al menos tres instrumentos, seleccionar uno principal y calcular carga real;
+- comparar al menos tres instrumentos, seleccionar uno principal y calcular por separado carga docente y carga de estudiantes o pares;
 - declarar momentos diagnósticos, de seguimiento y finales cuando sean pertinentes;
 - exigir feedback con uso posterior;
-- construir la matriz objetivo → indicador → evidencia → instrumento → momento;
+- construir la matriz objetivo → indicador → evidencia → instrumento → momento con una fila por objetivo y componente, sin ampliar relaciones;
 - validar `planning-alignment.json` antes de diseñar actividades.
 
 ### 5. Proponer alternativas de rediseño
@@ -102,10 +104,20 @@ Solo después de superar los tres stops, crear en `canvas_profiles/<slug>/`:
 
 El perfil incorpora snapshots aprobados, fuentes, decisiones, `process_assessment_policy` y metadatos de proceso por actividad. En UDD registra `knowledge_base_refs`, procesos cognitivos, dimensiones del conocimiento, actor del feedback y formatos equivalentes.
 
+Antes de escribir, declarar una única raíz portable que contenga las fuentes y la carpeta `canvas_profiles`. Crear los artefactos dentro de esa raíz y comprobar que cada `source_evidence.path` resuelva desde ella; nunca crear una carpeta hermana fuera de la raíz asumida. En perfiles 0.3, cada actividad debe referenciar una cadena existente mediante `objective_ids`, `indicator_ids`, `evidence_ids`, `instrument_id` y `procedure_moment_id`.
+
+En `before-after.md`, separar categorías excluyentes —producto final, checkpoints de proceso y verificación individual— y declarar aparte el total de evidencia no final. No usar la misma etiqueta para el subtotal y el total.
+
 ### 9. Validar y transferir
 
-Ejecutar la validación determinística antes de recomendar `$canvas-mds-gestionar`. Resumir qué comprendió GPT-5.6, qué decidió el docente, qué reglas verificó el motor y qué sigue pendiente. Nunca ejecutar escritura desde este skill.
+Ejecutar la validación determinística desde la raíz portable antes de recomendar `$canvas-mds-gestionar`:
+
+```powershell
+python plugins/canvas-mds/scripts/process_evidence.py --profile canvas_profiles/<slug>/course-profile.json --repository-root .
+```
+
+Resumir qué comprendió GPT-5.6, qué decidió el docente, qué reglas verificó el motor y qué sigue pendiente. Nunca ejecutar escritura desde este skill.
 
 ## Portabilidad
 
-No incluir URL, ID o token de Canvas, nombres de estudiantes, entregas, notas ni reportes locales. Usar evidencia sanitizada. Mostrar y almacenar rutas relativas al repositorio; nunca emitir rutas absolutas del equipo local. Las decisiones comunes pertenecen al plugin; las decisiones del curso permanecen en sus artefactos.
+No incluir URL, ID o token de Canvas, nombres de estudiantes, entregas, notas ni reportes locales. Usar evidencia sanitizada. Mostrar y almacenar rutas relativas a la raíz portable declarada; nunca emitir rutas absolutas del equipo local. Exigir que perfil y fuentes resuelvan dentro de esa raíz. Las decisiones comunes pertenecen al plugin; las decisiones del curso permanecen en sus artefactos.

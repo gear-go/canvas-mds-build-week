@@ -47,7 +47,7 @@ Cubrir acción, contenido o desempeño y condición de cada objetivo. No agregar
 
 Comparar al menos tres instrumentos pertinentes antes de seleccionar. Para cada alternativa explicitar ventajas, limitaciones, alineamiento, carga de revisión, tamaño de cohorte, tiempo y capacidad de feedback.
 
-Seleccionar exactamente un instrumento principal y solo complementos indispensables. Calcular la carga: elementos por revisar × minutos por elemento. No construir una rúbrica cuando una decisión binaria requiere una lista de cotejo.
+Seleccionar exactamente un instrumento principal y solo complementos indispensables. Todo instrumento usado en un momento evaluativo debe quedar seleccionado; los instrumentos meramente considerados no pueden aparecer en el procedimiento. Calcular la carga: elementos por revisar × minutos por elemento, distinguiendo la capacidad docente de la carga de estudiantes, pares o externos. No construir una rúbrica cuando una decisión binaria requiere una lista de cotejo.
 
 ## Procedimiento
 
@@ -66,4 +66,4 @@ No diseñar agenda, módulos ni actividades hasta comprobar:
 7. la carga total está calculada;
 8. las actividades posteriores ejercitan exactamente esta cadena.
 
-Registrar la matriz objetivo → indicador → evidencia → instrumento → momento evaluativo. Mantener los cambios indispensables separados de mejoras opcionales.
+Registrar la matriz objetivo → indicador → evidencia → instrumento → momento evaluativo. Cada fila cubre exactamente un objetivo y uno de sus componentes; solo puede incluir indicadores vinculados a ese objetivo, evidencia de esos indicadores, instrumentos capaces de valorarla y momentos que realmente la observan. Mantener los cambios indispensables separados de mejoras opcionales.
