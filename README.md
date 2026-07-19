@@ -137,7 +137,7 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 15 tests
+Ran 20 tests
 OK
 ~~~
 
@@ -158,7 +158,8 @@ The tests exercise:
 - Canvas dates generated in the course time zone;
 - supported Classic Quiz role choices;
 - structured provisional audit output;
-- UDD-informed learning-outcome alignment, self/peer assessment, cognitive-demand, feedback-actor, response-loop, and alternative-format controls.
+- UDD-informed learning-outcome alignment, self/peer assessment, cognitive-demand, feedback-actor, response-loop, and alternative-format controls;
+- P0.1 decision hard stops, cohort-workload calculation, and repository-relative output paths.
 
 Judges can inspect the full reasoning contract in [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), the evidence shift in [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md), and the compiled profile in [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). These are sanitized reference artifacts, not a profile to apply to an unrelated course.
 
