@@ -17,6 +17,8 @@ Usar este contrato para producir `pedagogical-redesign.json`. El artefacto regis
 - `adversarial_scenarios`: escenarios, riesgo detectado, mitigación y actividades afectadas.
 - `unresolved_decisions`: vacía antes de compilar el perfil final.
 
+Desde `schema_version: 0.3.*` también es obligatorio `planning_alignment`: snapshot confirmado conforme a [planning-alignment-schema.md](planning-alignment-schema.md). Las versiones 0.2 se mantienen compatibles para conservar artefactos previos.
+
 ## Trazabilidad
 
 Usar IDs únicos con prefijos `SRC-`, `Q-`, `FD-`, `OPT-` y `ADV-`. Cada hallazgo, opción y actividad propuesta debe referenciar fuentes o decisiones existentes.
@@ -34,5 +36,7 @@ Para cursos UDD, usar referencias `UDD-R1`–`UDD-R10` y `UDD-H1`–`UDD-H6` seg
 ## Criterios de calidad
 
 El diagnóstico debe preceder a la solución. Las preguntas deben poder cambiar el diseño. Las alternativas deben mostrar carga docente y trade-offs. La simulación adversarial debe examinar al menos producto generado con IA sin comprensión y contribución grupal desigual.
+
+Antes de calendarizar, la versión 0.3 debe demostrar la cadena necesidad → objetivo → indicador → evidencia → instrumento → procedimiento. El objetivo no puede describir actividades; cada componente debe estar cubierto; la carga de revisión debe estar calculada; y el feedback debe tener uso posterior. Ningún artefacto final puede conservar `alignment_status: pending`.
 
 La salida no puede calificar estudiantes ni afirmar autoría individual. Su función es rediseñar qué evidencia se solicitará en el futuro.

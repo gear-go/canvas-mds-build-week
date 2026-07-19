@@ -19,12 +19,22 @@ DEFAULT_PROFILE = (
     / "profiles"
     / "entornos-digitales-2026.json"
 )
+DEFAULT_ALIGNMENT = (
+    REPO_ROOT
+    / "plugins"
+    / "canvas-mds"
+    / "assets"
+    / "judge-case"
+    / "reference"
+    / "planning-alignment.json"
+)
 
 if str(ENGINE_DIR) not in sys.path:
     sys.path.insert(0, str(ENGINE_DIR))
 
 from canvas_mds import CanvasMVPError, build_dry_run  # noqa: E402
 from canvas_mds_apply import validate_blueprint  # noqa: E402
+from planning_alignment import validate_planning_alignment  # noqa: E402
 from process_evidence import validate_process_blueprint  # noqa: E402
 
 
@@ -89,6 +99,8 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
     blueprint = load_profile(profile_path)
     validate_blueprint(blueprint)
     process_metrics = validate_process_blueprint(blueprint)
+    alignment = load_profile(DEFAULT_ALIGNMENT)
+    alignment_metrics = validate_planning_alignment(alignment)
 
     snapshot = synthetic_empty_snapshot(blueprint)
     plan = build_dry_run(snapshot, blueprint)
@@ -119,6 +131,11 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
     checks = {
         "profile_valid": True,
         "generative_redesign_artifact_valid": bool(process_metrics),
+        "planning_alignment_gate_valid": (
+            alignment_metrics["objective_count"] == 1
+            and alignment_metrics["indicator_count"] == 5
+            and alignment_metrics["estimated_review_minutes"] == 180
+        ),
         "two_or_more_redesign_options": len(options) >= 2,
         "exactly_one_faculty_selected_option": len(selected_options) == 1,
         "udd_knowledge_base_is_traced": (
@@ -188,18 +205,20 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
         },
         "reasoning_contract": {
             "gpt_5_6": (
-                "Diagnoses the validity gap from heterogeneous course evidence, "
-                "proposes alternatives and tests them against failure scenarios."
+                "Distinguishes objectives from activities, derives a coherent "
+                "evidence chain, diagnoses the validity gap, proposes alternatives "
+                "and tests them against failure scenarios."
             ),
             "faculty": (
                 "Answers decision-changing questions and confirms, modifies or "
                 "rejects every material pedagogical choice."
             ),
             "deterministic_engine": (
-                "Validates traceability, learning-outcome coverage, weights, "
-                "process evidence, accessibility metadata and Canvas safety gates."
+                "Validates objective-to-procedure alignment, workload, traceability, "
+                "learning-outcome coverage, process evidence and Canvas safety gates."
             ),
         },
+        "alignment_metrics": alignment_metrics,
         "proposed": plan["proposed"],
         "actions": plan["actions"],
         "checks": checks,

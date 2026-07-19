@@ -17,13 +17,16 @@ GPT-5.6 must:
 
 - reconcile heterogeneous course evidence: learning outcomes, current assessment, rubric, AI guidance and faculty constraints;
 - diagnose the assessment-validity gap before proposing a solution;
+- distinguish a demonstrable objective from an activity agenda;
+- propose observable objective alternatives and stop for faculty confirmation when no approved objective exists;
+- derive and audit objective → indicator → evidence → instrument → procedure before calendarizing activities;
 - identify learning processes that remain invisible in polished team products;
-- ask up to three questions whose answers can materially change the design, then enforce HARD STOP 1 while any answer is missing;
-- propose at least two viable alternatives with cohort workload, risks and trade-offs only after faculty answers;
+- ask up to three questions whose answers can materially change the design;
+- propose at least two viable alternatives with workload, risks and trade-offs;
 - test the selected option against AI-without-understanding and unequal-team-contribution scenarios;
 - explain concise, evidence-linked rationales.
 
-The model does not make the final pedagogical decision. Two explicit hard stops prevent it from proposing alternatives before decision-changing answers or compiling artifacts before an option is selected. The faculty member confirms, modifies or rejects material choices. A deterministic engine then validates traceability, weights, learning-outcome coverage, feedback loops, individual evidence, accessible alternatives and Canvas safety gates.
+The model does not make the final pedagogical decision. The faculty member confirms, modifies or rejects material choices. A deterministic engine then validates traceability, weights, learning-outcome coverage, feedback loops, individual evidence, accessible alternatives and Canvas safety gates.
 
 ## Part A · Interactive reasoning experience
 
@@ -46,6 +49,10 @@ AI-rich course. Use the packaged UDD active-learning knowledge base where
 relevant. Do not inspect the reference solution yet. First show me the
 evidence-linked diagnosis and ask only the decision-changing faculty questions
 you need before proposing a redesign.
+
+If the evidence does not contain an approved objective, propose two or three
+observable objective alternatives. Stop after the objective alternatives and
+wait for my explicit confirmation before deriving indicators or activities.
 ~~~
 
 ### What to observe
@@ -56,18 +63,22 @@ A conforming run should:
 2. separate documented facts, model proposals and faculty decisions;
 3. explain why a polished AI-assisted product can conceal weak understanding;
 4. ask no more than three consequential questions;
-5. end the first turn after those questions (HARD STOP 1): it must not propose alternatives, provisional weights, adversarial simulations or files before faculty answers;
-6. after the answers, offer at least two alternatives with trade-offs and a cohort-level faculty workload calculation;
-7. request an explicit selection and stop again (HARD STOP 2) before compiling artifacts;
-8. preserve the authentic final product while adding process evidence;
-9. simulate adversarial validity failures only for the selected design;
-10. produce an approved, traceable redesign only after faculty confirmation;
-11. use repository-relative paths and avoid Canvas writes or student data.
+5. enforce HARD STOP 1 while consequential questions remain unanswered; it must not propose alternatives, weights, simulations or files in that turn;
+6. preserve approved outcomes or distinguish a proposed objective from activities;
+7. enforce ALIGNMENT STOP until a new or revised objective is explicitly confirmed;
+8. derive 4–6 indicators, concrete evidence, three compared instruments, realistic workload and a feedback procedure;
+9. offer at least two redesign alternatives with workload and trade-offs;
+10. enforce HARD STOP 2 until one option is selected or modified;
+11. preserve the authentic final product while adding process evidence;
+12. simulate adversarial validity failures;
+13. produce artifacts only after faculty confirmation;
+14. avoid Canvas writes and student data.
 
 For a time-bounded review, compare the interaction with the completed reference artifacts:
 
 | Artifact | What it demonstrates |
 | --- | --- |
+| [planning-alignment.json](plugins/canvas-mds/assets/judge-case/reference/planning-alignment.json) | Confirmed objective, indicators, evidence, compared instruments, workload and feedback procedure. |
 | [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json) | Evidence-linked diagnosis, questions, decisions, alternatives and adversarial tests. |
 | [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md) | Concise explanation of the assessment paradigm shift. |
 | [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json) | Approved design compiled into a portable Canvas MDS profile. |
@@ -97,11 +108,11 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 20 tests
+Ran 29 tests
 OK
 ~~~
 
-The tests cover the read-only and protected-write engines, the P0.1 hard-stop contract, and the process-centered controls derived from the UDD knowledge base: learning-outcome references, self/peer assessment, cognitive demand, feedback actors and response loops.
+The tests cover the read-only and protected-write engines, the P0.1 hard-stop contract, cohort-level workload and portable paths, plus objective/activity separation, the P0.2 alignment stop, bidirectional evidence mappings, instrument selection, workload arithmetic, usable feedback, and the process-centered UDD controls.
 
 ### Step 2 · Run the judge demo
 
@@ -126,7 +137,7 @@ Assessment evidence shift:
 - Individual evidence: 5% -> 5.0%
 ~~~
 
-The remainder reports the role of GPT-5.6, the faculty member and the deterministic engine, followed by 20 PASS checks.
+The remainder reports the role of GPT-5.6, the faculty member and the deterministic engine, followed by 21 PASS checks, including the live P0.2 alignment gate.
 
 For a machine-readable result:
 
@@ -143,13 +154,19 @@ Sanitized course evidence + UDD knowledge base
 GPT-5.6 evidence-linked diagnosis + decision-changing questions
                     |
                     v
-HARD STOP 1 -> faculty answers -> alternatives with workload
+HARD STOP 1 -> faculty answers
                     |
                     v
-HARD STOP 2 -> faculty selects or modifies one option
+Confirmed objective or objective alternatives -> ALIGNMENT STOP
                     |
                     v
-GPT-5.6 adversarial simulation of the selected design
+Indicators -> evidence -> compared instruments -> procedure
+                    |
+                    v
+Redesign alternatives with cohort workload -> HARD STOP 2
+                    |
+                    v
+Faculty selection -> adversarial simulation
                     |
                     v
 Traceable redesign artifact + portable course profile
@@ -167,9 +184,11 @@ Production code used by the offline verification:
 | --- | --- |
 | [judge_demo.py](judge_demo.py) | Credential-free English judge harness. |
 | [process_evidence.py](plugins/canvas-mds/scripts/process_evidence.py) | Process-centered assessment validation and metrics. |
+| [planning_alignment.py](plugins/canvas-mds/scripts/planning_alignment.py) | Deterministic P0.2 alignment gate and workload validation. |
 | [canvas_mds_apply.py](plugins/canvas-mds/scripts/canvas_mds_apply.py) | Profile validator and protected Canvas write engine. |
 | [canvas_mds.py](plugins/canvas-mds/scripts/canvas_mds.py) | Read-only engine and dry-run planner. |
 | [test_process_evidence.py](plugins/canvas-mds/scripts/test_process_evidence.py) | UDD-informed pedagogical guardrail tests. |
+| [test_planning_alignment.py](plugins/canvas-mds/scripts/test_planning_alignment.py) | Objective, evidence, instrument, procedure and alignment-stop regression tests. |
 | [test_skill_contract.py](plugins/canvas-mds/scripts/test_skill_contract.py) | P0.1 regression tests for decision hard stops, cohort workload and portable paths. |
 
 ## Why the Canvas snapshot is synthetic

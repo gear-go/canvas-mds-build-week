@@ -24,6 +24,7 @@ Canvas MDS separa:
 - Lee la estructura del curso sin recuperar entregas, notas ni matrículas.
 - Produce snapshots estructurales, auditorías provisionales y dry-runs sin mutaciones.
 - Diagnostica qué puede y qué no puede demostrar la evaluación actual sobre el aprendizaje en un curso con IA.
+- Impone una puerta de alineamiento: confirma el objetivo antes de derivar indicadores, evidencias, instrumentos, procedimientos o actividades.
 - Propone alternativas de rediseño, simula fallas de validez y registra las decisiones del docente.
 - Convierte el rediseño aprobado en un perfil JSON portable.
 - Crea o reutiliza grupos de evaluación, una categoría de equipos, páginas, tareas, un Classic Quiz y módulos.
@@ -38,7 +39,7 @@ Deliberadamente **no** publica ni elimina contenido, modifica matrículas, desca
 | Capa | Responsabilidad |
 | --- | --- |
 | Evidencia del curso | Programa aprobado, planificación, lineamientos institucionales y decisiones explícitas del docente. |
-| Codex + GPT-5.6 | Diagnostica la brecha de validez, formula preguntas que cambian decisiones, propone alternativas con trade-offs, simula fallas y compila las decisiones confirmadas. |
+| Codex + GPT-5.6 | Distingue objetivos de actividades, alinea objetivo → indicador → evidencia → instrumento → procedimiento, diagnostica la brecha de validez y compila decisiones confirmadas. |
 | Perfil JSON | Guarda resultados de aprendizaje, ponderaciones, evidencia de proceso, fechas, políticas de IA/datos, páginas, módulos y decisiones pendientes sin credenciales ni IDs de Canvas. |
 | Motor Python determinista | Valida invariantes, lee la estructura de Canvas, calcula el dry-run, aplica el plan autorizado y verifica el resultado. |
 | API de Canvas LMS | Recibe lecturas por defecto y solicitudes POST/PUT protegidas solo después de una confirmación explícita. |
@@ -64,6 +65,8 @@ Durante Build Week, Codex con GPT-5.6 aceleró el paso desde las necesidades edu
 - empaquetó el complemento, el perfil de ejemplo, el marketplace local, el ZIP y la trazabilidad reproducible.
 
 Las decisiones centrales siguieron siendo humanas: enfocarse en evidencia del proceso, mantener al docente en control, prohibir publicación y operaciones destructivas, excluir datos estudiantiles y exigir confirmación explícita de la identidad del curso.
+
+P0.2 incorpora una puerta de alineamiento generativo. GPT-5.6 debe comprender la necesidad documentada, distinguir un objetivo de aprendizaje de las actividades para alcanzarlo, presentar alternativas cuando no exista un objetivo aprobado y detenerse para confirmación docente. Solo entonces puede derivar indicadores, evidencias, instrumentos, procedimiento, carga y finalmente actividades. El validador determinista comprueba la cadena completa.
 
 Durante el uso, GPT-5.6 reconcilia evidencia heterogénea, diagnostica procesos de aprendizaje invisibles, propone al menos dos diseños viables y los somete a escenarios de IA sin comprensión y contribución desigual. El docente confirma cada decisión material. La validación determinista aplica controles inspirados en la base UDD para alineamiento con RA, evidencia de proceso e individual, uso del feedback, demanda cognitiva, alternativas accesibles, ponderaciones, trazabilidad y seguridad Canvas.
 
@@ -137,7 +140,7 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Resultado esperado:
 
 ~~~text
-Ran 20 tests
+Ran 29 tests
 OK
 ~~~
 
@@ -147,7 +150,7 @@ Luego ejecuta la experiencia completa para jueces, cuya interfaz y documentació
 python judge_demo.py
 ~~~
 
-El comando valida el rediseño aprobado asistido por GPT-5.6, muestra el cambio de 95% producto final / 0% proceso a 40% / 60%, y genera un resumen PASS en inglés con 20 controles pedagógicos, de trazabilidad y seguridad. Consulta la [Judge Experience](JUDGE_GUIDE.md), que también incluye el prompt interactivo para Codex.
+El comando valida el rediseño aprobado y el artefacto de alineamiento P0.2, muestra el cambio de 95% producto final / 0% proceso a 40% / 60%, y genera un resumen PASS en inglés con 21 controles pedagógicos, de trazabilidad y seguridad. Consulta la [Judge Experience](JUDGE_GUIDE.md), que también incluye el prompt interactivo para Codex.
 
 Las pruebas cubren:
 
@@ -158,7 +161,8 @@ Las pruebas cubren:
 - fechas Canvas generadas en la zona horaria del curso;
 - opciones admitidas para roles en el Classic Quiz;
 - salida estructurada de la auditoría provisional;
-- controles UDD de alineamiento con RA, auto/coevaluación, demanda cognitiva, actor del feedback, ciclo de respuesta y formatos alternativos.
+- separación objetivo/actividad, bloqueo de alineamiento, trazabilidad bidireccional indicador/evidencia, comparación de instrumentos, cálculo de carga y feedback utilizable;
+- controles UDD de alineamiento con RA, auto/coevaluación, demanda cognitiva, actor del feedback, ciclo de respuesta y formatos alternativos;
 - puertas de decisión P0.1, cálculo de carga por cohorte y rutas de salida relativas al repositorio.
 
 Los jueces pueden inspeccionar el contrato de razonamiento en [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), el cambio de evidencia en [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md) y el perfil compilado en [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). Son artefactos sanitizados de referencia y no deben aplicarse a otro curso.
@@ -206,7 +210,7 @@ Este MVP no tiene comando de publicación.
 
 Las necesidades de Canvas MDS surgieron de trabajo previo en el IA Workshop de la UDD, comisiones de IA de universidad y facultad, discusiones de política institucional y la dirección de la Maestría en Data Science. Ese trabajo previo estableció el problema y las restricciones; no se presenta como software de Build Week.
 
-La ideación de esta implementación comenzó el 16 de julio de 2026. La primera sesión técnica central recuperada fue creada el 17 de julio. El complemento portable, sus tres skills, el motor determinista, las quince pruebas, el caso de rediseño centrado en el proceso y el perfil de ejemplo, el paquete y la evidencia de entrega se implementaron para Build Week.
+La ideación de esta implementación comenzó el 16 de julio de 2026. La primera sesión técnica central recuperada fue creada el 17 de julio. El complemento portable, sus tres skills, el motor determinista, las veintinueve pruebas, el caso de rediseño centrado en el proceso y el perfil de ejemplo, el paquete y la evidencia de entrega se implementaron para Build Week.
 
 Consulta [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) para revisar el registro de evidencia.
 

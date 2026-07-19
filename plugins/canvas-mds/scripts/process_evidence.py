@@ -3,6 +3,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from planning_alignment import validate_planning_alignment
+
 ALLOWED_EVIDENCE_SCOPES = {"individual", "team", "mixed"}
 SELF_OR_PEER_DIMENSIONS = {"self_assessment", "peer_assessment"}
 LOW_COGNITIVE_QUESTION_TYPES = {"multiple_choice", "true_false", "matching"}
@@ -104,6 +106,18 @@ def validate_redesign_artifact(artifact: dict[str, Any]) -> None:
             raise ValueError("Cada decisión docente requiere decisión y fundamento.")
     if not accepted_ids:
         raise ValueError("El rediseño requiere al menos una decisión aceptada.")
+
+    alignment = artifact.get("planning_alignment")
+    if str(artifact.get("schema_version") or "").startswith("0.3") and not isinstance(
+        alignment, dict
+    ):
+        raise ValueError("El rediseño 0.3 requiere planning_alignment.")
+    if isinstance(alignment, dict):
+        validate_planning_alignment(
+            alignment,
+            source_ids=source_ids,
+            accepted_decision_ids=accepted_ids,
+        )
 
     options = _items(artifact.get("redesign_options"), "redesign_options")
     if len(options) < 2:

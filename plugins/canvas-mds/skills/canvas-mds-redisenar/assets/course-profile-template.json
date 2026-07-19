@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0-process-draft",
+  "version": "0.3.0-alignment-draft",
   "course_profile": "reemplazar-curso-periodo",
   "course_identity": {
     "required_terms": [
@@ -223,9 +223,35 @@
     "Aprobar y asociar rúbricas antes de publicar tareas sumativas."
   ],
   "pedagogical_redesign": {
-    "schema_version": "0.2.0",
+    "schema_version": "0.3.0",
     "redesign_id": "replace-course-assessment-redesign",
     "language": "es",
+      "planning_alignment": {
+        "schema_version": "0.1.0",
+        "alignment_id": "replace-planning-alignment",
+        "alignment_status": "pending",
+        "scope": "course",
+        "need": "Replace with the documented need.",
+        "audience": "Replace with the documented audience.",
+        "duration": {"value": 1, "unit": "weeks"},
+        "objectives": [{
+          "id": "OBJ-01",
+          "statement": "Replace with a confirmed objective.",
+          "observable_action": "Replace",
+          "content_or_performance": "Replace",
+          "condition": "Replace",
+          "status": "faculty_confirmed",
+          "activity_free": true,
+          "source_evidence_ids": ["SRC-01"],
+          "faculty_decision_ids": ["FD-01"]
+        }],
+        "indicators": [],
+        "evidence": [],
+        "instruments": [],
+        "evaluation_procedure": {"moments": []},
+        "alignment_matrix": [],
+        "unresolved_decisions": ["Confirm the objective and complete the alignment chain."]
+      },
     "source_evidence": [
       {
         "id": "SRC-00",
