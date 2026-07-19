@@ -1,0 +1,79 @@
+{
+  "schema_version": "0.1.0",
+  "alignment_id": "entornos-digitales-process-alignment",
+  "alignment_status": "confirmed",
+  "scope": "course",
+  "need": "Make framing, decisions, iteration, feedback response, individual understanding and responsible AI use visible.",
+  "audience": "Interdisciplinary graduate student teams",
+  "duration": {"value": 8, "unit": "weeks"},
+  "objectives": [
+    {
+      "id": "OBJ-01",
+      "statement": "Justify digital-solution design decisions through evidence of framing, alternatives, iteration, feedback response and responsible AI verification.",
+      "observable_action": "Justify",
+      "content_or_performance": "digital-solution design decisions",
+      "condition": "through process evidence and responsible AI verification",
+      "status": "faculty_confirmed",
+      "activity_free": true,
+      "source_evidence_ids": ["SRC-01", "SRC-02"],
+      "faculty_decision_ids": ["FD-01"]
+    }
+  ],
+  "indicators": [
+    {"id": "IND-01", "statement": "Frames the problem with documented evidence.", "type": "process", "observable": true, "attendance_or_participation_only": false, "quality_condition": "Evidence supports the boundary.", "objective_ids": ["OBJ-01"], "evidence_ids": ["EV-01"]},
+    {"id": "IND-02", "statement": "Compares alternatives and records rejected options.", "type": "process", "observable": true, "attendance_or_participation_only": false, "quality_condition": "Trade-offs are explicit.", "objective_ids": ["OBJ-01"], "evidence_ids": ["EV-01"]},
+    {"id": "IND-03", "statement": "Verifies AI-supported claims and records limitations.", "type": "process", "observable": true, "attendance_or_participation_only": false, "quality_condition": "Verification is reproducible.", "objective_ids": ["OBJ-01"], "evidence_ids": ["EV-01"]},
+    {"id": "IND-04", "statement": "Revises the prototype in response to feedback.", "type": "process", "observable": true, "attendance_or_participation_only": false, "quality_condition": "The revision cites feedback used.", "objective_ids": ["OBJ-01"], "evidence_ids": ["EV-01"]},
+    {"id": "IND-05", "statement": "Defends one design decision individually.", "type": "result", "observable": true, "attendance_or_participation_only": false, "quality_condition": "The defense connects evidence and trade-offs.", "objective_ids": ["OBJ-01"], "evidence_ids": ["EV-02"]}
+  ],
+  "evidence": [
+    {"id": "EV-01", "description": "Team process portfolio with framing, decisions, AI verification and feedback-based revision.", "scope": "team", "indicator_ids": ["IND-01", "IND-02", "IND-03", "IND-04"]},
+    {"id": "EV-02", "description": "Individual defense of one consequential design decision.", "scope": "individual", "indicator_ids": ["IND-05"]}
+  ],
+  "instruments": [
+    {
+      "id": "INS-01", "type": "analytic_rubric", "role": "primary", "selected": true,
+      "rationale": "Separates framing, decision, verification, iteration and defense criteria.",
+      "advantages": "Produces criterion-level feedback.", "limitations": "Requires calibration.",
+      "indicator_ids": ["IND-01", "IND-02", "IND-03", "IND-04", "IND-05"],
+      "evidence_ids": ["EV-01", "EV-02"],
+      "review_workload": {"items_to_review": 10, "minutes_per_item": 6, "estimated_total_minutes": 60, "reviewer": "faculty"}
+    },
+    {
+      "id": "INS-02", "type": "structured_defense_guide", "role": "complementary", "selected": true,
+      "rationale": "Verifies individual understanding that a team artifact cannot establish.",
+      "advantages": "Targets consequential decisions.", "limitations": "Adds synchronous or recorded review time.",
+      "indicator_ids": ["IND-05"], "evidence_ids": ["EV-02"],
+      "review_workload": {"items_to_review": 24, "minutes_per_item": 5, "estimated_total_minutes": 120, "reviewer": "faculty"}
+    },
+    {
+      "id": "INS-03", "type": "portfolio_checklist", "role": "considered", "selected": false,
+      "rationale": "Could verify artifact presence.", "advantages": "Fast to apply.",
+      "limitations": "Cannot establish the quality of reasoning."
+    }
+  ],
+  "evaluation_procedure": {
+    "moments": [
+      {
+        "id": "MOM-01", "stage": "follow_up", "actor": "faculty and peers",
+        "action": "Review framing, decisions, verification and iteration evidence.",
+        "evidence_ids": ["EV-01"], "instrument_ids": ["INS-01"],
+        "feedback": "Criterion-level feedback on one strength and one gap.",
+        "feedback_use": "Revise the prototype and document the response."
+      },
+      {
+        "id": "MOM-02", "stage": "final", "actor": "faculty",
+        "action": "Evaluate the portfolio and individual defense.",
+        "evidence_ids": ["EV-01", "EV-02"], "instrument_ids": ["INS-01", "INS-02"],
+        "feedback": "Summative rationale with a transferable next step.",
+        "feedback_use": "Record a final reflection and future application."
+      }
+    ]
+  },
+  "alignment_matrix": [
+    {"objective_component": "action", "objective_ids": ["OBJ-01"], "indicator_ids": ["IND-01", "IND-02", "IND-03", "IND-04", "IND-05"], "evidence_ids": ["EV-01", "EV-02"], "instrument_ids": ["INS-01", "INS-02"], "procedure_moment_ids": ["MOM-01", "MOM-02"]},
+    {"objective_component": "content_or_performance", "objective_ids": ["OBJ-01"], "indicator_ids": ["IND-01", "IND-02", "IND-03", "IND-04", "IND-05"], "evidence_ids": ["EV-01", "EV-02"], "instrument_ids": ["INS-01", "INS-02"], "procedure_moment_ids": ["MOM-01", "MOM-02"]},
+    {"objective_component": "condition", "objective_ids": ["OBJ-01"], "indicator_ids": ["IND-01", "IND-02", "IND-03", "IND-04", "IND-05"], "evidence_ids": ["EV-01", "EV-02"], "instrument_ids": ["INS-01", "INS-02"], "procedure_moment_ids": ["MOM-01", "MOM-02"]}
+  ],
+  "unresolved_decisions": []
+}

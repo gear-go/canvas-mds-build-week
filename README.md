@@ -24,6 +24,7 @@ Canvas MDS separates:
 - Reads course structure without retrieving student submissions, grades, or enrollment data.
 - Produces structural snapshots, provisional audits, and zero-mutation dry-runs.
 - Diagnoses what the current assessment can and cannot establish about learning in an AI-rich course.
+- Enforces an alignment gate: confirm the objective before deriving indicators, evidence, instruments, procedures, or activities.
 - Proposes multiple redesign options, tests validity failures, and records the instructor's decisions.
 - Converts the approved redesign into a portable JSON course profile.
 - Creates or reuses assignment groups, a team category, pages, assignments, one Classic Quiz, and modules.
@@ -38,7 +39,7 @@ It intentionally does **not** publish or delete content, change enrollments, dow
 | Layer | Responsibility |
 | --- | --- |
 | Course evidence | Approved syllabus, schedule, institutional guidance, and explicit faculty decisions. |
-| Codex + GPT-5.6 | Diagnoses the assessment-validity gap, asks decision-changing questions, proposes alternatives with trade-offs, simulates failure scenarios, and compiles confirmed faculty decisions. |
+| Codex + GPT-5.6 | Distinguishes objectives from activities, aligns objective → indicator → evidence → instrument → procedure, diagnoses the validity gap, and compiles confirmed faculty decisions. |
 | JSON course profile | Stores learning outcomes, assessment weights, process evidence, dates, AI/data policies, pages, modules, and pending decisions without Canvas credentials or IDs. |
 | Deterministic Python engine | Validates invariants, reads Canvas structure, calculates a dry-run, applies the narrowly authorized plan, and verifies the result. |
 | Canvas LMS API | Receives read requests by default and protected POST/PUT requests only after explicit confirmation. |
@@ -64,6 +65,8 @@ During Build Week, Codex with GPT-5.6 accelerated the transition from educationa
 - packaged the plugin, example profile, local marketplace, distribution ZIP, and reproducible provenance.
 
 Key product decisions remained human decisions: focus on process evidence, keep instructors in control, prohibit publication and destructive operations, exclude student data, and require explicit course identity confirmation.
+
+P0.2 adds a generative alignment gate. GPT-5.6 must understand the documented need, distinguish a learning objective from the activities used to reach it, present alternatives when the objective is not approved, and stop for faculty confirmation. Only then may it derive indicators, evidence, instruments, procedure, workload, and finally activities. The deterministic validator checks that complete chain.
 
 At runtime, GPT-5.6 reconciles heterogeneous course evidence, diagnoses invisible learning processes, proposes at least two viable designs, and stress-tests them against AI-without-understanding and unequal-contribution scenarios. The instructor confirms every material decision. Deterministic validation then enforces UDD-informed controls for learning-outcome alignment, process and individual evidence, feedback use, cognitive demand, accessible alternatives, weights, traceability, and Canvas safety.
 
@@ -137,7 +140,7 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 15 tests
+Ran 24 tests
 OK
 ~~~
 
@@ -147,7 +150,7 @@ Then run the complete credential-free judge experience:
 python judge_demo.py
 ~~~
 
-It validates the approved GPT-5.6-assisted redesign, shows the shift from 95% final-product / 0% process evidence to 40% / 60%, and generates an English PASS summary with 20 pedagogical, traceability, and safety checks. See the full [Judge Experience](JUDGE_GUIDE.md), including the interactive Codex prompt.
+It validates the approved GPT-5.6-assisted redesign and P0.2 alignment artifact, shows the shift from 95% final-product / 0% process evidence to 40% / 60%, and generates an English PASS summary with 21 pedagogical, traceability, and safety checks. See the full [Judge Experience](JUDGE_GUIDE.md), including the interactive Codex prompt.
 
 The tests exercise:
 
@@ -158,6 +161,7 @@ The tests exercise:
 - Canvas dates generated in the course time zone;
 - supported Classic Quiz role choices;
 - structured provisional audit output;
+- objective/activity separation, alignment-stop enforcement, bidirectional indicator/evidence traceability, instrument comparison, workload arithmetic, and usable-feedback controls;
 - UDD-informed learning-outcome alignment, self/peer assessment, cognitive-demand, feedback-actor, response-loop, and alternative-format controls.
 
 Judges can inspect the full reasoning contract in [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), the evidence shift in [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md), and the compiled profile in [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). These are sanitized reference artifacts, not a profile to apply to an unrelated course.
@@ -205,7 +209,7 @@ No publication command exists in this MVP.
 
 The needs behind Canvas MDS came from earlier work in the UDD AI Workshop, university and faculty AI committees, institutional AI policy discussions, and leadership of the Master's in Data Science. That prior work established the problem and constraints; it is not presented as Build Week software.
 
-Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, fifteen tests, process-redesign reference case, example profile, distribution package, and submission evidence were implemented for Build Week.
+Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, twenty-four tests, process-redesign reference case, example profile, distribution package, and submission evidence were implemented for Build Week.
 
 See [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) for the evidence record.
 

@@ -18,6 +18,7 @@ El perfil JSON es la fuente portable para el motor determinístico. No debe cont
 Cuando `process_assessment_policy.enabled=true`, incluir:
 
 - `pedagogical_redesign`: snapshot aprobado conforme a [pedagogical-redesign-schema.md](pedagogical-redesign-schema.md);
+- `pedagogical_redesign.planning_alignment`: cadena confirmada de objetivo, indicadores, evidencias, instrumentos y procedimiento para perfiles 0.3;
 - `process_assessment_policy.minimum_process_weight_percent`;
 - `require_individual_evidence_for_group_work`;
 - `require_feedback_iteration`;
@@ -40,6 +41,8 @@ Cada actividad debe declarar:
 - `faculty_decision_ids`;
 - `feedback_loop.receives_feedback`, `requires_response`, `actor` cuando corresponda y `response_in_assignment_key` cuando el estudiante deba usar el feedback en una entrega posterior.
 
+En perfiles generados desde un rediseño 0.3, cada actividad también declara `objective_ids`, `indicator_ids`, `evidence_ids`, `instrument_id` y `procedure_moment_id`. Estas referencias deben existir en `planning_alignment`; una actividad no puede ampliar silenciosamente el objetivo.
+
 El peso de proceso corresponde a actividades cuyo `process_stage` no sea `final_product`.
 
 ## Convenciones del MVP
@@ -54,3 +57,5 @@ El peso de proceso corresponde a actividades cuyo `process_stage` no sea `final_
 ## Puertas de aprobación
 
 Mantener una decisión en `manual_decisions` cuando falte fecha, incidencia, rúbrica, modalidad, política de atraso, uso de IA/datos o aprobación del diseño. El motor se negará a escribir mientras exista una decisión pendiente.
+
+También detener la generación cuando falte confirmar un objetivo nuevo o revisado, o cuando la cadena de alineamiento no supere su validación determinística.

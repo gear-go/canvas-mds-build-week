@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1.0",
+  "alignment_id": "replace-planning-alignment",
+  "alignment_status": "pending",
+  "scope": "workshop",
+  "need": "Replace with the documented need.",
+  "audience": "Replace with the documented audience.",
+  "duration": {"value": 1, "unit": "hours"},
+  "objectives": [
+    {
+      "id": "OBJ-01",
+      "statement": "Replace with a confirmed objective.",
+      "observable_action": "Replace",
+      "content_or_performance": "Replace",
+      "condition": "Replace",
+      "status": "faculty_confirmed",
+      "activity_free": true,
+      "source_evidence_ids": ["SRC-01"],
+      "faculty_decision_ids": ["FD-01"]
+    }
+  ],
+  "indicators": [],
+  "evidence": [],
+  "instruments": [],
+  "evaluation_procedure": {"moments": []},
+  "alignment_matrix": [],
+  "unresolved_decisions": [
+    "Confirm the objective before deriving indicators, evidence, instruments, procedure or activities."
+  ]
+}
