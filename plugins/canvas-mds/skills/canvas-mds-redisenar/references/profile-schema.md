@@ -43,6 +43,8 @@ Cada actividad debe declarar:
 
 En perfiles generados desde un rediseño 0.3, cada actividad también declara `objective_ids`, `indicator_ids`, `evidence_ids`, `instrument_id` y `procedure_moment_id`. Estas referencias deben existir en `planning_alignment`; una actividad no puede ampliar silenciosamente el objetivo.
 
+El perfil final se valida desde una raíz portable explícita. El archivo debe estar dentro de esa raíz y cada ruta de `source_files` o `source_evidence.path` debe resolver dentro de ella. Ser relativa no basta si la ruta solo funciona desde otra carpeta asumida.
+
 El peso de proceso corresponde a actividades cuyo `process_stage` no sea `final_product`.
 
 ## Convenciones del MVP
@@ -59,3 +61,5 @@ El peso de proceso corresponde a actividades cuyo `process_stage` no sea `final_
 Mantener una decisión en `manual_decisions` cuando falte fecha, incidencia, rúbrica, modalidad, política de atraso, uso de IA/datos o aprobación del diseño. El motor se negará a escribir mientras exista una decisión pendiente.
 
 También detener la generación cuando falte confirmar un objetivo nuevo o revisado, o cuando la cadena de alineamiento no supere su validación determinística.
+
+Validar el bundle final con `python plugins/canvas-mds/scripts/process_evidence.py --profile canvas_profiles/<slug>/course-profile.json --repository-root .` ejecutado desde la raíz portable.

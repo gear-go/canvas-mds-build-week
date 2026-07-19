@@ -84,7 +84,7 @@ For a time-bounded review, compare the interaction with the completed reference 
 | [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json) | Approved design compiled into a portable Canvas MDS profile. |
 | [metodologias-activas-udd.md](plugins/canvas-mds/skills/canvas-mds-redisenar/references/metodologias-activas-udd.md) | Institutional pedagogical knowledge used as traceable guidance. |
 
-The reference case moves from **95% final-product evidence / 0% process evidence** to **40% final-product evidence / 60% process evidence**, with a separate **5% individual instrument**.
+The reference case moves from **95% final-product evidence** to **40% final-product evidence, 55% process checkpoints and 5% individual verification**. The last two categories form **60% total non-final evidence** without double-labeling the individual component.
 
 ## Part B · Automated verification
 
@@ -108,11 +108,11 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 29 tests
+Ran 39 tests
 OK
 ~~~
 
-The tests cover the read-only and protected-write engines, the P0.1 hard-stop contract, cohort-level workload and portable paths, plus objective/activity separation, the P0.2 alignment stop, bidirectional evidence mappings, instrument selection, workload arithmetic, usable feedback, and the process-centered UDD controls.
+The tests cover the read-only and protected-write engines, the P0.1 hard-stop contract, cohort-level workload and portable paths, plus objective/activity separation, the P0.2 alignment stop and the P0.3 semantic guards for selected instruments, non-cartesian mappings, activity-level inheritance, workload actors and resolvable source roots.
 
 ### Step 2 · Run the judge demo
 
@@ -133,11 +133,12 @@ Canvas mutations: 0
 
 Assessment evidence shift:
 - Final product: 95% -> 40.0%
-- Process evidence: 0% -> 60.0%
-- Individual evidence: 5% -> 5.0%
+- Process checkpoints (excluding individual verification): 0% -> 55.0%
+- Individual verification: 5% -> 5.0%
+- Total non-final evidence: 5% -> 60.0%
 ~~~
 
-The remainder reports the role of GPT-5.6, the faculty member and the deterministic engine, followed by 21 PASS checks, including the live P0.2 alignment gate.
+The remainder reports the role of GPT-5.6, the faculty member and the deterministic engine, followed by 23 PASS checks, including the live P0.3 semantic-alignment and portable-source gates.
 
 For a machine-readable result:
 
@@ -184,7 +185,7 @@ Production code used by the offline verification:
 | --- | --- |
 | [judge_demo.py](judge_demo.py) | Credential-free English judge harness. |
 | [process_evidence.py](plugins/canvas-mds/scripts/process_evidence.py) | Process-centered assessment validation and metrics. |
-| [planning_alignment.py](plugins/canvas-mds/scripts/planning_alignment.py) | Deterministic P0.2 alignment gate and workload validation. |
+| [planning_alignment.py](plugins/canvas-mds/scripts/planning_alignment.py) | Deterministic P0.3 semantic-alignment, instrument and workload validation. |
 | [canvas_mds_apply.py](plugins/canvas-mds/scripts/canvas_mds_apply.py) | Profile validator and protected Canvas write engine. |
 | [canvas_mds.py](plugins/canvas-mds/scripts/canvas_mds.py) | Read-only engine and dry-run planner. |
 | [test_process_evidence.py](plugins/canvas-mds/scripts/test_process_evidence.py) | UDD-informed pedagogical guardrail tests. |

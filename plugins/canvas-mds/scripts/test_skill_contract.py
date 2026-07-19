@@ -31,8 +31,20 @@ class RedesignSkillContractTests(unittest.TestCase):
         self.assertIn("tiempo de revisión docente", self.skill)
 
     def test_portable_output_forbids_absolute_local_paths(self) -> None:
-        self.assertIn("rutas relativas al repositorio", self.skill)
+        self.assertIn("rutas relativas a la raíz portable declarada", self.skill)
         self.assertIn("nunca emitir rutas absolutas", self.skill)
+
+    def test_p03_rejects_unselected_instruments_and_cartesian_traceability(self) -> None:
+        self.assertIn("Seleccionar todo instrumento usado por el procedimiento", self.skill)
+        self.assertIn("exactamente un objetivo y un componente", self.skill)
+
+    def test_p03_requires_resolvable_portable_bundle(self) -> None:
+        self.assertIn("cada `source_evidence.path` resuelva", self.skill)
+        self.assertIn("--repository-root .", self.skill)
+
+    def test_p03_separates_exclusive_evidence_metrics(self) -> None:
+        self.assertIn("categorías excluyentes", self.skill)
+        self.assertIn("total de evidencia no final", self.skill)
 
     def test_judge_guide_exercises_the_first_hard_stop(self) -> None:
         self.assertIn("HARD STOP 1", self.judge_guide)

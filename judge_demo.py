@@ -98,7 +98,9 @@ def empty_snapshot_requires_all_proposed_objects(plan: dict[str, Any]) -> bool:
 def run_demo(profile_path: Path) -> dict[str, Any]:
     blueprint = load_profile(profile_path)
     validate_blueprint(blueprint)
-    process_metrics = validate_process_blueprint(blueprint)
+    process_metrics = validate_process_blueprint(
+        blueprint, repository_root=REPO_ROOT
+    )
     alignment = load_profile(DEFAULT_ALIGNMENT)
     alignment_metrics = validate_planning_alignment(alignment)
 
@@ -135,6 +137,15 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
             alignment_metrics["objective_count"] == 1
             and alignment_metrics["indicator_count"] == 5
             and alignment_metrics["estimated_review_minutes"] == 180
+        ),
+        "portable_profile_and_sources_resolve": True,
+        "exclusive_evidence_metrics_sum_to_total_non_final": (
+            process_metrics["process_checkpoint_weight_percent"]
+            + process_metrics["individual_verification_weight_percent"]
+            == process_metrics["process_weight_percent"]
+            and process_metrics["product_weight_percent"]
+            + process_metrics["process_weight_percent"]
+            == 100
         ),
         "two_or_more_redesign_options": len(options) >= 2,
         "exactly_one_faculty_selected_option": len(selected_options) == 1,
@@ -200,6 +211,13 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
             },
             "approved_redesign": {
                 "final_product_percent": process_metrics["product_weight_percent"],
+                "process_checkpoints_percent": process_metrics[
+                    "process_checkpoint_weight_percent"
+                ],
+                "individual_verification_percent": process_metrics[
+                    "individual_verification_weight_percent"
+                ],
+                "total_non_final_percent": process_metrics["process_weight_percent"],
                 "process_evidence_percent": process_metrics["process_weight_percent"],
                 "individual_evidence_percent": process_metrics[
                     "individual_evidence_weight_percent"
@@ -218,7 +236,9 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
             ),
             "deterministic_engine": (
                 "Validates objective-to-procedure alignment, workload, traceability, "
-                "learning-outcome coverage, process evidence and Canvas safety gates."
+                "portable source paths, learning-outcome coverage, process evidence "
+                "and Canvas safety gates; it rejects unselected instruments and "
+                "spurious matrix links."
             ),
         },
         "alignment_metrics": alignment_metrics,
@@ -255,13 +275,19 @@ def render_summary(result: dict[str, Any]) -> str:
             f"{before['final_product_percent']}% -> {after['final_product_percent']}%"
         ),
         (
-            "- Process evidence: "
-            f"{before['process_evidence_percent']}% -> {after['process_evidence_percent']}%"
+            "- Process checkpoints (excluding individual verification): "
+            f"{before['process_evidence_percent']}% -> "
+            f"{after['process_checkpoints_percent']}%"
         ),
         (
-            "- Individual evidence: "
+            "- Individual verification: "
             f"{before['individual_evidence_percent']}% -> "
-            f"{after['individual_evidence_percent']}%"
+            f"{after['individual_verification_percent']}%"
+        ),
+        (
+            "- Total non-final evidence: "
+            f"{before['process_evidence_percent'] + before['individual_evidence_percent']}% -> "
+            f"{after['total_non_final_percent']}%"
         ),
         "",
         "Reasoning and control:",

@@ -139,11 +139,14 @@ def validate_planning_alignment(
     if len(instruments) < 3:
         raise ValueError("Se deben comparar al menos tres instrumentos.")
     instrument_ids = _ids(instruments, "instruments")
+    instrument_by_id = {str(item["id"]): item for item in instruments}
     selected = [item for item in instruments if item.get("selected") is True]
+    selected_instrument_ids = {str(item["id"]) for item in selected}
     primary = [item for item in selected if item.get("role") == "primary"]
     if len(primary) != 1:
         raise ValueError("Debe existir exactamente un instrumento principal.")
     total_workload = 0.0
+    non_faculty_workload = 0.0
     for instrument in instruments:
         iid = str(instrument["id"])
         if instrument.get("role") not in {"primary", "complementary", "considered"}:
@@ -154,6 +157,12 @@ def validate_planning_alignment(
             raise ValueError(f"El instrumento {iid} requiere comparacion completa.")
         if instrument.get("role") == "considered" and instrument.get("selected") is not False:
             raise ValueError(f"El instrumento considerado {iid} no puede quedar seleccionado.")
+        if instrument.get("role") in {"primary", "complementary"} and instrument.get(
+            "selected"
+        ) is not True:
+            raise ValueError(
+                f"El instrumento {iid} con role {instrument.get('role')} debe quedar seleccionado."
+            )
         if instrument.get("selected") is True:
             _refs(instrument.get("indicator_ids"), indicator_ids, f"{iid}.indicator_ids")
             _refs(instrument.get("evidence_ids"), evidence_ids, f"{iid}.evidence_ids")
@@ -164,7 +173,16 @@ def validate_planning_alignment(
             actual = float(workload.get("estimated_total_minutes"))
             if round(expected, 6) != round(actual, 6):
                 raise ValueError(f"La carga de revision de {iid} no coincide.")
-            total_workload += actual
+            if "counts_toward_faculty_capacity" in workload and not isinstance(
+                workload.get("counts_toward_faculty_capacity"), bool
+            ):
+                raise ValueError(
+                    f"La carga de revision de {iid} requiere un alcance de capacidad booleano."
+                )
+            if workload.get("counts_toward_faculty_capacity", True) is True:
+                total_workload += actual
+            else:
+                non_faculty_workload += actual
 
     procedure = alignment.get("evaluation_procedure")
     if not isinstance(procedure, dict):
@@ -186,11 +204,19 @@ def validate_planning_alignment(
         usable_feedback = usable_feedback or bool(moment.get("feedback_use"))
     if not usable_feedback:
         raise ValueError("El procedimiento no contiene feedback utilizable.")
-    if {str(item["id"]) for item in selected} - used_instruments:
+    unselected_used = used_instruments - selected_instrument_ids
+    if unselected_used:
+        raise ValueError(
+            "El procedimiento usa instrumentos no seleccionados: "
+            f"{sorted(unselected_used)}"
+        )
+    if selected_instrument_ids - used_instruments:
         raise ValueError("El procedimiento no usa todos los instrumentos seleccionados.")
 
     rows = _items(alignment.get("alignment_matrix"), "alignment_matrix")
-    covered_components: set[str] = set()
+    indicator_by_id = {str(item["id"]): item for item in indicators}
+    moment_by_id = {str(item["id"]): item for item in moments}
+    covered_pairs: set[tuple[str, str]] = set()
     covered_objectives: set[str] = set()
     covered_indicators: set[str] = set()
     covered_evidence: set[str] = set()
@@ -200,19 +226,114 @@ def validate_planning_alignment(
         component = str(row.get("objective_component") or "")
         if component not in OBJECTIVE_COMPONENTS:
             raise ValueError("La matriz requiere componentes validos del objetivo.")
-        covered_components.add(component)
-        covered_objectives |= _refs(row.get("objective_ids"), objective_ids, "matrix.objective_ids")
-        covered_indicators |= _refs(row.get("indicator_ids"), indicator_ids, "matrix.indicator_ids")
-        covered_evidence |= _refs(row.get("evidence_ids"), evidence_ids, "matrix.evidence_ids")
-        covered_instruments |= _refs(
-            row.get("instrument_ids"), {str(item["id"]) for item in selected}, "matrix.instrument_ids"
+        row_objectives = _refs(
+            row.get("objective_ids"), objective_ids, "matrix.objective_ids"
         )
-        covered_moments |= _refs(row.get("procedure_moment_ids"), moment_ids, "matrix.procedure_moment_ids")
-    if covered_components != OBJECTIVE_COMPONENTS or covered_objectives != objective_ids:
+        if len(row_objectives) != 1:
+            raise ValueError(
+                "Cada fila de la matriz debe trazar exactamente un objetivo y un componente."
+            )
+        objective_id = next(iter(row_objectives))
+        pair = (objective_id, component)
+        if pair in covered_pairs:
+            raise ValueError(
+                f"La matriz duplica el componente {component} del objetivo {objective_id}."
+            )
+        covered_pairs.add(pair)
+
+        allowed_indicators = {
+            iid
+            for iid, indicator in indicator_by_id.items()
+            if objective_id in {str(value) for value in indicator.get("objective_ids") or []}
+        }
+        row_indicators = _refs(
+            row.get("indicator_ids"), allowed_indicators, "matrix.indicator_ids"
+        )
+        allowed_evidence = {
+            eid
+            for iid in row_indicators
+            for eid in {
+                str(value) for value in indicator_by_id[iid].get("evidence_ids") or []
+            }
+        }
+        row_evidence = _refs(
+            row.get("evidence_ids"), allowed_evidence, "matrix.evidence_ids"
+        )
+        for iid in row_indicators:
+            if not row_evidence.intersection(
+                {str(value) for value in indicator_by_id[iid].get("evidence_ids") or []}
+            ):
+                raise ValueError(
+                    f"La fila de {objective_id}/{component} no aporta evidencia para {iid}."
+                )
+
+        row_instruments = _refs(
+            row.get("instrument_ids"), selected_instrument_ids, "matrix.instrument_ids"
+        )
+        for eid in row_evidence:
+            if not any(
+                eid
+                in {
+                    str(value)
+                    for value in instrument_by_id[iid].get("evidence_ids") or []
+                }
+                for iid in row_instruments
+            ):
+                raise ValueError(
+                    f"La fila de {objective_id}/{component} no tiene instrumento para {eid}."
+                )
+        for iid in row_instruments:
+            if not row_evidence.intersection(
+                {str(value) for value in instrument_by_id[iid].get("evidence_ids") or []}
+            ):
+                raise ValueError(
+                    f"La fila de {objective_id}/{component} usa el instrumento espurio {iid}."
+                )
+
+        row_moments = _refs(
+            row.get("procedure_moment_ids"), moment_ids, "matrix.procedure_moment_ids"
+        )
+        for mid in row_moments:
+            moment_evidence = {
+                str(value) for value in moment_by_id[mid].get("evidence_ids") or []
+            }
+            moment_instruments = {
+                str(value) for value in moment_by_id[mid].get("instrument_ids") or []
+            }
+            if not row_evidence.intersection(moment_evidence) or not row_instruments.intersection(
+                moment_instruments
+            ):
+                raise ValueError(
+                    f"La fila de {objective_id}/{component} usa el momento espurio {mid}."
+                )
+        for eid in row_evidence:
+            if not any(
+                eid
+                in {
+                    str(value) for value in moment_by_id[mid].get("evidence_ids") or []
+                }
+                for mid in row_moments
+            ):
+                raise ValueError(
+                    f"La fila de {objective_id}/{component} no sitúa {eid} en un momento."
+                )
+
+        covered_objectives |= row_objectives
+        covered_indicators |= row_indicators
+        covered_evidence |= row_evidence
+        covered_instruments |= row_instruments
+        covered_moments |= row_moments
+
+    expected_pairs = {
+        (objective_id, component)
+        for objective_id in objective_ids
+        for component in OBJECTIVE_COMPONENTS
+    }
+    if covered_pairs != expected_pairs or covered_objectives != objective_ids:
         raise ValueError("La matriz no cubre todos los objetivos y sus componentes.")
     if covered_indicators != indicator_ids or covered_evidence != evidence_ids:
         raise ValueError("La matriz no cubre todos los indicadores y evidencias.")
-    if covered_instruments != {str(item["id"]) for item in selected} or covered_moments != moment_ids:
+    if covered_instruments != selected_instrument_ids or covered_moments != moment_ids:
         raise ValueError("La matriz no cubre instrumentos y momentos seleccionados.")
     return {
         "objective_count": len(objectives),
@@ -220,4 +341,5 @@ def validate_planning_alignment(
         "evidence_count": len(evidence),
         "selected_instrument_count": len(selected),
         "estimated_review_minutes": round(total_workload, 6),
+        "estimated_non_faculty_review_minutes": round(non_faculty_workload, 6),
     }

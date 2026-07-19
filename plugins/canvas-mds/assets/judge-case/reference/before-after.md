@@ -20,8 +20,9 @@ The rubric claims to assess critical reasoning, evidence, iteration, and respons
 | Evidence model | Before | Approved redesign |
 |---|---:|---:|
 | Final product | 95% | 40.0% |
-| Process evidence | 0% | 60.0% |
-| Individual evidence | 5% | 5.0% |
+| Process checkpoints (excluding individual verification) | 0% | 55.0% |
+| Individual verification | 5% | 5.0% |
+| Total non-final evidence | 5% | 60.0% |
 
 Selected option: **Balanced studio evidence**
 
