@@ -1,9 +1,9 @@
 ---
 name: canvas-mds-gestionar
-description: Inspecciona, audita y crea de forma controlada una estructura de curso MDS en Canvas a partir de un perfil aprobado. Usar para snapshot, dry-run, revisión de módulos y evaluaciones, diagnóstico de preparación, creación explícita como no publicada o resolución de dudas sobre el siguiente paso.
+description: Inspecciona, audita y crea de forma controlada mediante el adaptador Canvas MDS de AssessTrace a partir de un perfil aprobado. Usar para snapshot, dry-run, revisión de módulos y evaluaciones, diagnóstico de preparación, creación explícita como no publicada o resolución de dudas sobre el siguiente paso.
 ---
 
-# Canvas MDS · Gestionar
+# AssessTrace · Gestionar con el adaptador Canvas MDS
 
 Opera Canvas con lectura por defecto y una única ruta de escritura acotada, idempotente y no publicada.
 

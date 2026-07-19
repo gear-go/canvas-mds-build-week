@@ -1,9 +1,9 @@
 ---
 name: canvas-mds-configurar
-description: Configura de forma segura un curso MDS para usar Canvas desde una carpeta local. Usar cuando un docente necesite conectar Canvas, registrar URL e ID de curso, guardar o migrar su token sin exponerlo, comprobar permisos, listar cursos o diagnosticar la conexión antes de cualquier auditoría o cambio.
+description: Configura de forma segura el adaptador Canvas MDS de AssessTrace desde una carpeta local. Usar cuando un docente necesite conectar Canvas, registrar URL e ID de curso, guardar o migrar su token sin exponerlo, comprobar permisos, listar cursos o diagnosticar la conexión antes de cualquier auditoría o cambio.
 ---
 
-# Canvas MDS · Configurar
+# AssessTrace · Configurar el adaptador Canvas MDS
 
 Configura el contexto local reutilizable de un docente sin incluir secretos en el plugin, el chat ni archivos compartidos.
 

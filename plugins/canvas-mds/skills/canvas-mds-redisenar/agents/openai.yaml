@@ -1,4 +1,4 @@
 interface:
-  display_name: "Canvas MDS: rediseñar"
-  short_description: "Alinea objetivos y evaluación con decisiones docentes"
-  default_prompt: "Usa $canvas-mds-redisenar para diagnosticar mi evaluación; aplica HARD STOP tras preguntas materiales, confirma cualquier objetivo nuevo, valida la cadena objetivo-indicador-evidencia-instrumento y espera mi selección antes de generar artefactos."
+  display_name: "AssessTrace: Evidence by Design"
+  short_description: "Diseña evidencia del proceso bajo decisión docente"
+  default_prompt: "Usa $canvas-mds-redisenar para aplicar Evidence by Design: diagnostica mi evaluación, detente ante decisiones materiales y traza objetivo, indicadores, evidencias, instrumentos y procedimiento."

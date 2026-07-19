@@ -1,6 +1,6 @@
 # Alineamiento antes de diseñar actividades
 
-Usar esta referencia cuando Canvas MDS deba crear o revisar objetivos, indicadores, evidencias, instrumentos, procedimientos o una jornada formativa. Su función es impedir que una agenda plausible oculte una cadena evaluativa débil.
+Usar esta referencia cuando AssessTrace deba crear o revisar objetivos, indicadores, evidencias, instrumentos, procedimientos o una jornada formativa. Su función es impedir que una agenda plausible oculte una cadena evaluativa débil.
 
 ## Distinciones
 
