@@ -86,12 +86,19 @@ class CanvasMDSReadOnlyTests(unittest.TestCase):
                     "summary": "Aprobado.",
                 }
             ],
-            "manual_decisions": ["Confirmar mecanismo individual."],
+            "manual_decisions": [
+                {
+                    "id": "MD-01",
+                    "status": "pending",
+                    "decision": "Confirmar mecanismo individual.",
+                    "blocking_stage": "dry_run",
+                }
+            ],
         }
         plan = build_dry_run(sample_snapshot(), blueprint)
         self.assertEqual(plan["metadata"]["canvas_mutations"], 0)
         self.assertEqual(plan["course_policies"][0]["status"], "confirmed")
-        self.assertEqual(plan["manual_decisions"], ["Confirmar mecanismo individual."])
+        self.assertEqual(plan["manual_decisions"][0]["id"], "MD-01")
 
 
 if __name__ == "__main__":

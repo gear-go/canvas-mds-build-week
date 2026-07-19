@@ -13,7 +13,7 @@ Aplicar Evidence by Design para convertir evidencia y decisiones docentes en un 
 2. En contexto UDD, consultar [references/metodologias-activas-udd.md](references/metodologias-activas-udd.md), especialmente las secciones 2, 4, 5, 9 y 11. Usar reglas `R1`–`R10` y heurísticas `H1`–`H6` como criterios trazables, no como receta. Si el diagnóstico cita cualquier `UDD-R*` o `UDD-H*`, registrar esta base en el inventario como `SRC-00`, con ruta relativa y autoridad documentada.
 3. Tratar programa y resultados aprobados como autoridad. No reescribir objetivos aprobados silenciosamente. Usar planificación, rúbricas, políticas de IA y restricciones como evidencia contextual.
 4. Distinguir siempre necesidad, objetivo, actividad, indicador, evidencia, instrumento y procedimiento. Un objetivo describe qué podrá demostrar la persona; una actividad, qué hará durante la experiencia.
-5. Separar hechos documentados, respuestas docentes e inferencias de GPT-5.6. Asignar IDs estables también a preguntas y decisiones pendientes, y citar fuentes en cada recomendación.
+5. Separar hechos documentados, respuestas docentes e inferencias de GPT-5.6. Asignar IDs estables también a preguntas y decisiones pendientes, y citar fuentes en cada recomendación. Representar cada `manual_decision` como objeto con `id`, `status: pending`, `decision` y `blocking_stage`; nunca como texto suelto.
 6. No mostrar cadena de pensamiento interna. Entregar diagnósticos y justificaciones breves, auditables y vinculadas a evidencia.
 7. Preguntar antes de asumir una decisión pedagógica material. Si queda una pregunta material sin responder, aplicar `HARD STOP 1`. Mantener lo no resuelto en `manual_decisions`.
 8. No cambiar ponderaciones, modalidad, carga docente, formato individual ni una restricción documentada sin confirmación explícita.
@@ -47,7 +47,7 @@ No equiparar la ausencia de hitos calificados durante el proceso con `0% de evid
 
 ### 3. Resolver preguntas docentes
 
-No volver a preguntar aquello que una fuente autorizada ya responde. Formular como máximo tres preguntas únicamente sobre brechas que puedan cambiar ponderaciones, modalidad, evidencia individual, uso de IA, accesibilidad o carga docente. Asignar IDs estables `Q-01`, `Q-02` y `Q-03` según corresponda, citar las fuentes que justifican cada pregunta y listar sus IDs pendientes en `manual_decisions` dentro de la respuesta, sin crear archivos. Antes de recomendar una revisión individual, calcular su carga total con el tamaño de la cohorte; distinguir tiempo del estudiante y tiempo de revisión docente.
+No volver a preguntar aquello que una fuente autorizada ya responde. Formular como máximo tres preguntas únicamente sobre brechas que puedan cambiar ponderaciones, modalidad, evidencia individual, uso de IA, accesibilidad o carga docente. Asignar IDs estables `Q-01`, `Q-02` y `Q-03` según corresponda, citar las fuentes que justifican cada pregunta y reflejar cada una como objeto `MD-*` pendiente en `manual_decisions` dentro de la respuesta, sin crear archivos. Antes de recomendar una revisión individual, calcular su carga total con el tamaño de la cohorte; distinguir tiempo del estudiante y tiempo de revisión docente.
 
 **Puerta obligatoria · HARD STOP 1:** si al menos una pregunta material queda sin responder, terminar el turno inmediatamente después de enumerarla. En ese turno:
 
@@ -87,7 +87,7 @@ Generar al menos dos opciones: una ligera y otra de mayor verificación. Para ca
 
 Solicitar que el docente seleccione, modifique o rechace las opciones.
 
-**Puerta obligatoria · HARD STOP 2:** mientras no exista una selección explícita, no marcar una opción como elegida, no construir `selected_design`, no ejecutar la simulación final y no generar artefactos. Terminar el turno después de solicitar la decisión.
+**Puerta obligatoria · HARD STOP 2:** asignar un ID `MD-*` estable a la selección pendiente y mostrarla como objeto en `manual_decisions`. Mientras no exista una selección explícita, no marcar una opción como elegida, no construir `selected_design`, no ejecutar la simulación final y no generar artefactos. Terminar el turno después de solicitar la decisión.
 
 ### 6. Simular fallas de validez
 
@@ -95,7 +95,7 @@ Probar contra producto generado con IA sin comprensión, trabajo grupal desigual
 
 ### 7. Confirmar decisiones
 
-Registrar selecciones, modificaciones y rechazos como `faculty_decisions`. Exigir estado `confirmed` para toda decisión que llegue al perfil. Mantener preguntas no respondidas en `manual_decisions`.
+Registrar selecciones, modificaciones y rechazos como `faculty_decisions`. Exigir `status: confirmed` para toda decisión aplicada al perfil y registrar por separado `resolution: selected`, `resolution: modified` o `resolution: confirmed`; usar `status: rejected` y `resolution: rejected` solo para decisiones descartadas. Mantener preguntas y decisiones operativas no resueltas como objetos en `manual_decisions`.
 
 ### 8. Entregar artefactos
 
@@ -120,7 +120,7 @@ Ejecutar la validación determinística desde la raíz portable antes de recomen
 python plugins/canvas-mds/scripts/process_evidence.py --profile canvas_profiles/<slug>/course-profile.json --repository-root .
 ```
 
-Resumir qué comprendió GPT-5.6, qué decidió el docente, qué reglas verificó el motor y qué sigue pendiente. Nunca ejecutar escritura desde este skill.
+Cerrar siempre con cuatro bloques explícitos: `GPT-5.6 comprendió y propuso`, `El docente decidió`, `El motor determinístico verificó` y `Sigue pendiente`. Nunca ejecutar escritura desde este skill.
 
 ## Portabilidad
 

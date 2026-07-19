@@ -264,6 +264,10 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
                 "and Canvas safety gates; it rejects unselected instruments and "
                 "replays the historical all-to-all matrix to prove rejection."
             ),
+            "pending": (
+                "None in the sanitized reference; live profiles must surface every "
+                "remaining blocker as a structured MD-* decision."
+            ),
         },
         "alignment_metrics": alignment_metrics,
         "proposed": plan["proposed"],
@@ -318,6 +322,7 @@ def render_summary(result: dict[str, Any]) -> str:
         f"- GPT-5.6: {contract['gpt_5_6']}",
         f"- Faculty: {contract['faculty']}",
         f"- Deterministic engine: {contract['deterministic_engine']}",
+        f"- Pending: {contract['pending']}",
         "",
         "Proposed course structure:",
         f"- Modules: {proposed['modules']}",

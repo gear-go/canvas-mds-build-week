@@ -11,7 +11,7 @@ El perfil JSON es la fuente portable para el motor determinístico. No debe cont
 - `assignments`: clave única, nombre, puntos, fecha, modalidad, RA, evidencia y grupo.
 - `modules`: nombre, posición, páginas y claves de actividades.
 - `course_policies`: decisiones confirmadas y fundamento.
-- `manual_decisions`: vacía antes de autorizar escritura.
+- `manual_decisions`: lista de objetos con `id`, `status: pending`, `decision` y `blocking_stage`; debe quedar vacía antes de autorizar escritura.
 
 ## Rediseño centrado en el proceso
 
@@ -58,7 +58,7 @@ El peso de proceso corresponde a actividades cuyo `process_stage` no sea `final_
 
 ## Puertas de aprobación
 
-Mantener una decisión en `manual_decisions` cuando falte fecha, incidencia, rúbrica, modalidad, política de atraso, uso de IA/datos o aprobación del diseño. El motor se negará a escribir mientras exista una decisión pendiente.
+Mantener una decisión identificada en `manual_decisions` cuando falte fecha, incidencia, rúbrica, modalidad, política de atraso, uso de IA/datos o aprobación del diseño. No usar cadenas sueltas ni perder el ID entre una puerta y el perfil. El motor se negará a escribir mientras exista una decisión pendiente.
 
 También detener la generación cuando falte confirmar un objetivo nuevo o revisado, o cuando la cadena de alineamiento no supere su validación determinística.
 

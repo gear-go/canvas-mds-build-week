@@ -78,6 +78,8 @@ P0.2 introduced the generative alignment gate. P0.3 hardens its semantics: GPT-5
 
 P0.3.2 hardens the initial diagnostic stop: any `UDD-R*` or `UDD-H*` citation must surface the UDD knowledge base as `SRC-00`; missing graded checkpoints cannot be mislabeled as zero process evidence when an undocumented post-hoc reflection exists; and every material question must have a stable `Q-*` ID recorded in `manual_decisions` without creating an artifact.
 
+P0.3.3 closes the authority and handoff loop discovered by the end-to-end forward test: an applied faculty decision must be `confirmed` even when it modifies an option, with `resolution: modified` preserving how it was reached; every pending operational decision is a structured `MD-*` object; and the final handoff separates what GPT-5.6 proposed, what the instructor decided, what the deterministic engine verified, and what remains pending. The validator rejects the ambiguous status and unstructured-pending regressions.
+
 At runtime, GPT-5.6 reconciles heterogeneous course evidence, diagnoses invisible learning processes, proposes at least two viable designs, and stress-tests them against AI-without-understanding and unequal-contribution scenarios. The instructor confirms every material decision. Deterministic validation then enforces UDD-informed controls for learning-outcome alignment, process and individual evidence, feedback use, cognitive demand, accessible alternatives, weights, traceability, and Canvas safety.
 
 ## Safety model
@@ -150,7 +152,7 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 43 tests
+Ran 49 tests
 OK
 ~~~
 
@@ -179,6 +181,7 @@ The tests exercise:
 - UDD-informed learning-outcome alignment, self/peer assessment, cognitive-demand, feedback-actor, response-loop, and alternative-format controls;
 - P0.1 decision hard stops, cohort-workload calculation, and repository-relative output paths.
 - P0.3.2 HARD STOP source tracing, bounded process-evidence claims, and stable question/manual-decision IDs.
+- P0.3.3 confirmed-authority semantics, structured pending decisions, and four-layer handoff coverage.
 
 Judges can inspect the full reasoning contract in [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), the evidence shift in [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md), and the compiled profile in [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). These are sanitized reference artifacts, not a profile to apply to an unrelated course.
 
@@ -229,7 +232,7 @@ AssessTrace is designed for faculty, but this MVP is deliberately an engine with
 
 The needs behind AssessTrace and Evidence by Design came from earlier work in the UDD AI Workshop, university and faculty AI committees, institutional AI policy discussions, and leadership of the Master's in Data Science. That prior work established the problem and constraints; it is not presented as Build Week software.
 
-Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, forty-three tests, process-redesign reference case, example profile, distribution package, and submission evidence were implemented for Build Week.
+Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, forty-nine tests, process-redesign reference case, example profile, distribution package, and submission evidence were implemented for Build Week.
 
 See [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) for the evidence record.
 

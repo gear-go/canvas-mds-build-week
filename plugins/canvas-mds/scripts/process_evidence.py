@@ -10,8 +10,9 @@ from planning_alignment import validate_planning_alignment
 ALLOWED_EVIDENCE_SCOPES = {"individual", "team", "mixed"}
 SELF_OR_PEER_DIMENSIONS = {"self_assessment", "peer_assessment"}
 LOW_COGNITIVE_QUESTION_TYPES = {"multiple_choice", "true_false", "matching"}
-ACCEPTED_DECISION_STATUSES = {"confirmed", "modified"}
+ACCEPTED_DECISION_STATUSES = {"confirmed"}
 CLOSED_DECISION_STATUSES = ACCEPTED_DECISION_STATUSES | {"rejected"}
+DECISION_RESOLUTIONS = {"confirmed", "selected", "modified", "rejected"}
 REQUIRED_ADVERSARIAL_CATEGORIES = {
     "ai_without_understanding",
     "unequal_team_contribution",
@@ -35,6 +36,18 @@ def _unique_ids(items: list[dict[str, Any]], label: str) -> set[str]:
     if len(ids) != len(set(ids)):
         raise ValueError(f"{label} contiene ids duplicados.")
     return set(ids)
+
+
+def _validate_manual_decisions(value: Any) -> None:
+    decisions = _items(value, "manual_decisions")
+    _unique_ids(decisions, "manual_decisions")
+    for decision in decisions:
+        if decision.get("status") != "pending":
+            raise ValueError("Cada manual_decision debe conservar status=pending.")
+        if not _nonempty(decision.get("decision")):
+            raise ValueError("Cada manual_decision requiere una decisión pendiente.")
+        if not _nonempty(decision.get("blocking_stage")):
+            raise ValueError("Cada manual_decision requiere blocking_stage.")
 
 
 def _require_refs(values: Any, allowed: set[str], label: str) -> None:
@@ -120,11 +133,24 @@ def validate_redesign_artifact(
         raise ValueError("El rediseño requiere decisiones docentes.")
     decision_ids = _unique_ids(decisions, "faculty_decisions")
     accepted_ids: set[str] = set()
+    requires_resolution = str(artifact.get("schema_version") or "").startswith("0.3")
     for decision in decisions:
         status = decision.get("status")
-        if status not in CLOSED_DECISION_STATUSES:
-            raise ValueError("Cada decisión docente debe estar confirmada, modificada o rechazada.")
-        if status in ACCEPTED_DECISION_STATUSES:
+        legacy_modified = not requires_resolution and status == "modified"
+        if status not in CLOSED_DECISION_STATUSES and not legacy_modified:
+            raise ValueError(
+                "Cada decisión docente debe usar status=confirmed o status=rejected."
+            )
+        resolution = decision.get("resolution")
+        if requires_resolution and resolution not in DECISION_RESOLUTIONS:
+            raise ValueError(
+                "Cada decisión docente 0.3 requiere una resolution válida."
+            )
+        if resolution == "rejected" and status != "rejected":
+            raise ValueError("Una resolución rechazada requiere status=rejected.")
+        if status == "rejected" and resolution not in {None, "rejected"}:
+            raise ValueError("Una decisión rechazada requiere resolution=rejected.")
+        if status in ACCEPTED_DECISION_STATUSES or legacy_modified:
             accepted_ids.add(str(decision["id"]))
         question_refs = decision.get("source_question_ids") or []
         unknown = {str(item) for item in question_refs} - question_ids
@@ -375,6 +401,7 @@ def validate_assignment_alignment(
 def validate_process_blueprint(
     blueprint: dict[str, Any], *, repository_root: Path | None = None
 ) -> dict[str, Any]:
+    _validate_manual_decisions(blueprint.get("manual_decisions", []))
     policy = blueprint.get("process_assessment_policy") or {}
     if policy.get("enabled") is not True:
         return {}
@@ -629,13 +656,23 @@ def render_before_after(blueprint: dict[str, Any]) -> str:
                 "",
             ]
         )
+    pending = blueprint.get("manual_decisions") or []
+    pending_summary = (
+        "; ".join(
+            f"{item.get('id')}: {item.get('decision')}"
+            for item in pending
+            if isinstance(item, dict)
+        )
+        or "None."
+    )
     lines.extend(
         [
-            "## Safety boundary",
+            "## Handoff · reasoning, authority, validation, and pending work",
             "",
-            "- GPT-5.6 proposed the diagnosis and alternatives from course evidence.",
-            "- The instructor confirmed the material pedagogical decisions.",
-            "- The deterministic engine validated weights, traceability, process evidence, and safety gates.",
+            "- **GPT-5.6 understood and proposed:** the evidence-linked diagnosis, alternatives, and adversarial mitigations.",
+            "- **The instructor decided:** every material pedagogical choice recorded with status `confirmed`.",
+            "- **The deterministic engine verified:** weights, traceability, process evidence, and safety gates.",
+            f"- **Still pending:** {pending_summary}",
             "- No student data was used and no Canvas object was published.",
             "",
         ]

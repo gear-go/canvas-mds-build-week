@@ -237,6 +237,8 @@ class PlanningAlignmentTests(unittest.TestCase):
         path = root / "assets" / "judge-case" / "reference" / "pedagogical-redesign.json"
         artifact = json.loads(path.read_text(encoding="utf-8"))
         artifact["schema_version"] = "0.3.0"
+        for decision in artifact["faculty_decisions"]:
+            decision["resolution"] = "confirmed"
         with self.assertRaisesRegex(ValueError, "requiere planning_alignment"):
             validate_redesign_artifact(copy.deepcopy(artifact))
 

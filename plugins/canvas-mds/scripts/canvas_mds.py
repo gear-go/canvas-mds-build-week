@@ -1101,7 +1101,11 @@ def render_dry_run(snapshot: dict[str, Any], blueprint: dict[str, Any], plan: di
     manual_decisions = plan.get("manual_decisions", [])
     if manual_decisions:
         lines.extend(
-            f"{index}. {decision}"
+            (
+                f"{index}. {decision.get('id')}: {decision.get('decision')}"
+                if isinstance(decision, dict)
+                else f"{index}. {decision}"
+            )
             for index, decision in enumerate(manual_decisions, start=1)
         )
     else:

@@ -12,6 +12,7 @@ PLUGIN_ROOT = SCRIPT_DIR.parent
 PROFILE_PATH = PLUGIN_ROOT / "assets" / "profiles" / "entornos-digitales-2026.json"
 REPO_ROOT = PLUGIN_ROOT.parent.parent
 ALIGNMENT_PATH = PLUGIN_ROOT / "assets" / "judge-case" / "reference" / "planning-alignment.json"
+REDESIGN_PATH = PLUGIN_ROOT / "assets" / "judge-case" / "reference" / "pedagogical-redesign.json"
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from process_evidence import (  # noqa: E402
@@ -20,12 +21,23 @@ from process_evidence import (  # noqa: E402
     validate_artifact_bundle,
     validate_assignment_alignment,
     validate_process_blueprint,
+    validate_redesign_artifact,
 )
 
 
 class ProcessEvidenceTests(unittest.TestCase):
     def setUp(self) -> None:
         self.blueprint = json.loads(PROFILE_PATH.read_text(encoding="utf-8"))
+
+    def redesign_v03(self) -> dict:
+        artifact = json.loads(REDESIGN_PATH.read_text(encoding="utf-8"))
+        artifact["schema_version"] = "0.3.0"
+        artifact["planning_alignment"] = json.loads(
+            ALIGNMENT_PATH.read_text(encoding="utf-8")
+        )
+        for decision in artifact["faculty_decisions"]:
+            decision["resolution"] = "confirmed"
+        return artifact
 
     def test_reference_profile_passes_process_validation(self) -> None:
         metrics = validate_process_blueprint(self.blueprint)
@@ -45,6 +57,28 @@ class ProcessEvidenceTests(unittest.TestCase):
         invalid = copy.deepcopy(self.blueprint)
         invalid["assignments"][0]["ra"].append("RA-UNKNOWN")
         with self.assertRaisesRegex(ValueError, "resultados de aprendizaje desconocidos"):
+            validate_process_blueprint(invalid)
+
+    def test_p033_rejects_modified_as_an_authority_status(self) -> None:
+        invalid = self.redesign_v03()
+        invalid["faculty_decisions"][0]["status"] = "modified"
+        invalid["faculty_decisions"][0]["resolution"] = "modified"
+        with self.assertRaisesRegex(ValueError, "status=confirmed"):
+            validate_redesign_artifact(invalid)
+
+    def test_p033_accepts_confirmed_modified_resolution(self) -> None:
+        artifact = self.redesign_v03()
+        artifact["faculty_decisions"][0]["resolution"] = "modified"
+        validate_redesign_artifact(artifact)
+
+        legacy = json.loads(REDESIGN_PATH.read_text(encoding="utf-8"))
+        legacy["faculty_decisions"][0]["status"] = "modified"
+        validate_redesign_artifact(legacy)
+
+    def test_p033_rejects_unstructured_manual_decisions(self) -> None:
+        invalid = copy.deepcopy(self.blueprint)
+        invalid["manual_decisions"] = ["Confirmar fechas."]
+        with self.assertRaisesRegex(ValueError, "lista de objetos"):
             validate_process_blueprint(invalid)
 
     def test_rejects_missing_self_or_peer_assessment(self) -> None:
@@ -92,7 +126,8 @@ class ProcessEvidenceTests(unittest.TestCase):
         )
         self.assertIn("| Individual verification | 5% | 5.0% |", report)
         self.assertIn("| Total non-final evidence | 5% | 60.0% |", report)
-        self.assertIn("GPT-5.6 proposed the diagnosis", report)
+        self.assertIn("GPT-5.6 understood and proposed", report)
+        self.assertIn("Still pending", report)
 
     def test_assignment_alignment_uses_selected_chain(self) -> None:
         alignment = json.loads(ALIGNMENT_PATH.read_text(encoding="utf-8"))
