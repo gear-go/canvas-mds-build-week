@@ -1,4 +1,4 @@
 interface:
-  display_name: "Canvas MDS: gestionar"
-  short_description: "Audita y crea estructuras Canvas de forma controlada"
+  display_name: "AssessTrace: gestionar Canvas MDS"
+  short_description: "Audita y crea en Canvas de forma controlada"
   default_prompt: "Usa $canvas-mds-gestionar para hacer dry-run, auditar o crear una estructura no publicada en Canvas."

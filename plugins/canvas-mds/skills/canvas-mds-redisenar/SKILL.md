@@ -1,11 +1,11 @@
 ---
 name: canvas-mds-redisenar
-description: Diagnostica y rediseña evaluaciones, cursos y jornadas para hacer visible el proceso de aprendizaje en educación con IA. Usar cuando un docente necesite alinear necesidad, objetivos, indicadores, evidencias, instrumentos, procedimientos y actividades; identificar razonamiento, decisiones, iteración, feedback, contribución individual o uso responsable de IA invisibles; comparar alternativas y producir un perfil Canvas MDS trazable antes del dry-run.
+description: Aplica la metodología Evidence by Design de AssessTrace para diagnosticar y rediseñar evaluaciones, cursos y jornadas que hagan visible el proceso de aprendizaje con IA. Usar cuando un docente necesite alinear necesidad, objetivos, indicadores, evidencias, instrumentos, procedimientos y actividades; identificar razonamiento, decisiones, iteración, feedback, contribución individual o uso responsable de IA invisibles; comparar alternativas y producir un perfil Canvas MDS trazable antes del dry-run.
 ---
 
-# Canvas MDS · Rediseñar
+# AssessTrace · Evidence by Design
 
-Convertir evidencia y decisiones docentes en un diseño centrado en el proceso. No modificar Canvas desde este skill.
+Aplicar Evidence by Design para convertir evidencia y decisiones docentes en un diseño cuyo proceso de aprendizaje sea visible y trazable. El docente decide; AssessTrace registra y valida. No modificar Canvas desde este skill.
 
 ## Contrato
 

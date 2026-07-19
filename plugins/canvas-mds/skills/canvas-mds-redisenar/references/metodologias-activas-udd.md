@@ -1,5 +1,5 @@
 # Metodologías Activas de Enseñanza-Aprendizaje en el Contexto UDD
-## Base de conocimiento pedagógico para Canvas MDS Process Evidence Studio
+## Base de conocimiento pedagógico para AssessTrace · Evidence by Design
 
 Universidad del Desarrollo — Instituto de Ciencias de Datos
 Borrador: 18 de julio 2026
@@ -8,7 +8,7 @@ Borrador: 18 de julio 2026
 
 ## 1. Propósito y uso de este documento
 
-Este documento consolida el marco pedagógico institucional de la Universidad del Desarrollo (UDD) en materia de metodologías activas, aprendizaje experiencial, planificación de la enseñanza y evaluación. Su función es servir como corpus de referencia para el sistema Canvas MDS Process Evidence Studio, de modo que el diagnóstico pedagógico, las preguntas al docente, las propuestas de rediseño evaluativo y las reglas de validación determinística que el sistema genere sean coherentes con el Proyecto Educativo UDD y con los lineamientos del Centro de Innovación Docente (CID).
+Este documento consolida el marco pedagógico institucional de la Universidad del Desarrollo (UDD) en materia de metodologías activas, aprendizaje experiencial, planificación de la enseñanza y evaluación. Su función es servir como corpus de referencia para AssessTrace y su metodología Evidence by Design, de modo que el diagnóstico pedagógico, las preguntas al docente, las propuestas de rediseño evaluativo y las reglas de validación determinística sean coherentes con el Proyecto Educativo UDD y con los lineamientos del Centro de Innovación Docente (CID).
 
 El documento distingue tres niveles de contenido:
 
@@ -28,7 +28,7 @@ El aprendizaje experiencial es uno de los lineamientos principales del Proyecto 
 
 La incorporación del aprendizaje experiencial se promueve en dos niveles dentro de los planes de estudio. El primer nivel corresponde a la implementación de metodologías activas enfocadas en la construcción del conocimiento en contextos reales, distribuidas en todo el currículum. El Proyecto Educativo enumera, entre otras: aprendizaje centrado en la solución de problemas auténticos, aprendizaje basado en desafíos, análisis de casos en contextos reales, método de proyectos en contextos reales, prácticas situadas o aprendizaje in situ, aprendizaje y servicio, cursos y actividades en las cuatro vías temáticas (Responsabilidad Pública; Humanidades; Ciencia, Tecnología e Innovación; Emprendimiento), cursos de segunda disciplina, Lab interdisciplinario, programa Diseña tu Futuro, cursos Zigna y actividades deportivas y de liderazgo. El segundo nivel corresponde a instancias curriculares estructuralmente experienciales (prácticas en terreno, simulación, Semana i y afines), declaradas en los productos curriculares de cada carrera.
 
-Implicación para el sistema: cuando Canvas MDS analice un curso UDD, debe asumir que la presencia de un proyecto auténtico o una experiencia directa es condición necesaria pero no suficiente. El diagnóstico debe verificar si el diseño incluye instancias intencionadas de reflexión sobre la experiencia y si esas instancias generan evidencia evaluable.
+Implicación para el sistema: cuando AssessTrace analice un curso UDD, debe asumir que la presencia de un proyecto auténtico o una experiencia directa es condición necesaria pero no suficiente. El diagnóstico debe verificar si el diseño incluye instancias intencionadas de reflexión sobre la experiencia y si esas instancias generan evidencia evaluable.
 
 ---
 
@@ -45,7 +45,7 @@ De estos aspectos se derivan tres consecuencias de diseño que el sistema debe t
 
 - Interacción como condición: una actividad que no contempla interacción del estudiante con la información, con pares o con el docente no califica como metodología activa, aunque se etiquete como tal.
 - Progresión cognitiva: la secuencia de actividades debe mostrar tránsito desde procesos básicos (recordar, entender) hacia procesos superiores (aplicar, analizar, evaluar, crear), consistente con la taxonomía de la sección 4.
-- Evidencia por aplicación: la evaluación debe observar desempeño en situaciones de aplicación, no solo reproducción de contenido. Este punto conecta directamente con la evaluación auténtica (sección 10) y con la lógica de evidencias de proceso de Canvas MDS.
+- Evidencia por aplicación: la evaluación debe observar desempeño en situaciones de aplicación, no solo reproducción de contenido. Este punto conecta directamente con la evaluación auténtica (sección 10) y con Evidence by Design de AssessTrace.
 
 Un criterio adicional, tomado de las rúbricas del propio Diplomado en Docencia Universitaria: declarar el uso de una metodología activa no basta. Si el diseño de la actividad sigue siendo predominantemente expositivo o centrado en el docente, la rúbrica institucional lo califica bajo lo esperado. El sistema debe replicar esta distinción entre declaración y diseño efectivo.
 
@@ -74,7 +74,7 @@ Seis categorías: 1. Recordar, 2. Entender, 3. Aplicar, 4. Analizar, 5. Evaluar,
 
 Todo resultado de aprendizaje con énfasis cognitivo puede ubicarse en una o más celdas de la tabla (tipo de conocimiento × proceso cognitivo). El texto fuente recomienda integrar los objetivos dentro de unidades instruccionales en lugar de tratarlos por separado, y usar la tabla para verificar que la unidad no se concentre exclusivamente en recordar conocimiento factual.
 
-Implicación para el sistema: la tabla taxonómica es la representación interna natural para el módulo de diagnóstico. Canvas MDS puede clasificar cada resultado de aprendizaje, cada actividad y cada instrumento de evaluación en celdas de la tabla y detectar tres tipos de brecha: (a) resultados declarados en celdas superiores (analizar, evaluar, crear) con actividades que solo ejercitan celdas inferiores; (b) evaluaciones que observan celdas distintas de las declaradas; (c) ausencia total de trabajo en la fila metacognitiva, que es precisamente la fila donde viven los artefactos de proceso (bitácoras de decisión, reflexiones sobre uso de IA, defensas individuales).
+Implicación para el sistema: la tabla taxonómica es la representación interna natural para el módulo de diagnóstico. AssessTrace puede clasificar cada resultado de aprendizaje, cada actividad y cada instrumento de evaluación en celdas de la tabla y detectar tres tipos de brecha: (a) resultados declarados en celdas superiores (analizar, evaluar, crear) con actividades que solo ejercitan celdas inferiores; (b) evaluaciones que observan celdas distintas de las declaradas; (c) ausencia total de trabajo en la fila metacognitiva, que es precisamente la fila donde viven los artefactos de proceso (bitácoras de decisión, reflexiones sobre uso de IA, defensas individuales).
 
 ---
 
@@ -136,7 +136,7 @@ Dos condiciones de calidad merecen registro explícito. La primera es la gestió
 
 El material fuente registra además una advertencia crítica: prácticas de andamiaje poco flexibles pueden convertirse en imposición de estructuras de acción o pensamiento centradas en el docente. La atención constante a las interacciones y el ajuste según las necesidades de cada estudiante son parte del método, no un extra.
 
-Implicación para el sistema: los checkpoints de proceso que Canvas MDS proponga (briefs de encuadre, bitácoras de decisión, hitos de retroalimentación) son, en términos de este marco, andamios de nivel micro con evidencia asociada. Deben heredar sus tres propiedades: planificados desde el diseño, temporales (con retiro progresivo de soporte a lo largo del trimestre, coherente con el principio de gradualidad) y ajustables. Un diseño donde el soporte no decrece nunca, o donde los checkpoints son idénticos en semana 2 y semana 12, contradice el marco.
+Implicación para el sistema: los checkpoints de proceso que AssessTrace proponga (briefs de encuadre, bitácoras de decisión, hitos de retroalimentación) son, en términos de este marco, andamios de nivel micro con evidencia asociada. Deben heredar sus tres propiedades: planificados desde el diseño, temporales (con retiro progresivo de soporte a lo largo del trimestre, coherente con el principio de gradualidad) y ajustables. Un diseño donde el soporte no decrece nunca, o donde los checkpoints son idénticos en semana 2 y semana 12, contradice el marco.
 
 ---
 
@@ -260,7 +260,7 @@ Implicación para el sistema: cualquier propuesta de rediseño evaluativo debe s
 
 ---
 
-## 11. Reglas operacionalizables para Canvas MDS
+## 11. Reglas operacionalizables para AssessTrace
 
 Esta sección traduce el marco anterior en verificaciones que el motor determinístico puede ejecutar y en heurísticas que el módulo de diagnóstico puede aplicar. Las reglas R son verificables mecánicamente sobre el perfil del curso; las heurísticas H requieren juicio del modelo o respuesta del docente.
 
@@ -286,7 +286,7 @@ Heurísticas de diagnóstico:
 - H5. En cursos con uso permitido de IA, verificar que exista evidencia que observe el uso crítico de la herramienta (decisiones aceptadas y rechazadas, verificación de resultados, declaración de uso), anclándola en el conocimiento metacognitivo de la taxonomía.
 - H6. En la simulación adversarial, contrastar cada escenario (dominio con uso crítico de IA; delegación de decisiones esenciales; contribución grupal desigual) contra R7, H1 y H5, y recomendar el ajuste mínimo que cierre la brecha detectada.
 
-Estas reglas no sustituyen la autoridad pedagógica del docente. En coherencia con el flujo de Canvas MDS, toda recomendación derivada de ellas se presenta con su fundamento (regla o heurística, sección de este documento y fuente institucional), el trade-off de carga que introduce y la decisión estructurada del docente (aceptar, modificar, rechazar).
+Estas reglas no sustituyen la autoridad pedagógica del docente. En coherencia con Evidence by Design, toda recomendación derivada de ellas se presenta con su fundamento (regla o heurística, sección de este documento y fuente institucional), el trade-off de carga que introduce y la decisión estructurada del docente (aceptar, modificar, rechazar).
 
 ---
 

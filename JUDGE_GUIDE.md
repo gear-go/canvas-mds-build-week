@@ -1,6 +1,6 @@
-# Canvas MDS · Judge Experience
+# AssessTrace — Evidence by Design · Judge Experience
 
-Canvas MDS helps a faculty member redesign assessment for the AI era: from grading only polished outputs to collecting evidence of framing, decisions, iteration, feedback response, individual contribution and responsible AI use.
+**AssessTrace — evidence by design.** It redesigns assessment so the learning process leaves evidence: the instructor decides; the tool traces. **Canvas MDS** is its first adapter.
 
 The recommended experience has two parts:
 
@@ -11,7 +11,7 @@ No Canvas account, token, student data or network access is required for the off
 
 ## What is genuinely generative
 
-Canvas MDS is not a text splitter or format converter.
+AssessTrace is not a text splitter or format converter.
 
 GPT-5.6 must:
 
@@ -34,7 +34,7 @@ The model does not make the final pedagogical decision. The faculty member confi
 
 - Codex with GPT-5.6.
 - This repository available locally.
-- The Canvas MDS plugin installed from **plugins/canvas-mds**, or the repository opened in Codex so the skill can be inspected.
+- The **AssessTrace · Canvas MDS** plugin installed from **plugins/canvas-mds**, or the repository opened in Codex so the skill can be inspected.
 
 ### Prompt
 
@@ -123,8 +123,8 @@ python judge_demo.py
 Expected opening:
 
 ~~~text
-Canvas MDS Process-Centered Judge Demo
-======================================
+AssessTrace - Evidence by Design Judge Demo
+===========================================
 Status: PASS
 Profile: entornos-digitales-digital-innovation-studio-2026
 Canvas connection used: no
@@ -151,7 +151,7 @@ python judge_demo.py --json
 Sanitized course evidence + UDD knowledge base
                     |
                     v
-GPT-5.6 evidence-linked diagnosis + decision-changing questions
+AssessTrace + GPT-5.6: evidence-linked diagnosis + questions
                     |
                     v
 HARD STOP 1 -> faculty answers
@@ -172,10 +172,10 @@ Faculty selection -> adversarial simulation
 Traceable redesign artifact + portable course profile
                     |
                     v
-Deterministic pedagogical and safety validation
+AssessTrace: deterministic pedagogical and safety validation
                     |
                     v
-Canvas dry-run plan with zero mutations
+Canvas MDS adapter: dry-run plan with zero mutations
 ~~~
 
 Production code used by the offline verification:

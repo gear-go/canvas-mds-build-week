@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a credential-free, offline judge experience for Canvas MDS."""
+"""Run the credential-free AssessTrace judge experience with Canvas MDS."""
 
 from __future__ import annotations
 
@@ -180,7 +180,10 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
 
     return {
         "status": "PASS",
-        "experience": "Canvas MDS process-centered assessment judge demo",
+        "product": "AssessTrace",
+        "methodology": "Evidence by Design",
+        "adapter": "Canvas MDS",
+        "experience": "AssessTrace evidence-by-design judge demo",
         "profile": blueprint.get("course_profile"),
         "profile_path": str(profile_path),
         "sample_content_language": "Spanish (target deployment context)",
@@ -236,9 +239,10 @@ def render_summary(result: dict[str, Any]) -> str:
     before = result["assessment_shift"]["before"]
     after = result["assessment_shift"]["approved_redesign"]
     contract = result["reasoning_contract"]
+    title = "AssessTrace - Evidence by Design Judge Demo"
     lines = [
-        "Canvas MDS Process-Centered Judge Demo",
-        "======================================",
+        title,
+        "=" * len(title),
         f"Status: {result['status']}",
         f"Profile: {result['profile']}",
         "Canvas connection used: no",
@@ -284,7 +288,7 @@ def render_summary(result: dict[str, Any]) -> str:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Validate the approved process-centered assessment redesign and run "
+            "Validate the approved Evidence by Design assessment redesign and run "
             "the production Canvas dry-run planner without credentials, network "
             "access or Canvas mutations."
         )

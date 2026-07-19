@@ -1,18 +1,20 @@
-# Canvas MDS · Diseño de cursos centrado en el proceso con IA
+# AssessTrace — Evidence by Design
 
-> Un complemento seguro para Codex que combina razonamiento pedagógico generativo, evaluación centrada en el proceso y blueprints revisables para Canvas LMS.
+> Rediseña la evaluación para que el proceso de aprendizaje deje evidencia; el docente decide, la herramienta traza. Canvas MDS es su primer adaptador.
 
 [English version](README.md)
 
-Canvas MDS ayuda a diseñar y construir cursos alrededor del **proceso de aprendizaje**, no solo del producto final. Combina la capacidad interpretativa de **Codex con GPT-5.6** con un motor Python determinista que inspecciona Canvas, produce dry-runs sin mutaciones y solo puede crear estructuras no publicadas que hayan sido aprobadas explícitamente.
+AssessTrace ayuda a diseñar la evaluación alrededor del **proceso de aprendizaje**, no solo del producto final. Su metodología **Evidence by Design** utiliza **Codex con GPT-5.6** para comprender la evidencia del curso, hacer visibles las brechas de validez, proponer alternativas viables y preservar el juicio docente en cada decisión material.
 
-El MVP fue diseñado para docentes del ecosistema de la Maestría en Data Science (MDS) de la Universidad del Desarrollo (UDD), pero su arquitectura basada en perfiles puede adaptarse a otros cursos e instituciones.
+**AssessTrace** es el producto, **Evidence by Design** es su metodología pedagógica y **Canvas MDS** es el primer adaptador técnico. Canvas MDS transforma un diseño aprobado y trazable en blueprints revisables para Canvas LMS mediante un motor Python determinista: la inspección y el dry-run no realizan mutaciones, mientras que la ruta protegida solo puede crear estructuras explícitamente aprobadas y no publicadas.
+
+El MVP y su adaptador Canvas MDS fueron diseñados para docentes del ecosistema de la Maestría en Data Science (MDS) de la Universidad del Desarrollo (UDD), pero los contratos de evidencia y la arquitectura basada en perfiles pueden admitir futuros adaptadores LMS y otras instituciones.
 
 ## El problema
 
 La IA generativa cambia lo que una entrega final permite demostrar. Los docentes necesitan una manera práctica de rediseñar actividades, checkpoints, evidencia individual, políticas de uso de IA y secuencias de evaluación sin reconstruir manualmente cada curso en Canvas ni delegar las decisiones pedagógicas a un sistema automatizado.
 
-Canvas MDS separa:
+AssessTrace separa:
 
 - los lineamientos compartidos a nivel institucional y de programa;
 - la evidencia extraída del programa aprobado y la planificación;
@@ -39,14 +41,16 @@ Deliberadamente **no** publica ni elimina contenido, modifica matrículas, desca
 | Capa | Responsabilidad |
 | --- | --- |
 | Evidencia del curso | Programa aprobado, planificación, lineamientos institucionales y decisiones explícitas del docente. |
-| Codex + GPT-5.6 | Distingue objetivos de actividades, alinea objetivo → indicador → evidencia → instrumento → procedimiento, diagnostica la brecha de validez y compila decisiones confirmadas. |
-| Perfil JSON | Guarda resultados de aprendizaje, ponderaciones, evidencia de proceso, fechas, políticas de IA/datos, páginas, módulos y decisiones pendientes sin credenciales ni IDs de Canvas. |
-| Motor Python determinista | Valida invariantes, lee la estructura de Canvas, calcula el dry-run, aplica el plan autorizado y verifica el resultado. |
+| AssessTrace + Evidence by Design | Usa Codex con GPT-5.6 para distinguir objetivos de actividades, alinear objetivo → indicador → evidencia → instrumento → procedimiento, diagnosticar la brecha de validez y compilar decisiones confirmadas. |
+| Contratos de evidencia trazables | Guardan fuentes, propuestas, decisiones docentes, evidencia de proceso, asuntos pendientes y relaciones validables sin credenciales. |
+| Adaptador Canvas MDS | Compila el diseño aprobado en un perfil Canvas; su motor Python determinista valida invariantes, lee Canvas, calcula el dry-run, aplica el plan acotado y verifica el resultado. |
 | API de Canvas LMS | Recibe lecturas por defecto y solicitudes POST/PUT protegidas solo después de una confirmación explícita. |
 
 GPT-5.6 se utiliza dentro de Codex como capa de razonamiento y orquestación. El motor Python no realiza una llamada oculta a un modelo: su función es que las reglas de seguridad sean comprobables y predecibles.
 
-## Las tres skills
+## Las skills del adaptador Canvas MDS
+
+El adaptador conserva su ID técnico, rutas, esquemas de perfil y comandos actuales para mantener la compatibilidad:
 
 | Skill | Propósito | Comportamiento de escritura |
 | --- | --- | --- |
@@ -56,7 +60,7 @@ GPT-5.6 se utiliza dentro de Codex como capa de razonamiento y orquestación. El
 
 ## Cómo se utilizaron Codex y GPT-5.6
 
-Durante Build Week, Codex con GPT-5.6 aceleró el paso desde las necesidades educativas hasta un complemento funcional:
+Durante Build Week, Codex con GPT-5.6 aceleró el paso desde las necesidades educativas hasta AssessTrace y su adaptador Canvas MDS funcional:
 
 - tradujo restricciones docentes, de política de IA, privacidad y evaluación a una arquitectura de tres skills;
 - ayudó a separar el juicio docente de las operaciones que podían automatizarse de forma segura;
@@ -118,7 +122,7 @@ python -m pip install requests keyring
 codex plugin marketplace add <ruta-absoluta-a-este-repositorio>
 ~~~
 
-Después de agregar el marketplace, reinicia la aplicación de escritorio de ChatGPT. En Codex (o modo Work), abre Plugins, elige el marketplace **Canvas MDS · Docentes** e instala **Canvas MDS**. Inicia una nueva tarea de Codex, selecciona GPT-5.6 y comienza con:
+Después de agregar el marketplace, reinicia la aplicación de escritorio de ChatGPT. En Codex (o modo Work), abre Plugins, elige el marketplace **Canvas MDS · Docentes** e instala **AssessTrace · Canvas MDS**. Inicia una nueva tarea de Codex, selecciona GPT-5.6 y comienza con:
 
 ~~~text
 $canvas-mds-configurar
@@ -208,7 +212,7 @@ Este MVP no tiene comando de publicación.
 
 ## Alcance y trazabilidad de Build Week
 
-Las necesidades de Canvas MDS surgieron de trabajo previo en el IA Workshop de la UDD, comisiones de IA de universidad y facultad, discusiones de política institucional y la dirección de la Maestría en Data Science. Ese trabajo previo estableció el problema y las restricciones; no se presenta como software de Build Week.
+Las necesidades de AssessTrace y Evidence by Design surgieron de trabajo previo en el IA Workshop de la UDD, comisiones de IA de universidad y facultad, discusiones de política institucional y la dirección de la Maestría en Data Science. Ese trabajo previo estableció el problema y las restricciones; no se presenta como software de Build Week.
 
 La ideación de esta implementación comenzó el 16 de julio de 2026. La primera sesión técnica central recuperada fue creada el 17 de julio. El complemento portable, sus tres skills, el motor determinista, las veintinueve pruebas, el caso de rediseño centrado en el proceso y el perfil de ejemplo, el paquete y la evidencia de entrega se implementaron para Build Week.
 
@@ -216,7 +220,7 @@ Consulta [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) para revisar el re
 
 - Track: **Education**
 - Session ID de /feedback: **019f6fdb-32dc-70a0-a353-8640c3a29f08**
-- SHA-256 del ZIP: **7f863022d884e4003245850fffe80c6267ae35a3b28db628685273ac2e11486e**
+- Suma de verificación: comprueba **dist/canvas-mds-portable-0.1.0.sha256.txt** junto al ZIP.
 
 ## Autor
 

@@ -1,4 +1,4 @@
 interface:
-  display_name: "Canvas MDS: configurar"
-  short_description: "Configura acceso seguro y contexto local de Canvas"
+  display_name: "AssessTrace: configurar Canvas MDS"
+  short_description: "Configura el adaptador Canvas MDS de forma segura"
   default_prompt: "Usa $canvas-mds-configurar para conectar este curso MDS a Canvas sin exponer credenciales."

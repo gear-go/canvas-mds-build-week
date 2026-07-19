@@ -1,11 +1,13 @@
 {
   "name": "canvas-mds",
-  "version": "0.1.0+codex.20260719041741",
-  "description": "Razonamiento pedag\u00f3gico generativo, evaluaci\u00f3n centrada en el proceso y gesti\u00f3n segura de cursos Canvas MDS.",
+  "version": "0.1.0+codex.20260719054242",
+  "description": "AssessTrace aplica Evidence by Design para hacer visible el proceso de aprendizaje; Canvas MDS es su primer adaptador.",
   "author": {
     "name": "Docentes MDS UDD"
   },
   "keywords": [
+    "assesstrace",
+    "evidence-by-design",
     "canvas",
     "mds",
     "docencia",
@@ -15,18 +17,18 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Canvas MDS",
-    "shortDescription": "Redise\u00f1a evaluaci\u00f3n y construye Canvas con seguridad",
-    "longDescription": "Flujo docente portable que usa GPT-5.6 para diagnosticar validez, proponer alternativas y registrar decisiones; luego valida evidencia del proceso y crea, de forma controlada, objetos no publicados en Canvas.",
+    "displayName": "AssessTrace \u00b7 Canvas MDS",
+    "shortDescription": "Evidence by Design para evaluar el proceso con IA",
+    "longDescription": "AssessTrace usa GPT-5.6 para comprender evidencia, diagnosticar validez y proponer alternativas bajo decisi\u00f3n docente. Su adaptador Canvas MDS valida la trazabilidad y crea de forma controlada solo estructuras no publicadas.",
     "developerName": "Docentes MDS UDD",
     "category": "Education",
     "capabilities": [
-      "Generative assessment redesign",
+      "Evidence by Design reasoning",
       "Process-evidence validation",
       "Canvas course inspection",
       "Unpublished course scaffolding"
     ],
-    "defaultPrompt": "Usa $canvas-mds-redisenar para diagnosticar mi evaluaci\u00f3n y redise\u00f1arla con evidencia del proceso antes de preparar Canvas.",
+    "defaultPrompt": "Usa $canvas-mds-redisenar para aplicar Evidence by Design, hacer visible el proceso de aprendizaje y preparar el adaptador Canvas MDS.",
     "brandColor": "#1F4E79"
   }
 }
