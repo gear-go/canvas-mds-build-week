@@ -29,7 +29,14 @@ class CanvasMDSApplyTests(unittest.TestCase):
             validate_blueprint(
                 {
                     "default_publish": False,
-                    "manual_decisions": ["Pendiente"],
+                    "manual_decisions": [
+                        {
+                            "id": "MD-01",
+                            "status": "pending",
+                            "decision": "Pendiente",
+                            "blocking_stage": "canvas_write",
+                        }
+                    ],
                     "assignment_groups": [],
                     "assignments": [],
                     "modules": [],

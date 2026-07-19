@@ -241,8 +241,18 @@
   ],
   "course_policies": [],
   "manual_decisions": [
-    "Reemplazar datos de ejemplo y aprobar el perfil completo.",
-    "Aprobar y asociar rúbricas antes de publicar tareas sumativas."
+    {
+      "id": "MD-01",
+      "status": "pending",
+      "decision": "Reemplazar datos de ejemplo y aprobar el perfil completo.",
+      "blocking_stage": "profile_approval"
+    },
+    {
+      "id": "MD-02",
+      "status": "pending",
+      "decision": "Aprobar y asociar rúbricas antes de publicar tareas sumativas.",
+      "blocking_stage": "canvas_write"
+    }
   ],
   "pedagogical_redesign": {
     "schema_version": "0.3.0",

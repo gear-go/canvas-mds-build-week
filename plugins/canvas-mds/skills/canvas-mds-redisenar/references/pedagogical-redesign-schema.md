@@ -11,7 +11,7 @@ Usar este contrato para producir `pedagogical-redesign.json`. El artefacto regis
 - `current_assessment`: grupos, ponderaciones y descripción de qué evidencia observa hoy.
 - `diagnosis`: problema de validez, procesos invisibles, riesgos asociados a IA y referencias de evidencia.
 - `faculty_questions`: máximo tres preguntas; cada una declara estado, respuesta y referencias.
-- `faculty_decisions`: decisiones confirmadas, modificadas o rechazadas con fundamento.
+- `faculty_decisions`: decisiones con fundamento. Toda decisión aplicada usa `status: confirmed`; `resolution` registra por separado si fue confirmada, seleccionada o modificada. Una decisión descartada usa `status: rejected` y `resolution: rejected`.
 - `redesign_options`: al menos dos alternativas, exactamente una seleccionada.
 - `selected_design`: checkpoints, evidencia individual, feedback, evidencia de uso de IA y `knowledge_base_refs` que fundamenten el diseño.
 - `adversarial_scenarios`: escenarios, riesgo detectado, mitigación y actividades afectadas.
@@ -21,7 +21,7 @@ Desde `schema_version: 0.3.*` también es obligatorio `planning_alignment`: snap
 
 ## Trazabilidad
 
-Usar IDs únicos con prefijos `SRC-`, `Q-`, `FD-`, `OPT-` y `ADV-`. Cada hallazgo, opción y actividad propuesta debe referenciar fuentes o decisiones existentes.
+Usar IDs únicos con prefijos `SRC-`, `Q-`, `MD-`, `FD-`, `OPT-` y `ADV-`. Cada hallazgo, opción y actividad propuesta debe referenciar fuentes o decisiones existentes. Desde `schema_version: 0.3.*`, cada `faculty_decision` requiere `resolution` y ninguna decisión aplicada puede conservar `status: modified`.
 
 Distinguir siempre:
 
