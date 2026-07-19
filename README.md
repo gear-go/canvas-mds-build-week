@@ -21,6 +21,10 @@ AssessTrace separates:
 - decisions that still require the instructor;
 - deterministic Canvas operations that can be reviewed before execution.
 
+## Why a plugin, not a platform
+
+Tools already exist for parts of this problem. Hosted assessment platforms can make the writing process visible, but may require a separate institutional contract and add another processor for student work. Platform-native course agents can generate structure inside a single LMS, yet tie the institution more closely to that platform and its licensing. Curriculum-alignment tools can surface outcome gaps, but often live inside their own suites. AssessTrace takes a narrower, more portable position: it introduces no separate assessment platform. Where Canvas and Codex with GPT-5.6 are already institutionally approved, it can run through existing services, policies, and institution-controlled credentials instead of adding another system for student work. It never publishes or deletes, excludes student data by design, and separates instructor judgment from a deterministic engine that refuses any unauthorized or unsafe write. The claim is not more capability than the alternatives; it is less surface area to govern, and a design an institution can pilot without procuring another assessment platform.
+
 ## What the MVP does
 
 - Reads course structure without retrieving student submissions, grades, or enrollment data.
@@ -200,6 +204,10 @@ Judges can inspect the full reasoning contract in [pedagogical-redesign.json](pl
    ~~~
 
 No publication command exists in this MVP.
+
+## Who runs the MVP today
+
+AssessTrace is designed for faculty, but this MVP is deliberately an engine with safety rails, not a finished faculty interface. Operating it today assumes a technical user: Codex, Python, and command-line confirmation of every write. That is a sequencing decision, not an oversight. The first risk to solve is not interface polish; it is getting the reasoning, instructor-decision gates, and write-safety invariants right, where mistakes are expensive and hard to reverse. Those are what this release proves. The faculty-facing surface today is the Codex conversation driven by the three skills. A non-technical interface, and an operating model in which an instructional designer or program lead runs the tool alongside faculty, are next steps—not claims this MVP makes.
 
 ## Current limitations
 
