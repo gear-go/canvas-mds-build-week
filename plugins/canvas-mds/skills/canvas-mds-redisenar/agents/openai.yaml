@@ -1,4 +1,4 @@
 interface:
   display_name: "Canvas MDS: rediseñar"
-  short_description: "Alinea objetivos, evidencia y evaluación del proceso"
-  default_prompt: "Usa $canvas-mds-redisenar para diagnosticar mi evaluación; confirma el objetivo y valida la cadena objetivo-indicador-evidencia-instrumento antes de proponer actividades."
+  short_description: "Alinea objetivos y evaluación con decisiones docentes"
+  default_prompt: "Usa $canvas-mds-redisenar para diagnosticar mi evaluación; aplica HARD STOP tras preguntas materiales, confirma cualquier objetivo nuevo, valida la cadena objetivo-indicador-evidencia-instrumento y espera mi selección antes de generar artefactos."

@@ -140,7 +140,7 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 24 tests
+Ran 29 tests
 OK
 ~~~
 
@@ -162,7 +162,8 @@ The tests exercise:
 - supported Classic Quiz role choices;
 - structured provisional audit output;
 - objective/activity separation, alignment-stop enforcement, bidirectional indicator/evidence traceability, instrument comparison, workload arithmetic, and usable-feedback controls;
-- UDD-informed learning-outcome alignment, self/peer assessment, cognitive-demand, feedback-actor, response-loop, and alternative-format controls.
+- UDD-informed learning-outcome alignment, self/peer assessment, cognitive-demand, feedback-actor, response-loop, and alternative-format controls;
+- P0.1 decision hard stops, cohort-workload calculation, and repository-relative output paths.
 
 Judges can inspect the full reasoning contract in [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), the evidence shift in [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md), and the compiled profile in [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). These are sanitized reference artifacts, not a profile to apply to an unrelated course.
 
@@ -209,7 +210,7 @@ No publication command exists in this MVP.
 
 The needs behind Canvas MDS came from earlier work in the UDD AI Workshop, university and faculty AI committees, institutional AI policy discussions, and leadership of the Master's in Data Science. That prior work established the problem and constraints; it is not presented as Build Week software.
 
-Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, twenty-four tests, process-redesign reference case, example profile, distribution package, and submission evidence were implemented for Build Week.
+Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, twenty-nine tests, process-redesign reference case, example profile, distribution package, and submission evidence were implemented for Build Week.
 
 See [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) for the evidence record.
 

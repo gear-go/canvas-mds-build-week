@@ -63,7 +63,7 @@ A conforming run should:
 2. separate documented facts, model proposals and faculty decisions;
 3. explain why a polished AI-assisted product can conceal weak understanding;
 4. ask no more than three consequential questions;
-5. enforce HARD STOP 1 while consequential questions remain unanswered;
+5. enforce HARD STOP 1 while consequential questions remain unanswered; it must not propose alternatives, weights, simulations or files in that turn;
 6. preserve approved outcomes or distinguish a proposed objective from activities;
 7. enforce ALIGNMENT STOP until a new or revised objective is explicitly confirmed;
 8. derive 4–6 indicators, concrete evidence, three compared instruments, realistic workload and a feedback procedure;
@@ -108,11 +108,11 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 24 tests
+Ran 29 tests
 OK
 ~~~
 
-The tests cover the read-only and protected-write engines plus objective/activity separation, the alignment stop, bidirectional indicator/evidence mappings, instrument selection, workload arithmetic, usable feedback, and the process-centered UDD controls.
+The tests cover the read-only and protected-write engines, the P0.1 hard-stop contract, cohort-level workload and portable paths, plus objective/activity separation, the P0.2 alignment stop, bidirectional evidence mappings, instrument selection, workload arithmetic, usable feedback, and the process-centered UDD controls.
 
 ### Step 2 · Run the judge demo
 
@@ -151,13 +151,22 @@ python judge_demo.py --json
 Sanitized course evidence + UDD knowledge base
                     |
                     v
-GPT-5.6 diagnosis, questions, alternatives and adversarial simulation
+GPT-5.6 evidence-linked diagnosis + decision-changing questions
                     |
                     v
-Faculty confirmation of material pedagogical decisions
+HARD STOP 1 -> faculty answers
                     |
                     v
-Confirmed objective -> indicators -> evidence -> instrument -> procedure
+Confirmed objective or objective alternatives -> ALIGNMENT STOP
+                    |
+                    v
+Indicators -> evidence -> compared instruments -> procedure
+                    |
+                    v
+Redesign alternatives with cohort workload -> HARD STOP 2
+                    |
+                    v
+Faculty selection -> adversarial simulation
                     |
                     v
 Traceable redesign artifact + portable course profile
@@ -180,6 +189,7 @@ Production code used by the offline verification:
 | [canvas_mds.py](plugins/canvas-mds/scripts/canvas_mds.py) | Read-only engine and dry-run planner. |
 | [test_process_evidence.py](plugins/canvas-mds/scripts/test_process_evidence.py) | UDD-informed pedagogical guardrail tests. |
 | [test_planning_alignment.py](plugins/canvas-mds/scripts/test_planning_alignment.py) | Objective, evidence, instrument, procedure and alignment-stop regression tests. |
+| [test_skill_contract.py](plugins/canvas-mds/scripts/test_skill_contract.py) | P0.1 regression tests for decision hard stops, cohort workload and portable paths. |
 
 ## Why the Canvas snapshot is synthetic
 

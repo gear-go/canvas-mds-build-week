@@ -15,8 +15,9 @@ Convertir evidencia y decisiones docentes en un diseño centrado en el proceso. 
 4. Distinguir siempre necesidad, objetivo, actividad, indicador, evidencia, instrumento y procedimiento. Un objetivo describe qué podrá demostrar la persona; una actividad, qué hará durante la experiencia.
 5. Separar hechos documentados, respuestas docentes e inferencias de GPT-5.6. Asignar IDs estables y citar fuentes en cada recomendación.
 6. No mostrar cadena de pensamiento interna. Entregar diagnósticos y justificaciones breves, auditables y vinculadas a evidencia.
-7. Preguntar antes de asumir una decisión pedagógica material. Mantener lo no resuelto en `manual_decisions`.
-8. No calificar estudiantes, leer datos estudiantiles ni publicar o modificar Canvas.
+7. Preguntar antes de asumir una decisión pedagógica material. Si queda una pregunta material sin responder, aplicar `HARD STOP 1`. Mantener lo no resuelto en `manual_decisions`.
+8. No cambiar ponderaciones, modalidad, carga docente, formato individual ni una restricción documentada sin confirmación explícita.
+9. No calificar estudiantes, leer datos estudiantiles ni publicar o modificar Canvas.
 
 ## Flujo
 
@@ -40,9 +41,17 @@ Vincular cada hallazgo con evidencia y, en UDD, con identificadores `UDD-R*` o `
 
 ### 3. Resolver preguntas docentes
 
-Formular como máximo tres preguntas de alto valor. Priorizar qué debe demostrar cada participante, si se valora corrección inicial o mejora, uso permitido de IA y carga de revisión viable.
+No volver a preguntar aquello que una fuente autorizada ya responde. Formular como máximo tres preguntas únicamente sobre brechas que puedan cambiar ponderaciones, modalidad, evidencia individual, uso de IA, accesibilidad o carga docente. Antes de recomendar una revisión individual, calcular su carga total con el tamaño de la cohorte; distinguir tiempo del estudiante y tiempo de revisión docente.
 
-**HARD STOP 1:** si una respuesta puede cambiar materialmente el diseño, detenerse después de las preguntas. No proponer alternativas, porcentajes, agenda, actividades, archivos ni perfil hasta recibir respuesta explícita. No convertir supuestos en decisiones docentes.
+**Puerta obligatoria · HARD STOP 1:** si al menos una pregunta material queda sin responder, terminar el turno inmediatamente después de enumerarla. En ese turno:
+
+- entregar solo inventario breve, diagnóstico y preguntas;
+- no proponer alternativas, ponderaciones ni recomendaciones provisionales;
+- no simular escenarios adversariales;
+- no crear ni modificar archivos o perfiles;
+- no ejecutar los pasos 4–9.
+
+Reanudar el paso 4 únicamente después de recibir respuestas explícitas. No convertir supuestos en decisiones docentes. Una solicitud como «primero diagnostica y pregunta» activa siempre esta puerta.
 
 ### 4. Alinear antes de calendarizar
 
@@ -68,9 +77,11 @@ Después de la confirmación:
 
 ### 5. Proponer alternativas de rediseño
 
-Generar al menos dos opciones: una ligera y otra de mayor verificación. Para cada una explicar beneficios, riesgos, carga y trade-offs. Conservar el producto auténtico, rodeándolo de checkpoints que hagan visible el aprendizaje. Elegir metodologías por coherencia con objetivos, contexto, diversidad y viabilidad.
+Generar al menos dos opciones: una ligera y otra de mayor verificación. Para cada una explicar beneficios, riesgos, carga y trade-offs. Conservar el producto auténtico y toda restricción confirmada, rodeándolo de checkpoints que hagan visible el aprendizaje. Mostrar el cálculo de carga cuando dependa del tamaño de la cohorte. Elegir metodologías por coherencia con objetivos, contexto, diversidad y viabilidad.
 
-**HARD STOP 2:** presentar las alternativas y pedir una selección o modificación explícita. No crear artefactos finales, perfil ni recomendar gestión de Canvas mientras ninguna alternativa esté seleccionada.
+Solicitar que el docente seleccione, modifique o rechace las opciones.
+
+**Puerta obligatoria · HARD STOP 2:** mientras no exista una selección explícita, no marcar una opción como elegida, no construir `selected_design`, no ejecutar la simulación final y no generar artefactos. Terminar el turno después de solicitar la decisión.
 
 ### 6. Simular fallas de validez
 
@@ -97,4 +108,4 @@ Ejecutar la validación determinística antes de recomendar `$canvas-mds-gestion
 
 ## Portabilidad
 
-No incluir URL, ID o token de Canvas, nombres de estudiantes, entregas, notas ni reportes locales. Usar evidencia sanitizada y rutas relativas. Las decisiones comunes pertenecen al plugin; las decisiones del curso permanecen en sus artefactos.
+No incluir URL, ID o token de Canvas, nombres de estudiantes, entregas, notas ni reportes locales. Usar evidencia sanitizada. Mostrar y almacenar rutas relativas al repositorio; nunca emitir rutas absolutas del equipo local. Las decisiones comunes pertenecen al plugin; las decisiones del curso permanecen en sus artefactos.

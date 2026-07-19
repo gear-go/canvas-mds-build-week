@@ -140,7 +140,7 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Resultado esperado:
 
 ~~~text
-Ran 24 tests
+Ran 29 tests
 OK
 ~~~
 
@@ -162,7 +162,8 @@ Las pruebas cubren:
 - opciones admitidas para roles en el Classic Quiz;
 - salida estructurada de la auditoría provisional;
 - separación objetivo/actividad, bloqueo de alineamiento, trazabilidad bidireccional indicador/evidencia, comparación de instrumentos, cálculo de carga y feedback utilizable;
-- controles UDD de alineamiento con RA, auto/coevaluación, demanda cognitiva, actor del feedback, ciclo de respuesta y formatos alternativos.
+- controles UDD de alineamiento con RA, auto/coevaluación, demanda cognitiva, actor del feedback, ciclo de respuesta y formatos alternativos;
+- puertas de decisión P0.1, cálculo de carga por cohorte y rutas de salida relativas al repositorio.
 
 Los jueces pueden inspeccionar el contrato de razonamiento en [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), el cambio de evidencia en [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md) y el perfil compilado en [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). Son artefactos sanitizados de referencia y no deben aplicarse a otro curso.
 
@@ -209,7 +210,7 @@ Este MVP no tiene comando de publicación.
 
 Las necesidades de Canvas MDS surgieron de trabajo previo en el IA Workshop de la UDD, comisiones de IA de universidad y facultad, discusiones de política institucional y la dirección de la Maestría en Data Science. Ese trabajo previo estableció el problema y las restricciones; no se presenta como software de Build Week.
 
-La ideación de esta implementación comenzó el 16 de julio de 2026. La primera sesión técnica central recuperada fue creada el 17 de julio. El complemento portable, sus tres skills, el motor determinista, las veinticuatro pruebas, el caso de rediseño centrado en el proceso y el perfil de ejemplo, el paquete y la evidencia de entrega se implementaron para Build Week.
+La ideación de esta implementación comenzó el 16 de julio de 2026. La primera sesión técnica central recuperada fue creada el 17 de julio. El complemento portable, sus tres skills, el motor determinista, las veintinueve pruebas, el caso de rediseño centrado en el proceso y el perfil de ejemplo, el paquete y la evidencia de entrega se implementaron para Build Week.
 
 Consulta [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) para revisar el registro de evidencia.
 
