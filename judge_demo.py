@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import sys
 from pathlib import Path
@@ -103,6 +104,28 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
     )
     alignment = load_profile(DEFAULT_ALIGNMENT)
     alignment_metrics = validate_planning_alignment(alignment)
+    cartesian_alignment = copy.deepcopy(alignment)
+    all_indicator_ids = [str(item["id"]) for item in alignment["indicators"]]
+    all_evidence_ids = [str(item["id"]) for item in alignment["evidence"]]
+    all_selected_instrument_ids = [
+        str(item["id"])
+        for item in alignment["instruments"]
+        if item.get("selected") is True
+    ]
+    all_moment_ids = [
+        str(item["id"]) for item in alignment["evaluation_procedure"]["moments"]
+    ]
+    for row in cartesian_alignment["alignment_matrix"]:
+        row["indicator_ids"] = all_indicator_ids
+        row["evidence_ids"] = all_evidence_ids
+        row["instrument_ids"] = all_selected_instrument_ids
+        row["procedure_moment_ids"] = all_moment_ids
+    try:
+        validate_planning_alignment(cartesian_alignment)
+    except ValueError as exc:
+        cartesian_matrix_rejected = "matriz cartesiana" in str(exc).lower()
+    else:
+        cartesian_matrix_rejected = False
 
     snapshot = synthetic_empty_snapshot(blueprint)
     plan = build_dry_run(snapshot, blueprint)
@@ -138,6 +161,7 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
             and alignment_metrics["indicator_count"] == 5
             and alignment_metrics["estimated_review_minutes"] == 180
         ),
+        "historical_all_to_all_matrix_rejected": cartesian_matrix_rejected,
         "portable_profile_and_sources_resolve": True,
         "exclusive_evidence_metrics_sum_to_total_non_final": (
             process_metrics["process_checkpoint_weight_percent"]
@@ -238,7 +262,7 @@ def run_demo(profile_path: Path) -> dict[str, Any]:
                 "Validates objective-to-procedure alignment, workload, traceability, "
                 "portable source paths, learning-outcome coverage, process evidence "
                 "and Canvas safety gates; it rejects unselected instruments and "
-                "spurious matrix links."
+                "replays the historical all-to-all matrix to prove rejection."
             ),
         },
         "alignment_metrics": alignment_metrics,

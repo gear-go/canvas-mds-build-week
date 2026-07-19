@@ -108,11 +108,11 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Expected result:
 
 ~~~text
-Ran 39 tests
+Ran 40 tests
 OK
 ~~~
 
-The tests cover the read-only and protected-write engines, the P0.1 hard-stop contract, cohort-level workload and portable paths, plus objective/activity separation, the P0.2 alignment stop and the P0.3 semantic guards for selected instruments, non-cartesian mappings, activity-level inheritance, workload actors and resolvable source roots.
+The tests cover the read-only and protected-write engines, the P0.1 hard-stop contract, cohort-level workload and portable paths, plus objective/activity separation, the P0.2 alignment stop and the P0.3 semantic guards for selected instruments, non-cartesian mappings, activity-level inheritance, workload actors and resolvable source roots. The non-cartesian regression reconstructs the all-to-all component matrix found by the original forward test and asserts its rejection.
 
 ### Step 2 · Run the judge demo
 
@@ -138,7 +138,7 @@ Assessment evidence shift:
 - Total non-final evidence: 5% -> 60.0%
 ~~~
 
-The remainder reports the role of GPT-5.6, the faculty member and the deterministic engine, followed by 23 PASS checks, including the live P0.3 semantic-alignment and portable-source gates.
+The remainder reports the role of GPT-5.6, the faculty member and the deterministic engine, followed by 24 PASS checks, including a live replay and rejection of the historical all-to-all matrix plus the P0.3 semantic-alignment and portable-source gates.
 
 For a machine-readable result:
 

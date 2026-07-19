@@ -1,1 +1,1 @@
-87ebc6514f09107f05be8f168a6d3df627751c3fc6efb26075640bb3f19da548  canvas-mds-portable-0.1.0.zip
+3fabf74a2187dce4a53e31138573d8d90c60d603bf23848d7ba9c00a8922e27b  canvas-mds-portable-0.1.0.zip

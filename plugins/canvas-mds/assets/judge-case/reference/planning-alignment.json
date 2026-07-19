@@ -71,9 +71,9 @@
     ]
   },
   "alignment_matrix": [
-    {"objective_component": "action", "objective_ids": ["OBJ-01"], "indicator_ids": ["IND-01", "IND-02", "IND-03", "IND-04", "IND-05"], "evidence_ids": ["EV-01", "EV-02"], "instrument_ids": ["INS-01", "INS-02"], "procedure_moment_ids": ["MOM-01", "MOM-02"]},
-    {"objective_component": "content_or_performance", "objective_ids": ["OBJ-01"], "indicator_ids": ["IND-01", "IND-02", "IND-03", "IND-04", "IND-05"], "evidence_ids": ["EV-01", "EV-02"], "instrument_ids": ["INS-01", "INS-02"], "procedure_moment_ids": ["MOM-01", "MOM-02"]},
-    {"objective_component": "condition", "objective_ids": ["OBJ-01"], "indicator_ids": ["IND-01", "IND-02", "IND-03", "IND-04", "IND-05"], "evidence_ids": ["EV-01", "EV-02"], "instrument_ids": ["INS-01", "INS-02"], "procedure_moment_ids": ["MOM-01", "MOM-02"]}
+    {"objective_component": "action", "objective_ids": ["OBJ-01"], "indicator_ids": ["IND-02", "IND-05"], "evidence_ids": ["EV-01", "EV-02"], "instrument_ids": ["INS-01", "INS-02"], "procedure_moment_ids": ["MOM-02"]},
+    {"objective_component": "content_or_performance", "objective_ids": ["OBJ-01"], "indicator_ids": ["IND-01", "IND-04"], "evidence_ids": ["EV-01"], "instrument_ids": ["INS-01"], "procedure_moment_ids": ["MOM-01", "MOM-02"]},
+    {"objective_component": "condition", "objective_ids": ["OBJ-01"], "indicator_ids": ["IND-03"], "evidence_ids": ["EV-01"], "instrument_ids": ["INS-01"], "procedure_moment_ids": ["MOM-01", "MOM-02"]}
   ],
   "unresolved_decisions": []
 }

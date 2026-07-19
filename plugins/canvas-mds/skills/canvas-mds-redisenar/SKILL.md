@@ -19,7 +19,7 @@ Aplicar Evidence by Design para convertir evidencia y decisiones docentes en un 
 8. No cambiar ponderaciones, modalidad, carga docente, formato individual ni una restricción documentada sin confirmación explícita.
 9. No calificar estudiantes, leer datos estudiantiles ni publicar o modificar Canvas.
 10. Seleccionar todo instrumento usado por el procedimiento. Mantener `selected: false` solo para alternativas comparadas y descartadas.
-11. Trazar cada fila de la matriz a exactamente un objetivo y un componente; prohibir relaciones cartesianas o referencias espurias.
+11. Trazar cada fila de la matriz a exactamente un objetivo y un componente; prohibir relaciones cartesianas o referencias espurias. Cuando un objetivo tenga varios indicadores, sus tres componentes no pueden repetir una firma downstream idéntica.
 
 ## Flujo
 
