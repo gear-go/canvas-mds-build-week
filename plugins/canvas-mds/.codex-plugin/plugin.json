@@ -1,10 +1,14 @@
 {
   "name": "canvas-mds",
-  "version": "0.1.0+codex.20260719231038",
+  "version": "0.1.0+codex.20260723180029",
   "description": "AssessTrace aplica Evidence by Design para hacer visible el proceso de aprendizaje; Canvas MDS es su primer adaptador.",
   "author": {
-    "name": "Docentes MDS UDD"
+    "name": "Docentes MDS UDD",
+    "email": "gagomez@udd.cl",
+    "url": "https://github.com/gear-go"
   },
+  "homepage": "https://github.com/gear-go/canvas-mds-build-week",
+  "repository": "https://github.com/gear-go/canvas-mds-build-week",
   "keywords": [
     "assesstrace",
     "evidence-by-design",
@@ -28,7 +32,12 @@
       "Canvas course inspection",
       "Unpublished course scaffolding"
     ],
-    "defaultPrompt": "Usa $canvas-mds-redisenar para aplicar Evidence by Design, hacer visible el proceso de aprendizaje y preparar el adaptador Canvas MDS.",
+    "websiteURL": "https://github.com/gear-go/canvas-mds-build-week",
+    "defaultPrompt": [
+      "Redise\u00f1a una evaluaci\u00f3n con Evidence by Design sin usar datos personales.",
+      "Audita la estructura de un curso Canvas en modo de solo lectura.",
+      "Prepara un dry-run para crear estructuras no publicadas en Canvas."
+    ],
     "brandColor": "#1F4E79"
   }
 }
