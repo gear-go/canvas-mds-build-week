@@ -113,7 +113,16 @@ Consulta los [lineamientos completos de seguridad](plugins/canvas-mds/skills/can
 
 El MVP está validado actualmente en **Windows con Python 3.12.4**. El código Python fue diseñado para ser portable a macOS y Linux, pero esas plataformas todavía no han sido verificadas para esta versión.
 
-## Instalación
+## Instalación para pilotos desde GitHub
+
+Cuando este repositorio es público, registra el marketplace directamente desde GitHub:
+
+~~~text
+python -m pip install requests keyring
+codex plugin marketplace add gear-go/canvas-mds-build-week --ref main
+~~~
+
+También puedes instalar desde un clon local:
 
 Desde la raíz del repositorio:
 
@@ -131,6 +140,7 @@ $canvas-mds-configurar
 Para revisar el comportamiento del marketplace y la instalación local, consulta la [documentación de complementos de OpenAI](https://developers.openai.com/codex/plugins/build).
 
 El ZIP dentro de **dist/** entrega el mismo complemento sin necesidad de reconstruirlo.
+El paquete **assesstrace-canvas-mds-skills-only-0.1.0.zip** está reservado para el portal oficial de Plugins y no reemplaza la instalación desde el marketplace durante el piloto.
 
 ## Prueba rápida para jueces: no requiere credenciales Canvas
 
@@ -144,7 +154,7 @@ python -m unittest discover -s plugins/canvas-mds/scripts -p "test_*.py" -v
 Resultado esperado:
 
 ~~~text
-Ran 29 tests
+Ran 49 tests
 OK
 ~~~
 
