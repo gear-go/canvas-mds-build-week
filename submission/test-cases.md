@@ -1,5 +1,7 @@
 # Reviewer test cases
 
+[Versión en español](test-cases.es.md)
+
 ## Positive cases
 
 ### P1 — Configure without exposing the token

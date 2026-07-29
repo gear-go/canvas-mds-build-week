@@ -1,5 +1,7 @@
 # AssessTrace — Evidence by Design · Judge Experience
 
+[Versión en español](JUDGE_GUIDE.es.md)
+
 **AssessTrace — evidence by design.** It redesigns assessment so the learning process leaves evidence: the instructor decides; the tool traces. **Canvas MDS** is its first adapter.
 
 The recommended experience has two parts:

@@ -2,7 +2,7 @@
 
 > Redesign assessment so the learning process leaves evidence. The instructor decides; the tool traces. Canvas MDS is its first adapter.
 
-[Versión en español](README.es.md)
+[Versión en español](README.es.md) · [Índice completo en español](docs/es/README.md)
 
 AssessTrace helps faculty design assessment around the **learning process**, not only the final deliverable. Its **Evidence by Design** methodology uses **Codex with GPT-5.6** to understand course evidence, surface validity gaps, propose viable alternatives, and preserve instructor judgment at every material decision.
 
@@ -172,7 +172,7 @@ Then run the complete credential-free judge experience:
 python judge_demo.py
 ~~~
 
-It validates the approved GPT-5.6-assisted redesign and P0.3 semantic alignment contract, actively replays and rejects the historical all-to-all matrix, shows the shift from 95% final-product to 40% final-product, 55% process checkpoints and 5% individual verification, and generates an English PASS summary with 24 pedagogical, traceability, portability, and safety checks. See the full [Judge Experience](JUDGE_GUIDE.md), including the interactive Codex prompt.
+It validates the approved GPT-5.6-assisted redesign and P0.3 semantic alignment contract, actively replays and rejects the historical all-to-all matrix, shows the shift from 95% final-product to 40% final-product, 55% process checkpoints and 5% individual verification, and generates an English PASS summary with 24 pedagogical, traceability, portability, and safety checks. See the full [Judge Experience](JUDGE_GUIDE.md), including the interactive Codex prompt, or use the [Spanish guide](JUDGE_GUIDE.es.md).
 
 The tests exercise:
 
@@ -193,7 +193,7 @@ The tests exercise:
 - P0.3.2 HARD STOP source tracing, bounded process-evidence claims, and stable question/manual-decision IDs.
 - P0.3.3 confirmed-authority semantics, structured pending decisions, and four-layer handoff coverage.
 
-Judges can inspect the full reasoning contract in [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), the evidence shift in [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md), and the compiled profile in [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). These are sanitized reference artifacts, not a profile to apply to an unrelated course.
+Judges can inspect the full reasoning contract in [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), the evidence shift in [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md) or its [Spanish version](plugins/canvas-mds/assets/judge-case/reference/before-after.es.md), and the compiled profile in [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). These are sanitized reference artifacts, not a profile to apply to an unrelated course.
 
 ## Optional Canvas-connected verification
 
@@ -244,7 +244,7 @@ The needs behind AssessTrace and Evidence by Design came from earlier work in th
 
 Product ideation for this implementation began on July 16, 2026. The earliest recovered core technical session was created on July 17, 2026. The portable plugin, three skills, deterministic engine, forty-nine tests, process-redesign reference case, example profile, distribution package, and submission evidence were implemented for Build Week.
 
-See [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) for the evidence record.
+See [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) for the evidence record or [BUILD_WEEK_PROVENANCE.es.md](BUILD_WEEK_PROVENANCE.es.md) for the Spanish version.
 
 - Track: **Education**
 - Core Codex /feedback Session ID: **019f6fdb-32dc-70a0-a353-8640c3a29f08**

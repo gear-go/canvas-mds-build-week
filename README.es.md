@@ -2,7 +2,7 @@
 
 > Rediseña la evaluación para que el proceso de aprendizaje deje evidencia; el docente decide, la herramienta traza. Canvas MDS es su primer adaptador.
 
-[English version](README.md)
+[English version](README.md) · [Índice completo de documentación en español](docs/es/README.md)
 
 AssessTrace ayuda a diseñar la evaluación alrededor del **proceso de aprendizaje**, no solo del producto final. Su metodología **Evidence by Design** utiliza **Codex con GPT-5.6** para comprender la evidencia del curso, hacer visibles las brechas de validez, proponer alternativas viables y preservar el juicio docente en cada decisión material.
 
@@ -20,6 +20,12 @@ AssessTrace separa:
 - la evidencia extraída del programa aprobado y la planificación;
 - las decisiones que todavía requieren al docente;
 - las operaciones deterministas de Canvas que pueden revisarse antes de ejecutarse.
+
+## Por qué un plugin y no una plataforma
+
+Ya existen herramientas que resuelven partes de este problema. Algunas plataformas alojadas hacen visible el proceso de escritura, pero pueden requerir un contrato institucional adicional e incorporar un nuevo procesador para trabajos estudiantiles. Los agentes nativos de un LMS pueden generar estructuras dentro de una sola plataforma, aunque aumentan la dependencia de su licenciamiento. Las suites de alineamiento curricular permiten detectar brechas entre resultados y actividades, pero suelen operar dentro de su propio ecosistema.
+
+AssessTrace adopta una posición más acotada y portable: no introduce una plataforma de evaluación separada. Cuando Canvas y Codex con GPT-5.6 ya cuentan con aprobación institucional, puede operar mediante servicios, políticas y credenciales controladas por la institución. No publica ni elimina contenido, excluye datos estudiantiles por diseño y separa el juicio docente de un motor determinista que rechaza escrituras no autorizadas o inseguras. Su valor no depende de ofrecer más funciones que otras alternativas, sino de reducir la superficie que una institución debe gobernar para realizar un piloto.
 
 ## Qué hace el MVP
 
@@ -71,6 +77,12 @@ Durante Build Week, Codex con GPT-5.6 aceleró el paso desde las necesidades edu
 Las decisiones centrales siguieron siendo humanas: enfocarse en evidencia del proceso, mantener al docente en control, prohibir publicación y operaciones destructivas, excluir datos estudiantiles y exigir confirmación explícita de la identidad del curso.
 
 P0.2 incorpora una puerta de alineamiento generativo. GPT-5.6 debe comprender la necesidad documentada, distinguir un objetivo de aprendizaje de las actividades para alcanzarlo, presentar alternativas cuando no exista un objetivo aprobado y detenerse para confirmación docente. Solo entonces puede derivar indicadores, evidencias, instrumentos, procedimiento, carga y finalmente actividades. El validador determinista comprueba la cadena completa.
+
+P0.3 refuerza la semántica de esa puerta. El motor rechaza instrumentos no seleccionados, relaciones cartesianas entre componentes, actividades que amplían la cadena aprobada, rutas de fuentes que no pueden resolverse y etiquetas de evidencia superpuestas. Una prueba de regresión reconstruye la matriz todos-con-todos detectada durante la validación directa y comprueba que el validador rechaza esa falla.
+
+P0.3.2 refuerza la primera detención diagnóstica. Toda cita `UDD-R*` o `UDD-H*` debe registrar la base de conocimiento UDD como `SRC-00`; la ausencia de hitos evaluados no puede describirse como evidencia de proceso nula cuando existe una reflexión posterior cuyos criterios no están documentados; y cada pregunta material debe conservar un identificador `Q-*` estable dentro de `manual_decisions`, sin crear artefactos antes de la confirmación docente.
+
+P0.3.3 cierra la relación entre autoridad y traspaso operacional. Una decisión docente aplicada debe registrarse como `confirmed`, incluso cuando modifica una opción; `resolution: modified` conserva la forma en que se alcanzó la decisión. Cada asunto operacional pendiente se representa mediante un objeto estructurado `MD-*`, y el traspaso final distingue lo propuesto por GPT-5.6, lo decidido por el docente, lo verificado por el motor determinista y lo que continúa pendiente.
 
 Durante el uso, GPT-5.6 reconcilia evidencia heterogénea, diagnostica procesos de aprendizaje invisibles, propone al menos dos diseños viables y los somete a escenarios de IA sin comprensión y contribución desigual. El docente confirma cada decisión material. La validación determinista aplica controles inspirados en la base UDD para alineamiento con RA, evidencia de proceso e individual, uso del feedback, demanda cognitiva, alternativas accesibles, ponderaciones, trazabilidad y seguridad Canvas.
 
@@ -164,7 +176,7 @@ Luego ejecuta la experiencia completa para jueces, cuya interfaz y documentació
 python judge_demo.py
 ~~~
 
-El comando valida el rediseño aprobado y el artefacto de alineamiento P0.2, muestra el cambio de 95% producto final / 0% proceso a 40% / 60%, y genera un resumen PASS en inglés con 21 controles pedagógicos, de trazabilidad y seguridad. Consulta la [Judge Experience](JUDGE_GUIDE.md), que también incluye el prompt interactivo para Codex.
+El comando valida el rediseño aprobado y el contrato de alineamiento semántico P0.3, reproduce y rechaza la matriz histórica todos-con-todos, muestra el cambio desde 95% de evidencia del producto final hacia 40% de producto final, 55% de hitos del proceso y 5% de verificación individual, y genera un resumen PASS con 24 controles pedagógicos, de trazabilidad, portabilidad y seguridad. Consulta la [experiencia de evaluación en español](JUDGE_GUIDE.es.md), que también incluye el prompt interactivo para Codex.
 
 Las pruebas cubren:
 
@@ -177,9 +189,11 @@ Las pruebas cubren:
 - salida estructurada de la auditoría provisional;
 - separación objetivo/actividad, bloqueo de alineamiento, trazabilidad bidireccional indicador/evidencia, comparación de instrumentos, cálculo de carga y feedback utilizable;
 - controles UDD de alineamiento con RA, auto/coevaluación, demanda cognitiva, actor del feedback, ciclo de respuesta y formatos alternativos;
-- puertas de decisión P0.1, cálculo de carga por cohorte y rutas de salida relativas al repositorio.
+- puertas de decisión P0.1, cálculo de carga por cohorte y rutas de salida relativas al repositorio;
+- trazabilidad de fuentes UDD en HARD STOP, afirmaciones acotadas sobre evidencia del proceso e identificadores estables para preguntas y decisiones manuales en P0.3.2;
+- semántica de autoridad confirmada, decisiones pendientes estructuradas y traspaso en cuatro capas en P0.3.3.
 
-Los jueces pueden inspeccionar el contrato de razonamiento en [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), el cambio de evidencia en [before-after.md](plugins/canvas-mds/assets/judge-case/reference/before-after.md) y el perfil compilado en [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). Son artefactos sanitizados de referencia y no deben aplicarse a otro curso.
+Los jueces pueden inspeccionar el contrato de razonamiento en [pedagogical-redesign.json](plugins/canvas-mds/assets/judge-case/reference/pedagogical-redesign.json), el [cambio de evidencia explicado en español](plugins/canvas-mds/assets/judge-case/reference/before-after.es.md) y el perfil compilado en [entornos-digitales-2026.json](plugins/canvas-mds/assets/profiles/entornos-digitales-2026.json). Son artefactos sanitizados de referencia y no deben aplicarse a otro curso.
 
 ## Verificación opcional conectada a Canvas
 
@@ -211,6 +225,12 @@ Los jueces pueden inspeccionar el contrato de razonamiento en [pedagogical-redes
 
 Este MVP no tiene comando de publicación.
 
+## Quién opera el MVP actualmente
+
+AssessTrace está diseñado para docentes, pero este MVP es deliberadamente un motor con barreras de seguridad y no una interfaz docente terminada. Su operación actual supone un usuario técnico capaz de trabajar con Codex, Python y confirmaciones por línea de comandos antes de cada escritura. Esta secuencia prioriza los riesgos más costosos: la calidad del razonamiento, las puertas de decisión docente y las invariantes de seguridad.
+
+La superficie disponible para docentes es hoy la conversación en Codex conducida por las tres skills. Una interfaz no técnica y un modelo de operación acompañado por diseño instruccional o dirección de programa corresponden a pasos posteriores; no son capacidades que esta versión declare como terminadas.
+
 ## Limitaciones actuales
 
 - Canvas es necesario para snapshots, auditorías, dry-runs en vivo y creación.
@@ -224,9 +244,9 @@ Este MVP no tiene comando de publicación.
 
 Las necesidades de AssessTrace y Evidence by Design surgieron de trabajo previo en el IA Workshop de la UDD, comisiones de IA de universidad y facultad, discusiones de política institucional y la dirección de la Maestría en Data Science. Ese trabajo previo estableció el problema y las restricciones; no se presenta como software de Build Week.
 
-La ideación de esta implementación comenzó el 16 de julio de 2026. La primera sesión técnica central recuperada fue creada el 17 de julio. El complemento portable, sus tres skills, el motor determinista, las veintinueve pruebas, el caso de rediseño centrado en el proceso y el perfil de ejemplo, el paquete y la evidencia de entrega se implementaron para Build Week.
+La ideación de esta implementación comenzó el 16 de julio de 2026. La primera sesión técnica central recuperada fue creada el 17 de julio. El complemento portable, sus tres skills, el motor determinista, las cuarenta y nueve pruebas, el caso de rediseño centrado en el proceso, el perfil de ejemplo, el paquete y la evidencia de entrega se implementaron para Build Week.
 
-Consulta [BUILD_WEEK_PROVENANCE.md](BUILD_WEEK_PROVENANCE.md) para revisar el registro de evidencia.
+Consulta [BUILD_WEEK_PROVENANCE.es.md](BUILD_WEEK_PROVENANCE.es.md) para revisar el registro de evidencia en español.
 
 - Track: **Education**
 - Session ID de /feedback: **019f6fdb-32dc-70a0-a353-8640c3a29f08**

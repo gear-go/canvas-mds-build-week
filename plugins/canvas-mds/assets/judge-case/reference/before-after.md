@@ -1,5 +1,7 @@
 # Process-Centered Assessment Redesign · entornos-digitales-digital-innovation-studio-2026
 
+[Versión en español](before-after.es.md)
+
 > This report contains concise, evidence-linked design rationales, not hidden model reasoning.
 
 ## Why the current assessment needs redesign

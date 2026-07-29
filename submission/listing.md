@@ -1,5 +1,7 @@
 # Proposed public listing
 
+[Versión en español](listing.es.md)
+
 ## Identity
 
 - **Plugin name:** AssessTrace · Canvas MDS

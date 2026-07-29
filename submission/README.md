@@ -1,5 +1,7 @@
 # AssessTrace skills-only submission
 
+[Versión en español](README.es.md)
+
 This directory contains the human-readable materials for submitting **AssessTrace · Canvas MDS** as a skills-only plugin.
 
 ## Package
